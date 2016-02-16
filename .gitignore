@@ -36,3 +36,6 @@ nosetests.xml
 .pydevproject
 .metadata
 .idea
+
+# log files
+*.log
