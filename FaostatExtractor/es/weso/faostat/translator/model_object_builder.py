@@ -301,6 +301,53 @@ class ModelObjectBuilder(object):
 
         result[TranslatorConst.CODE_RELATIVE_FOREST_LAND] = relative_forest_land_ind
 
+
+        #CODE_PERMANENT_CROPS
+        permanent_crops_ind = Indicator(chain_for_id=self._org_id, 
+                                             int_for_id=int(self._read_config_value("INDICATOR", "permanent_crops_id")))
+        permanent_crops_ind.name_en = self._read_config_value("INDICATOR", "permanent_crops_name_en")
+        permanent_crops_ind.name_es = self._read_config_value("INDICATOR", "permanent_crops_name_es")
+        permanent_crops_ind.name_fr = self._read_config_value("INDICATOR", "permanent_crops_name_fr")
+        permanent_crops_ind.description_en = self._read_config_value("INDICATOR", "permanent_crops_desc_en")
+        permanent_crops_ind.description_es = self._read_config_value("INDICATOR", "permanent_crops_desc_es")
+        permanent_crops_ind.description_fr = self._read_config_value("INDICATOR", "permanent_crops_desc_fr")
+        permanent_crops_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "permanent_crops_unit_name"),
+                                                            convert_to = self._read_config_value("INDICATOR", "permanent_crops_unit_type"))
+        permanent_crops_ind.topic = self._read_config_value("INDICATOR", "permanent_crops_topic")
+        permanent_crops_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "permanent_crops_tendency"))
+        result[TranslatorConst.CODE_PERMANENT_CROPS] = permanent_crops_ind
+
+        #CODE_PERMANENT_MEADOW_AND_PASTURES
+        permanent_meadows_and_pastures_ind = Indicator(chain_for_id=self._org_id, 
+                                             int_for_id=int(self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_id")))
+        permanent_meadows_and_pastures_ind.name_en = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_name_en")
+        permanent_meadows_and_pastures_ind.name_es = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_name_es")
+        permanent_meadows_and_pastures_ind.name_fr = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_name_fr")
+        permanent_meadows_and_pastures_ind.description_en = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_desc_en")
+        permanent_meadows_and_pastures_ind.description_es = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_desc_es")
+        permanent_meadows_and_pastures_ind.description_fr = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_desc_fr")
+        permanent_meadows_and_pastures_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_unit_name"),
+                                                            convert_to = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_unit_type"))
+        permanent_meadows_and_pastures_ind.topic = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_topic")
+        permanent_meadows_and_pastures_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_tendency"))
+        result[TranslatorConst.CODE_PERMANENT_MEADOW_AND_PASTURES] = permanent_meadows_and_pastures_ind
+
+        #CODE_AGRICULTURAL_AREA_ORGANIC
+        agricultural_area_organic_ind = Indicator(chain_for_id=self._org_id, 
+                                             int_for_id=int(self._read_config_value("INDICATOR", "agricultural_area_organic_id")))
+        agricultural_area_organic_ind.name_en = self._read_config_value("INDICATOR", "agricultural_area_organic_name_en")
+        agricultural_area_organic_ind.name_es = self._read_config_value("INDICATOR", "agricultural_area_organic_name_es")
+        agricultural_area_organic_ind.name_fr = self._read_config_value("INDICATOR", "agricultural_area_organic_name_fr")
+        agricultural_area_organic_ind.description_en = self._read_config_value("INDICATOR", "agricultural_area_organic_desc_en")
+        agricultural_area_organic_ind.description_es = self._read_config_value("INDICATOR", "agricultural_area_organic_desc_es")
+        agricultural_area_organic_ind.description_fr = self._read_config_value("INDICATOR", "agricultural_area_organic_desc_fr")
+        agricultural_area_organic_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "agricultural_area_organic_unit_name"),
+                                                            convert_to = self._read_config_value("INDICATOR", "agricultural_area_organic_unit_type"))
+        agricultural_area_organic_ind.topic = self._read_config_value("INDICATOR", "agricultural_area_organic_topic")
+        agricultural_area_organic_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "agricultural_area_organic_tendency"))
+        result[TranslatorConst.CODE_AGRICULTURAL_AREA_ORGANIC] = agricultural_area_organic_ind
+
+
         return result
 
 

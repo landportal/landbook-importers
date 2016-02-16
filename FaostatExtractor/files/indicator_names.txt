@@ -7,7 +7,7 @@ Agricultural area
 #Agricultural area actually irrigated
 #Agricultural area certified organic
 #Agricultural area in conversion to organic
-#Agricultural area organic, total
+Agricultural area organic, total
 Arable land
 #Arable land and Permanent crops
 #Arable land area certified organic
@@ -22,11 +22,11 @@ Land area
 #Other land
 #Perm. meadows & pastures - Cultivated
 #Perm. meadows & pastures - Nat. growing
-#Permanent crops
+Permanent crops
 #Permanent crops area certified organic
 #Permanent crops area in conversion to organic
 #Permanent crops organic, total
-#Permanent meadows and pastures
+Permanent meadows and pastures
 #Permanent meadows and pastures area certified organic
 #Permanent meadows and pastures area in conversion to organic
 #Permanent meadows and pastures organic, total
