@@ -5,7 +5,6 @@ Created on 02/02/2014
 @author: Dani
 '''
 
-
 from datetime import datetime
 
 from lpentities.computation import Computation
@@ -22,7 +21,7 @@ from lpentities.year_interval import YearInterval
 from reconciler.exceptions.unknown_country_error import UnknownCountryError
 
 from es.weso.faostat.translator.translator_const import TranslatorConst
-
+import json
 
 class ModelObjectBuilder(object):
     """
@@ -184,172 +183,44 @@ class ModelObjectBuilder(object):
     
     def _build_indicators_dict(self):
         result = {}
+	indicator_codes = json.loads(self._config.get("INDICATORS", "codes"))
 
-        #agricultural_land
-        agricultural_land_ind = Indicator(chain_for_id=self._org_id, 
-                                          int_for_id=int(self._read_config_value("INDICATOR", "agricultural_land_id")))
-        agricultural_land_ind.name_en = self._read_config_value("INDICATOR", "agricultural_land_name_en")
-        agricultural_land_ind.name_es = self._read_config_value("INDICATOR", "agricultural_land_name_es")
-        agricultural_land_ind.name_fr = self._read_config_value("INDICATOR", "agricultural_land_name_fr")
-        agricultural_land_ind.description_en = self._read_config_value("INDICATOR", "agricultural_land_desc_en")
-        agricultural_land_ind.description_es = self._read_config_value("INDICATOR", "agricultural_land_desc_es")
-        agricultural_land_ind.description_fr = self._read_config_value("INDICATOR", "agricultural_land_desc_fr")
-        agricultural_land_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "agricultural_land_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "agricultural_land_unit_type"),
-                                                            factor = float(self._read_config_value("INDICATOR", "agricultural_land_unit_factor")))
-        agricultural_land_ind.topic = self._read_config_value("INDICATOR", "agricultural_land_topic")
-        agricultural_land_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "agricultural_land_tendency"))
+	self.log.info("Init process to add %d indicators in the indicators dictionary" %len(indicator_codes))
 
-        result[TranslatorConst.CODE_AGRICULTURAL_LAND] = agricultural_land_ind
+        for indicator in indicator_codes:
+         try:
+           ind = Indicator(chain_for_id=self._org_id,
+                                          int_for_id=int(self._read_config_value(indicator, "id")))
+           ind.name_en = self._read_config_value(indicator, "name_en")
+           ind.name_es = self._read_config_value(indicator, "name_es")
+           ind.name_fr = self._read_config_value(indicator, "name_fr")
+           ind.description_en = self._read_config_value(indicator, "desc_en")
+           ind.description_es = self._read_config_value(indicator, "desc_es")
+           ind.description_fr = self._read_config_value(indicator, "desc_fr")
+           try:
+		factor = float(self._read_config_value(indicator, "unit_factor"))
+	   except Exception as ex: #TODO add concrete exceptions. Move this code to function _read_config_value
+		factor = None
+		pass
+	   if factor is not None:
+              ind.measurement_unit = MeasurementUnit(name = self._read_config_value(indicator, "unit_name"),
+                                                     convert_to = self._read_config_value(indicator, "unit_type"),
+                                                     factor = factor)
+	   else:
+              ind.measurement_unit = MeasurementUnit(name = self._read_config_value(indicator, "unit_name"),
+                                                     convert_to = self._read_config_value(indicator, "unit_type"))
 
-        #arable_land
-        arable_land_ind = Indicator(chain_for_id=self._org_id, 
-                                    int_for_id=int(self._read_config_value("INDICATOR", "arable_land_id")))
-        arable_land_ind.name_en = self._read_config_value("INDICATOR", "arable_land_name_en")
-        arable_land_ind.name_es = self._read_config_value("INDICATOR", "arable_land_name_es")
-        arable_land_ind.name_fr = self._read_config_value("INDICATOR", "arable_land_name_fr")
-        arable_land_ind.description_en = self._read_config_value("INDICATOR", "arable_land_desc_en")
-        arable_land_ind.description_es = self._read_config_value("INDICATOR", "arable_land_desc_es")
-        arable_land_ind.description_fr = self._read_config_value("INDICATOR", "arable_land_desc_fr")
-        arable_land_ind.measurement_unit = MeasurementUnit(name=self._read_config_value("INDICATOR", "arable_land_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "arable_land_unit_type"),
-                                                            factor = float(self._read_config_value("INDICATOR", "arable_land_unit_factor")))
-        arable_land_ind.topic = self._read_config_value("INDICATOR", "arable_land_topic")
-        arable_land_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "arable_land_tendency"))
+           ind.topic = self._read_config_value(indicator, "topic")
+           ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value(indicator, "tendency"))
 
-        result[TranslatorConst.CODE_ARABLE_LAND] = arable_land_ind
-        
-        #forest_area
-        forest_area_ind = Indicator(chain_for_id=self._org_id, 
-                                    int_for_id=int(self._read_config_value("INDICATOR", "forest_area_id")))
-        forest_area_ind.name_en = self._read_config_value("INDICATOR", "forest_area_name_en")
-        forest_area_ind.name_es = self._read_config_value("INDICATOR", "forest_area_name_es")
-        forest_area_ind.name_fr = self._read_config_value("INDICATOR", "forest_area_name_fr")
-        forest_area_ind.description_en = self._read_config_value("INDICATOR", "forest_area_desc_en")
-        forest_area_ind.description_es = self._read_config_value("INDICATOR", "forest_area_desc_es")
-        forest_area_ind.description_fr = self._read_config_value("INDICATOR", "forest_area_desc_fr")
-        forest_area_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "forest_area_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "forest_area_unit_type"),
-                                                            factor = float(self._read_config_value("INDICATOR", "forest_area_unit_factor")))
-        forest_area_ind.topic = self._read_config_value("INDICATOR", "forest_area_topic")
-        forest_area_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "forest_area_tendency"))
+	   #FAO CODE
+           faocode = int(self._read_config_value(indicator, "faocode"))
 
-        result[TranslatorConst.CODE_FOREST_LAND] = forest_area_ind
-        
-        #land_area
-        land_area_ind = Indicator(chain_for_id=self._org_id, 
-                                  int_for_id=int(self._read_config_value("INDICATOR", "land_area_id")))
-        land_area_ind.name_en = self._read_config_value("INDICATOR", "land_area_name_en")
-        land_area_ind.name_es = self._read_config_value("INDICATOR", "land_area_name_es")
-        land_area_ind.name_fr = self._read_config_value("INDICATOR", "land_area_name_fr")
-        land_area_ind.description_en = self._read_config_value("INDICATOR", "land_area_desc_en")
-        land_area_ind.description_es = self._read_config_value("INDICATOR", "land_area_desc_es")
-        land_area_ind.description_fr = self._read_config_value("INDICATOR", "land_area_desc_fr")
-        land_area_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "land_area_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "land_area_unit_type"),
-                                                            factor = float(self._read_config_value("INDICATOR", "land_area_unit_factor")))
-        land_area_ind.topic = self._read_config_value("INDICATOR", "land_area_topic")
-        land_area_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "land_area_tendency"))
-
-        result[TranslatorConst.CODE_LAND_AREA] = land_area_ind
-
-        #relative_agricultural_land
-        relative_agricultural_land_ind = Indicator(chain_for_id=self._org_id, 
-                                                   int_for_id=int(self._read_config_value("INDICATOR", "relative_agricultural_land_id")))
-        relative_agricultural_land_ind.name_en = self._read_config_value("INDICATOR", "relative_agricultural_land_name_en")
-        relative_agricultural_land_ind.name_es = self._read_config_value("INDICATOR", "relative_agricultural_land_name_es")
-        relative_agricultural_land_ind.name_fr = self._read_config_value("INDICATOR", "relative_agricultural_land_name_fr")
-        relative_agricultural_land_ind.description_en = self._read_config_value("INDICATOR", "relative_agricultural_land_desc_en")
-        relative_agricultural_land_ind.description_es = self._read_config_value("INDICATOR", "relative_agricultural_land_desc_es")
-        relative_agricultural_land_ind.description_fr = self._read_config_value("INDICATOR", "relative_agricultural_land_desc_fr")
-        relative_agricultural_land_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "relative_agricultural_land_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "relative_agricultural_land_unit_type"))
-        relative_agricultural_land_ind.topic = self._read_config_value("INDICATOR", "relative_agricultural_land_topic")
-        relative_agricultural_land_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "relative_agricultural_land_tendency"))
-
-        result[TranslatorConst.CODE_RELATIVE_AGRICULTURAL_LAND] = relative_agricultural_land_ind
-
-        #relative_arable_land
-        relative_arable_land_ind = Indicator(chain_for_id=self._org_id, 
-                                             int_for_id= int(self._read_config_value("INDICATOR", "relative_arable_land_id")))
-        relative_arable_land_ind.name_en = self._read_config_value("INDICATOR", "relative_arable_land_name_en")
-        relative_arable_land_ind.name_es = self._read_config_value("INDICATOR", "relative_arable_land_name_es")
-        relative_arable_land_ind.name_fr = self._read_config_value("INDICATOR", "relative_arable_land_name_fr")
-        relative_arable_land_ind.description_en = self._read_config_value("INDICATOR", "relative_arable_land_desc_en")
-        relative_arable_land_ind.description_es = self._read_config_value("INDICATOR", "relative_arable_land_desc_es")
-        relative_arable_land_ind.description_fr = self._read_config_value("INDICATOR", "relative_arable_land_desc_fr")
-        relative_arable_land_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "relative_arable_land_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "relative_arable_land_unit_type"))
-        relative_arable_land_ind.topic = self._read_config_value("INDICATOR", "relative_arable_land_topic")
-        relative_arable_land_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "relative_arable_land_tendency"))
-
-        result[TranslatorConst.CODE_RELATIVE_ARABLE_LAND] = relative_arable_land_ind
-        
-        #relative_forest_land
-        relative_forest_land_ind = Indicator(chain_for_id=self._org_id, 
-                                             int_for_id=int(self._read_config_value("INDICATOR", "relative_forest_land_id")))
-        relative_forest_land_ind.name_en = self._read_config_value("INDICATOR", "relative_forest_land_name_en")
-        relative_forest_land_ind.name_es = self._read_config_value("INDICATOR", "relative_forest_land_name_es")
-        relative_forest_land_ind.name_fr = self._read_config_value("INDICATOR", "relative_forest_land_name_fr")
-        relative_forest_land_ind.description_en = self._read_config_value("INDICATOR", "relative_forest_land_desc_en")
-        relative_forest_land_ind.description_es = self._read_config_value("INDICATOR", "relative_forest_land_desc_es")
-        relative_forest_land_ind.description_fr = self._read_config_value("INDICATOR", "relative_forest_land_desc_fr")
-        relative_forest_land_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "relative_forest_land_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "relative_forest_land_unit_type"))
-        relative_forest_land_ind.topic = self._read_config_value("INDICATOR", "relative_forest_land_topic")
-        relative_forest_land_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "relative_forest_land_tendency"))
-
-        result[TranslatorConst.CODE_RELATIVE_FOREST_LAND] = relative_forest_land_ind
-
-
-        #CODE_PERMANENT_CROPS
-        permanent_crops_ind = Indicator(chain_for_id=self._org_id, 
-                                             int_for_id=int(self._read_config_value("INDICATOR", "permanent_crops_id")))
-        permanent_crops_ind.name_en = self._read_config_value("INDICATOR", "permanent_crops_name_en")
-        permanent_crops_ind.name_es = self._read_config_value("INDICATOR", "permanent_crops_name_es")
-        permanent_crops_ind.name_fr = self._read_config_value("INDICATOR", "permanent_crops_name_fr")
-        permanent_crops_ind.description_en = self._read_config_value("INDICATOR", "permanent_crops_desc_en")
-        permanent_crops_ind.description_es = self._read_config_value("INDICATOR", "permanent_crops_desc_es")
-        permanent_crops_ind.description_fr = self._read_config_value("INDICATOR", "permanent_crops_desc_fr")
-        permanent_crops_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "permanent_crops_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "permanent_crops_unit_type"))
-        permanent_crops_ind.topic = self._read_config_value("INDICATOR", "permanent_crops_topic")
-        permanent_crops_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "permanent_crops_tendency"))
-        result[TranslatorConst.CODE_PERMANENT_CROPS] = permanent_crops_ind
-
-        #CODE_PERMANENT_MEADOW_AND_PASTURES
-        permanent_meadows_and_pastures_ind = Indicator(chain_for_id=self._org_id, 
-                                             int_for_id=int(self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_id")))
-        permanent_meadows_and_pastures_ind.name_en = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_name_en")
-        permanent_meadows_and_pastures_ind.name_es = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_name_es")
-        permanent_meadows_and_pastures_ind.name_fr = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_name_fr")
-        permanent_meadows_and_pastures_ind.description_en = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_desc_en")
-        permanent_meadows_and_pastures_ind.description_es = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_desc_es")
-        permanent_meadows_and_pastures_ind.description_fr = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_desc_fr")
-        permanent_meadows_and_pastures_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_unit_type"))
-        permanent_meadows_and_pastures_ind.topic = self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_topic")
-        permanent_meadows_and_pastures_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "permanent_meadows_and_pastures_tendency"))
-        result[TranslatorConst.CODE_PERMANENT_MEADOW_AND_PASTURES] = permanent_meadows_and_pastures_ind
-
-        #CODE_AGRICULTURAL_AREA_ORGANIC
-        agricultural_area_organic_ind = Indicator(chain_for_id=self._org_id, 
-                                             int_for_id=int(self._read_config_value("INDICATOR", "agricultural_area_organic_id")))
-        agricultural_area_organic_ind.name_en = self._read_config_value("INDICATOR", "agricultural_area_organic_name_en")
-        agricultural_area_organic_ind.name_es = self._read_config_value("INDICATOR", "agricultural_area_organic_name_es")
-        agricultural_area_organic_ind.name_fr = self._read_config_value("INDICATOR", "agricultural_area_organic_name_fr")
-        agricultural_area_organic_ind.description_en = self._read_config_value("INDICATOR", "agricultural_area_organic_desc_en")
-        agricultural_area_organic_ind.description_es = self._read_config_value("INDICATOR", "agricultural_area_organic_desc_es")
-        agricultural_area_organic_ind.description_fr = self._read_config_value("INDICATOR", "agricultural_area_organic_desc_fr")
-        agricultural_area_organic_ind.measurement_unit = MeasurementUnit(name = self._read_config_value("INDICATOR", "agricultural_area_organic_unit_name"),
-                                                            convert_to = self._read_config_value("INDICATOR", "agricultural_area_organic_unit_type"))
-        agricultural_area_organic_ind.topic = self._read_config_value("INDICATOR", "agricultural_area_organic_topic")
-        agricultural_area_organic_ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value("INDICATOR", "agricultural_area_organic_tendency"))
-        result[TranslatorConst.CODE_AGRICULTURAL_AREA_ORGANIC] = agricultural_area_organic_ind
-
-
-        return result
-
+           result[faocode] = ind
+	 except:
+           print("exception on %s!" % option)
+	self.log.info("Added %d indicators in the indicators dictionary" % len(result))
+	return result
 
     def get_asociated_country(self, country_code):
         if country_code not in self._country_dict:
