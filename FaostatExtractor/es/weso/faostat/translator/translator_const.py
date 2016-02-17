@@ -31,6 +31,7 @@ class TranslatorConst(object):
     CODE_PERMANENT_CROPS = 6650
     CODE_PERMANENT_MEADOW_AND_PASTURES = 6655
     CODE_AGRICULTURAL_AREA_ORGANIC = 6671
+    CODE_WATER = 6720
 
     #  The next three are random numbers that are not it the previous indicator codes.
     CODE_RELATIVE_AGRICULTURAL_LAND = 999888777
