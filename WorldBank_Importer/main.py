@@ -13,8 +13,8 @@ from es.weso.worldbank.parser.parser import Parser
 __author__ = 'BorjaGB'
 
 def configure_log():
-    FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(filename='faoextractor.log', level=logging.INFO,
+    FORMAT = "%(asctime)s - %(name)s - %(levelname)s [%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
+    logging.basicConfig(filename='WorldBank.log', level=logging.INFO,
                         format=FORMAT)
 
 def update_ini_file(config, config_path, importer, log):
@@ -31,7 +31,7 @@ def update_ini_file(config, config_path, importer, log):
                 
 def run():
     configure_log()
-    log = logging.getLogger("faoextractor")
+    log = logging.getLogger("worldbanklog")
     config_path = "es/weso/worldbank/configuration/api_access.ini"
     config = ConfigParser.RawConfigParser()
     config.read(config_path)
