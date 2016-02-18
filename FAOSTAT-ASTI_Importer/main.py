@@ -20,7 +20,7 @@ from ConfigParser import ConfigParser
 
 def configure_log():
     FORMAT = "%(asctime)s - %(name)s - %(levelname)s [%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
-    logging.basicConfig(filename='faostat.log', level=logging.INFO, 
+    logging.basicConfig(filename='faostat-asti.log', level=logging.INFO, 
                         format=FORMAT)
 
 
