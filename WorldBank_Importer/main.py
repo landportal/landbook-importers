@@ -32,7 +32,7 @@ def update_ini_file(config, config_path, importer, log):
 def run():
     configure_log()
     log = logging.getLogger("worldbanklog")
-    config_path = "config/api_access.ini"
+    config_path = "config/configuration.ini"
     config = ConfigParser.RawConfigParser()
     config.read(config_path)
 
