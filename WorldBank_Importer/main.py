@@ -26,7 +26,7 @@ def update_ini_file(config, config_path, importer, log):
     
     if hasattr(importer, '_historical_year'):
         config.set("TRANSLATOR", 'historical_year', importer._historical_year)
-    with open("files/configuration.ini", 'wb') as configfile:
+    with open("config/configuration.ini.new", 'wb') as configfile:
         config.write(configfile)
                 
 def run():
@@ -45,7 +45,6 @@ def run():
     
     except Exception as detail:
         log.error("OOPS! Something went wrong %s" %detail)
-        
 
 if __name__ == '__main__':
     run()
