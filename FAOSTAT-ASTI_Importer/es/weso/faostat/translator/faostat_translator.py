@@ -63,7 +63,7 @@ class FaostatTranslator(object):
             self.generate_xml_from_dataset_model(dataset_model)
             self._update_config_values(builder)
         except BaseException as e:
-            self._log.error("Error while trying to sned xml to the receiver: " + e.message)
+            self._log.error("Error while trying to send xml to the receiver: " + e.message)
             raise e
 
 
