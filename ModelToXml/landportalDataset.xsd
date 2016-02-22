@@ -10,7 +10,7 @@
         <xs:element ref="indicator_groups"/>
         <xs:element ref="slices"/>
       </xs:sequence>
-      <xs:attribute name="id" type="xs:NCName" use="required"/>
+      <xs:attribute name="id" type="xs:string" use="required"/>
     </xs:complexType>
   </xs:element>
 
@@ -35,7 +35,7 @@
   
   <xs:element name="organization_name" type="xs:string"/>
   <xs:element name="organization_url" type="xs:anyURI"/>
-  <xs:element name="organization_id" type="xs:NMTOKEN"/>
+  <xs:element name="organization_id" type="xs:string"/>
   <xs:element name="organization_description_en" type="xs:string"/>
   <xs:element name="organization_description_es" type="xs:string"/>
   <xs:element name="organization_description_fr" type="xs:string"/>
@@ -43,7 +43,7 @@
     <xs:complexType>
       <xs:simpleContent>
         <xs:extension base="xs:string">
-          <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+          <xs:attribute name="id" type="xs:string" use="required"/>
         </xs:extension>
       </xs:simpleContent>
     </xs:complexType>
@@ -116,7 +116,7 @@
       <xs:attribute name="group" type="xs:string" use="optional"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="issued" type="xs:NMTOKEN"/>
+  <xs:element name="issued" type="xs:string"/>
   <xs:element name="obs-status">
  	<xs:simpleType>
 	  <xs:restriction base="xs:string">
@@ -209,8 +209,18 @@
   <xs:element name="ind_description_en" type="xs:string"/>
   <xs:element name="ind_description_es" type="xs:string"/>
   <xs:element name="ind_description_fr" type="xs:string"/>
-  <xs:element name="topic-ref" type="xs:NMTOKEN"/>
-  <xs:element name="preferable_tendency" type="xs:NMTOKEN"/>
+  <xs:element name="topic-ref" type="xs:string"/>
+
+  <xs:element name="preferable_tendency">
+ 	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	      <xs:enumeration value="increase" />
+ 		  <xs:enumeration value="decrease" />
+ 		  <xs:enumeration value="irrelevant" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:element>  
+
   <xs:element name="measure_unit">
     <xs:complexType>
       <xs:simpleContent>
