@@ -538,7 +538,7 @@ class ModelToXMLTransformer(object):
 
         #republish
         republish_node = Element(self.LICENSE_REPUBLISH)
-        republish_node.text = str(self._dataset.license_type.republish)
+        republish_node.text = str(self._dataset.license_type.republish).lower()
         license_node.append(republish_node)
 
         #url
