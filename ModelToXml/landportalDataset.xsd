@@ -13,6 +13,8 @@
       <xs:attribute name="id" type="xs:NCName" use="required"/>
     </xs:complexType>
   </xs:element>
+
+  <!-- begin import_process -->
   <xs:element name="import_process">
     <xs:complexType>
       <xs:sequence>
@@ -30,6 +32,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  
   <xs:element name="organization_name" type="xs:string"/>
   <xs:element name="organization_url" type="xs:anyURI"/>
   <xs:element name="organization_id" type="xs:NMTOKEN"/>
@@ -45,10 +48,32 @@
       </xs:simpleContent>
     </xs:complexType>
   </xs:element>
-  <xs:element name="type" type="xs:anyURI"/>
+  <xs:element name="type">
+	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+		<xs:enumeration value="XML" />
+		<xs:enumeration value="XLS" />
+		<xs:enumeration value="CSV" />
+		<xs:enumeration value="API" />
+		<xs:enumeration value="JSON" />
+		<xs:enumeration value="SCRAP" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:element>
   <xs:element name="file_name" type="xs:anyURI"/>
   <xs:element name="user" type="xs:anyURI"/>
-  <xs:element name="sdmx_frequency" type="xs:anyURI"/>
+  <xs:element name="sdmx_frequency">
+ 	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+		<xs:enumeration value="freq-M" />
+		<xs:enumeration value="freq-A" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:element> 
+  <!-- end import_process -->
+
+  
+  <!-- begin license -->
   <xs:element name="license">
     <xs:complexType>
       <xs:sequence>
@@ -63,14 +88,103 @@
   <xs:element name="lic_description" type="xs:string"/>
   <xs:element name="republish" type="xs:boolean"/>
   <xs:element name="lic_url" type="xs:anyURI"/>
-  <xs:element name="indicators">
+  <!-- end license -->
+  
+  <!-- begin observations -->  
+  <xs:element name="observations">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="indicator"/>
-        <xs:element maxOccurs="unbounded" ref="compound_indicator"/>
+        <xs:element maxOccurs="unbounded" minOccurs="1" ref="observation"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <!-- end observations -->  
+
+  <!-- begin observation --> 
+  <xs:element name="observation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="issued"/>
+        <xs:element ref="obs-status"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="value"/>
+        <xs:element ref="computation"/>
+        <xs:group ref="area"/>
+        <xs:element ref="time"/>
+        <xs:element name="indicator-ref" type="indicator-ref-observation"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="group" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="issued" type="xs:NMTOKEN"/>
+  <xs:element name="obs-status">
+ 	<xs:simpleType>
+	  <xs:restriction base="xs:string">
+	      <xs:enumeration value="obsStatus-M" />
+ 		  <xs:enumeration value="obsStatus-A" />
+	  </xs:restriction>
+	</xs:simpleType>
+  </xs:element>
+  <xs:element name="value" type="xs:string"/>
+  <xs:element name="computation">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" use="required">
+			<xs:simpleType>
+			  <xs:restriction base="xs:string">
+			  	<xs:enumeration value="Raw" />
+			  	<xs:enumeration value="Computed" />
+			  </xs:restriction>
+			</xs:simpleType>
+		  </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- begin area -->
+  <xs:group name="area">
+      <xs:choice>
+        <xs:element ref="country"/>
+        <xs:element ref="region"/>
+      </xs:choice>
+  </xs:group>
+  <xs:element name="country" type="xs:anyURI"/> <!-- TODO  generate pattern for this elements -->
+  <xs:element name="region" type="xs:anyURI"/> <!-- TODO  generate pattern for this elements -->
+  <!-- end area -->
+
+  <!-- begin time -->
+  <xs:element name="time">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="0" ref="interval"/>
+      </xs:sequence>
+      <xs:attribute name="unit" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>  
+  <!-- end time -->
+
+  <!-- begin indicator-ref -->
+  <xs:complexType name="indicator-ref-observation" >
+      <xs:attribute name="indicator" type="xs:string" use="required"/>
+  </xs:complexType>
+  <!-- end indicator-ref -->
+
+  <!-- end observation --> 
+ 
+  <!-- begin indicators -->
+  <xs:element name="indicators">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="indicator"/> <!-- Maybe minOccurs is 1 -->
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="compound_indicator"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- end indicators -->
+
+  <!-- begin indicator -->
   <xs:element name="indicator">
     <xs:complexType>
       <xs:sequence>
@@ -83,11 +197,28 @@
         <xs:element ref="topic-ref"/>
         <xs:element ref="preferable_tendency"/>
         <xs:element ref="measure_unit"/>
-        <xs:choice>
-          <xs:element ref="splitsIn"/>
-        </xs:choice>
+		<xs:element ref="splitsIn" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
-      <xs:attribute name="id" type="xs:anyURI" use="required"/>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ind_name_en" type="xs:string"/>
+  <xs:element name="ind_name_es" type="xs:string"/>
+  <xs:element name="ind_name_fr" type="xs:string"/>
+  <xs:element name="ind_description_en" type="xs:string"/>
+  <xs:element name="ind_description_es" type="xs:string"/>
+  <xs:element name="ind_description_fr" type="xs:string"/>
+  <xs:element name="topic-ref" type="xs:NMTOKEN"/>
+  <xs:element name="preferable_tendency" type="xs:NMTOKEN"/>
+  <xs:element name="measure_unit">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="convertible_to" type="xs:string" use="required"/> <!-- TODO maybe an enumeration list -->
+          <xs:attribute name="factor" type="xs:float" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="splitsIn">
@@ -98,6 +229,18 @@
       <xs:attribute name="type" type="xs:string"/>
     </xs:complexType>
   </xs:element>
+  
+  <!-- end indicator-ref -->
+  <xs:element name="indicator-ref">
+    <xs:complexType>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- end indicator-ref -->
+  
+  <!-- end indicator -->
+
+  <!-- begin compound_indicator -->
   <xs:element name="compound_indicator">
     <xs:complexType>
       <xs:sequence>
@@ -111,26 +254,30 @@
         <xs:element ref="preferable_tendency"/>
         <xs:element ref="measure_unit"/>
         <xs:element maxOccurs="unbounded" minOccurs="2" ref="indicator-ref"/>
-        <xs:choice>
-          <xs:element ref="splitsIn"/>
-        </xs:choice>
+		<xs:element ref="splitsIn" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
-      <xs:attribute name="id" type="xs:anyURI" use="required"/>
+      <xs:attribute name="id" type="xs:string" use="required"/>
     </xs:complexType>
   </xs:element>
+  <!-- end compound_indicator -->
+
+  <!-- begin indicator_groups -->  
   <xs:element name="indicator_groups">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="indicator_group"/>
+        <xs:element ref="indicator_group"  minOccurs="0" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="indicator_group">
     <xs:complexType>
       <xs:attribute name="id" type="xs:string" use="required"/>
-      <xs:attribute name="indicator-ref" type="xs:anyURI" use="required"/>
+      <xs:attribute name="indicator-ref" type="xs:string" use="required"/>
     </xs:complexType>
   </xs:element>
+  <!-- end indicator_groups -->  
+
+  <!-- begin slices -->    
   <xs:element name="slices">
     <xs:complexType>
       <xs:sequence>
@@ -147,27 +294,19 @@
       <xs:attribute name="id" type="xs:string" use="required"/>
     </xs:complexType>
   </xs:element>
+  
   <xs:element name="sli_metadata">
     <xs:complexType>
       <xs:sequence>
+        <xs:element ref="indicator-ref"/>
         <xs:choice>
           <xs:element ref="time"/>
-          <xs:element ref="area"/>
+          <xs:group ref="area"/>
         </xs:choice>
-        <xs:element ref="indicator-ref"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="area">
-    <xs:complexType>
-      <xs:choice>
-        <xs:element ref="country"/>
-        <xs:element ref="region"/>
-      </xs:choice>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="country" type="xs:anyURI"/>
-  <xs:element name="region" type="xs:anyURI"/>
+
   <xs:element name="referred">
     <xs:complexType>
       <xs:sequence>
@@ -175,77 +314,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="observations">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" minOccurs="1" ref="observation"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="observation">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="issued"/>
-        <xs:element ref="obs-status"/>
-        <xs:element maxOccurs="1" minOccurs="0" ref="value"/>
-        <xs:element ref="computation"/>
-        <xs:element ref="area"/>
-        <xs:element ref="indicator-ref"/>
-        <xs:element ref="time"/>
-      </xs:sequence>
-      <xs:attribute name="id" type="xs:string" use="required"/>
-      <xs:attribute name="group" type="xs:string" use="optional"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="issued" type="xs:NMTOKEN"/>
-  <xs:element name="obs-status" type="xs:anyURI"/>
-  <xs:element name="value" type="xs:string"/>
-  <xs:element name="computation">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:string">
-          <xs:attribute name="type" type="xs:NMTOKEN" use="required"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ind_name_en" type="xs:string"/>
-  <xs:element name="ind_name_es" type="xs:string"/>
-  <xs:element name="ind_name_fr" type="xs:string"/>
-  <xs:element name="ind_description_en" type="xs:string"/>
-  <xs:element name="ind_description_es" type="xs:string"/>
-  <xs:element name="ind_description_fr" type="xs:string"/>
-  <xs:element name="topic-ref" type="xs:NMTOKEN"/>
-  <xs:element name="preferable_tendency" type="xs:NMTOKEN"/>
-  <xs:element name="measure_unit">
-    <xs:complexType>
-      <xs:simpleContent>
-        <xs:extension base="xs:string">
-          <xs:attribute name="convertible_to" type="xs:NMTOKEN" use="required"/>
-          <xs:attribute name="factor" type="xs:int" use="required"/>
-        </xs:extension>
-      </xs:simpleContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="indicator-ref">
-    <xs:complexType>
-      <xs:attribute name="id" type="xs:anyURI" use="required"/>
-    </xs:complexType>
-  </xs:element>
+
   <xs:element name="observation-ref">
     <xs:complexType>
-      <xs:attribute name="id" type="xs:anyURI" use="required"/>
+      <xs:attribute name="id" type="xs:string" use="required"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="time">
-    <xs:complexType mixed="true">
-      <xs:sequence>
-        <xs:element maxOccurs="1" minOccurs="0" ref="interval"/>
-      </xs:sequence>
-      <xs:attribute name="unit" type="xs:string" use="required"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="interval">
+   <!-- end slices -->    
+
+   <xs:element name="interval">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="beginning"/>
@@ -254,5 +331,5 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="beginning" type="xs:string"/>
-  <xs:element name="end" type="xs:string"/>
+  <xs:element name="end" type="xs:string"/> 
 </xs:schema>
