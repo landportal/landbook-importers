@@ -112,7 +112,6 @@ class ModelToXMLTransformer(object):
     IMPORT_PROCESS_DATASOURCE = "datasource"
     IMPORT_PROCESS_DATASOURCE_ID_ATT = "id"
     IMPORT_PROCESS_TYPE = "type"
-    IMPORT_PROCESS_TIMESTAMP = "timestamp"
     IMPORT_PROCESS_USER = "user"
     IMPORT_PROCESS_SDMX_FREQUENCY = "sdmx_frequency"
     IMPORT_PROCESS_DATASOURCE_PREFIX = ""  # Empty value, but it remains here because it could still be changed
