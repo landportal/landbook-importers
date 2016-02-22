@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="dataset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="import_process"/>
+        <xs:element ref="license"/>
+        <xs:element ref="observations"/>
+        <xs:element ref="indicators"/>
+        <xs:element ref="indicator_groups"/>
+        <xs:element ref="slices"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:NCName" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="import_process">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="organization_name"/>
+        <xs:element ref="organization_url"/>
+        <xs:element ref="organization_id"/>
+        <xs:element ref="organization_description_en"/>
+        <xs:element ref="organization_description_es"/>
+        <xs:element ref="organization_description_fr"/>
+        <xs:element ref="datasource"/>
+        <xs:element ref="type"/>
+        <xs:element ref="file_name"/>
+        <xs:element ref="user"/>
+        <xs:element ref="sdmx_frequency"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="organization_name" type="xs:string"/>
+  <xs:element name="organization_url" type="xs:anyURI"/>
+  <xs:element name="organization_id" type="xs:NMTOKEN"/>
+  <xs:element name="organization_description_en" type="xs:string"/>
+  <xs:element name="organization_description_es" type="xs:string"/>
+  <xs:element name="organization_description_fr" type="xs:string"/>
+  <xs:element name="datasource">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="id" type="xs:NMTOKEN" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="type" type="xs:anyURI"/>
+  <xs:element name="file_name" type="xs:anyURI"/>
+  <xs:element name="user" type="xs:anyURI"/>
+  <xs:element name="sdmx_frequency" type="xs:anyURI"/>
+  <xs:element name="license">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="lic_name"/>
+        <xs:element ref="lic_description"/>
+        <xs:element ref="republish"/>
+        <xs:element ref="lic_url"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="lic_name" type="xs:string"/>
+  <xs:element name="lic_description" type="xs:string"/>
+  <xs:element name="republish" type="xs:boolean"/>
+  <xs:element name="lic_url" type="xs:anyURI"/>
+  <xs:element name="indicators">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="indicator"/>
+        <xs:element maxOccurs="unbounded" ref="compound_indicator"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="indicator">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ind_name_en"/>
+        <xs:element ref="ind_name_es"/>
+        <xs:element ref="ind_name_fr"/>
+        <xs:element ref="ind_description_en"/>
+        <xs:element ref="ind_description_es"/>
+        <xs:element ref="ind_description_fr"/>
+        <xs:element ref="topic-ref"/>
+        <xs:element ref="preferable_tendency"/>
+        <xs:element ref="measure_unit"/>
+        <xs:choice>
+          <xs:element ref="splitsIn"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="splitsIn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="1" ref="indicator-ref"/>
+      </xs:sequence>
+      <xs:attribute name="type" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="compound_indicator">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ind_name_en"/>
+        <xs:element ref="ind_name_es"/>
+        <xs:element ref="ind_name_fr"/>
+        <xs:element ref="ind_description_en"/>
+        <xs:element ref="ind_description_es"/>
+        <xs:element ref="ind_description_fr"/>
+        <xs:element ref="topic-ref"/>
+        <xs:element ref="preferable_tendency"/>
+        <xs:element ref="measure_unit"/>
+        <xs:element maxOccurs="unbounded" minOccurs="2" ref="indicator-ref"/>
+        <xs:choice>
+          <xs:element ref="splitsIn"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="indicator_groups">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="indicator_group"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="indicator_group">
+    <xs:complexType>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="indicator-ref" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="slices">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="0" ref="slice"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="slice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="sli_metadata"/>
+        <xs:element ref="referred"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sli_metadata">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="time"/>
+          <xs:element ref="area"/>
+        </xs:choice>
+        <xs:element ref="indicator-ref"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="area">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="country"/>
+        <xs:element ref="region"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="country" type="xs:anyURI"/>
+  <xs:element name="region" type="xs:anyURI"/>
+  <xs:element name="referred">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="1" ref="observation-ref"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="observations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" minOccurs="1" ref="observation"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="observation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="issued"/>
+        <xs:element ref="obs-status"/>
+        <xs:element maxOccurs="1" minOccurs="0" ref="value"/>
+        <xs:element ref="computation"/>
+        <xs:element ref="area"/>
+        <xs:element ref="indicator-ref"/>
+        <xs:element ref="time"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="group" type="xs:string" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="issued" type="xs:NMTOKEN"/>
+  <xs:element name="obs-status" type="xs:anyURI"/>
+  <xs:element name="value" type="xs:string"/>
+  <xs:element name="computation">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" type="xs:NMTOKEN" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ind_name_en" type="xs:string"/>
+  <xs:element name="ind_name_es" type="xs:string"/>
+  <xs:element name="ind_name_fr" type="xs:string"/>
+  <xs:element name="ind_description_en" type="xs:string"/>
+  <xs:element name="ind_description_es" type="xs:string"/>
+  <xs:element name="ind_description_fr" type="xs:string"/>
+  <xs:element name="topic-ref" type="xs:NMTOKEN"/>
+  <xs:element name="preferable_tendency" type="xs:NMTOKEN"/>
+  <xs:element name="measure_unit">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="convertible_to" type="xs:NMTOKEN" use="required"/>
+          <xs:attribute name="factor" type="xs:int" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="indicator-ref">
+    <xs:complexType>
+      <xs:attribute name="id" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="observation-ref">
+    <xs:complexType>
+      <xs:attribute name="id" type="xs:anyURI" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="time">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="0" ref="interval"/>
+      </xs:sequence>
+      <xs:attribute name="unit" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="interval">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="beginning"/>
+        <xs:element ref="end"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="beginning" type="xs:string"/>
+  <xs:element name="end" type="xs:string"/>
+</xs:schema>
