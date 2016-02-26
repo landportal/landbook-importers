@@ -1,6 +1,9 @@
 ./clean.sh # this scripts include to remove all .xml files
 
-python main.py #generate the intermediate XML
+python main.py -c files/configuration-ASTI_Researchers.ini #generate the intermediate XML
+mv DATFAOSTAT0_1_0.xml DAT-FAOASTI-Researchers.xml
+python main.py -c files/configuration-ASTI_Research_Spending.ini #generate the intermediate XML
+mv DATFAOSTAT0_1_0.xml DAT-FAOASTI-Research_Spending.xml
 
 for file in *.xml
 do
