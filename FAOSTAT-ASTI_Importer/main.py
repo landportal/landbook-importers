@@ -27,7 +27,8 @@ def configure_log():
 def run():
         config = ConfigParser()
         config_path = "./files/configuration-ASTI_Research_Spending.ini"
-        config.read(config_path)
+        config_path_org = "./files/configuration-FAO-ASTI.ini"
+        config.read([config_path, config_path_org])
         log = logging.getLogger('faostat-asti-log')
         configure_log()
         look_for_historical = config.getboolean("TRANSLATOR", "historical_mode")
