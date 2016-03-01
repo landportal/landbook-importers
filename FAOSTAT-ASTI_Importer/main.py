@@ -3,9 +3,7 @@ Created on 15/01/2014
 
 @author: Dani
 '''
-
-import os
-import sys
+import sys, getopt, traceback, os
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir), 'CountryReconciler'))
@@ -23,11 +21,27 @@ def configure_log():
     logging.basicConfig(filename='faostat-asti.log', level=logging.INFO, 
                         format=FORMAT)
 
+def main(argv):
+   config_file = ''
+   try:
+      opts, args = getopt.getopt(argv,"hc:",["cfile="])
+   except getopt.GetoptError:
+      print 'main.py -c <inputfile>'
+      sys.exit(2)
+   for opt, arg in opts:
+      if opt == '-h':
+         print 'main.py -c <inputfile>'
+         sys.exit()
+      elif opt in ("-c", "--config"):
+         config_file = arg
+   run(config_file)
 
-def run():
+def run(config_file):
+	basepath = os.path.dirname(__file__)
+	config_path = os.path.abspath(os.path.join(basepath, config_file)) #"./files/configuration-ASTI_Research_Spending.ini"
+        config_path_org = os.path.abspath(os.path.join(basepath, "files/configuration-FAO-ASTI.ini"))
         config = ConfigParser()
-        config_path = "./files/configuration-ASTI_Research_Spending.ini"
-        config.read(config_path)
+        config.read([config_path, config_path_org])
         log = logging.getLogger('faostat-asti-log')
         configure_log()
         look_for_historical = config.getboolean("TRANSLATOR", "historical_mode")
@@ -45,7 +59,9 @@ def run():
             log.error("While trying to turn raw info into xml: " + e.message)
             raise RuntimeError()
 
-        with open(config_path, 'w') as configfile:
+	# write the new configFile (content merged)
+	new_config_path = os.path.abspath(os.path.join(basepath, config_file+".new"))
+        with open(new_config_path, 'w') as configfile:
             config.write(configfile)
 
 
@@ -53,9 +69,10 @@ def run():
 
 if __name__ == '__main__':
     try:
-        run()
+        main(sys.argv[1:])
         print "Done!"
     except:
         print "Execution finalized with errors. Check logs. "
         e = sys.exc_info()[0]
         print "Error: %s" % e
+	traceback.print_exc(file=sys.stdout)
