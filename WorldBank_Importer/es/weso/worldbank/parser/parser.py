@@ -206,7 +206,6 @@ class Parser(object):
                 print '\t' + indicator.name_en  + "--------------" + indicator.preferable_tendency + "-----------"
                 for country in self.countries:
                     slice_object = self._build_slice(country, dataset, indicator)
-                    dataset.add_slice(slice_object)  # TESTING EFFECT
                     #print '\t\t' + slice_object.slice_id + '\t' + slice_object.dimension.get_dimension_string()
                     uri = self.observations_url.replace('{ISO3CODE}', country.iso3)
                     uri = uri.replace('{INDICATOR.CODE}', indicator_code)
@@ -215,21 +214,28 @@ class Parser(object):
                         observations = response[1]
                         if observations is not None:
                             for observation_element in observations:
-                                #print observation_element
-                                observation = self._build_observation(indicator, 
+				value = observation_element['value']
+
+				if value is not None: # Only create an observation if there is a value for it
+                                   observation = self._build_observation(indicator, 
                                                                       dataset, 
                                                                       country, 
                                                                       observation_element['value'], 
                                                                       observation_element['date'])
                                 
-                                if self._filter_historical_observations(observation.ref_time):
-                                    country.add_observation(observation)
-                                    dataset.add_observation(observation)
-                                    slice_object.add_observation(observation)
+                                   if self._filter_historical_observations(observation.ref_time):
+                                    		country.add_observation(observation)
+                                    		dataset.add_observation(observation)
+                                    		slice_object.add_observation(observation)
                                     #if observation.value.obs_status is not Value.MISSING:
                                     #    print '\t\t\t' + observation.ref_time.get_time_string() + '\t' + str(observation.value.value) + ' ' + indicator.measurement_unit.name
                                     #else:
                                     #    print '\t\t\t' + observation.ref_time.get_time_string() + '\tMissing'
+
+			# Only add the slice if there area observations
+			if len(slice_object.observations) > 0:
+				dataset.add_slice(slice_object) 
+
                     except (KeyError, ConnectionError, ValueError):
                         self.logger.error('Error retrieving response for \'' + uri + '\'')
                 self.logger.info("FINISHED: " + indicator.name_en)
