@@ -13,7 +13,7 @@ __author__ = 'BorjaGB'
 
 def configure_log():
     FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(filename='faoextractor.log', level=logging.INFO,
+    logging.basicConfig(filename='FAOCensus.log', level=logging.INFO,
                         format=FORMAT)
 
 def update_ini_file(config, config_path, importer, log):
