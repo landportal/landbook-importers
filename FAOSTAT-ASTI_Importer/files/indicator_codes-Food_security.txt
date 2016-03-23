@@ -1,0 +1,21 @@
+#This file contains all the needed indicators from the complete downloaded list.
+#Each indicator should be placed in a single line. You can use comments
+#by starting a line with "#"
+
+# Domestic food price index (index)
+21018-6125
+
+# Prevalence of undernourishment (%) (3-year average)
+21004-6121
+
+# Share of food expenditure of the poor (%)
+21022-6121
+
+# Depth of the food deficit (kcal/capita/day) (3-year average)
+21023-6128
+
+# Access to improved water sources (%)
+21019-6121
+
+# Access to improved sanitation facilities (%)
+21020-6121
