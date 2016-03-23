@@ -57,6 +57,7 @@ def run(config_file):
             csv_translator.run()
         except BaseException as e:
             log.error("While trying to turn raw info into xml: " + e.message)
+	    traceback.print_exc(file=sys.stdout)
             raise RuntimeError()
 
 	# write the new configFile (content merged)

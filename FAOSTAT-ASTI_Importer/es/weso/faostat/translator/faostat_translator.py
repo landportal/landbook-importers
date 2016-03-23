@@ -119,6 +119,7 @@ class FaostatTranslator(object):
 		    self._log.debug("The candidate register does NOT pass the filters")
             except RuntimeError as e:
                 self._log.info("While parsing a row form the csv_file: {0}. Row will be ignored".format(e.message))
+	self._log.info("Generated %s valid registers" %len(result))
         return result
 
 
@@ -279,10 +280,11 @@ class FaostatTranslator(object):
     @staticmethod
     def _parse_year(primitive_data):
         """
-        We are receiving an string containing a int number with a "'" at the end
+        We are receiving an string containing a int number with a "'" at the end.
+	This field could contain a single year or an interval (pattern: XXXX-XXXX)
 
         """
-        return int(primitive_data[:-1])
+        return primitive_data[:-1]
 
     @staticmethod
     def _parse_unit(primitive_data):

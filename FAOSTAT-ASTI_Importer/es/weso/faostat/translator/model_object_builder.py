@@ -18,6 +18,7 @@ from lpentities.observation import Observation
 from lpentities.organization import Organization
 from lpentities.value import Value
 from lpentities.year_interval import YearInterval
+from lpentities.interval import Interval
 from reconciler.exceptions.unknown_country_error import UnknownCountryError
 
 from es.weso.faostat.translator.translator_const import TranslatorConst
@@ -128,8 +129,12 @@ class ModelObjectBuilder(object):
 
 
     def _actualize_last_checked_date_if_needed(self, new_observation):
-        if new_observation.ref_time.year > self._last_checked_year:
-            self._last_checked_year = new_observation.ref_time.year
+	if isinstance(new_observation.ref_time, Interval):
+	   if new_observation.ref_time.end_time > self._last_checked_year:
+	      self._last_checked_year = new_observation.ref_time.end_time
+	if isinstance(new_observation.ref_time, YearInterval):
+	   if new_observation.ref_time.year > self._last_checked_year:
+              self._last_checked_year = new_observation.ref_time.year
 
     @staticmethod
     def add_issued_to_observation(observation):
@@ -138,7 +143,24 @@ class ModelObjectBuilder(object):
 
     @staticmethod
     def add_reftime_to_observation(observation, register):
-        observation.ref_time = YearInterval(year=register[TranslatorConst.YEAR])
+#        observation.ref_time = YearInterval(year=register[TranslatorConst.YEAR])
+        observation.ref_time = ModelObjectBuilder._build_ref_time_object(year=register[TranslatorConst.YEAR])
+
+    @staticmethod
+    def _build_ref_time_object(year):
+        years = str(year).split("-")
+        if len(years) == 1:
+            if len(str(year)) == 2:
+                return YearInterval(year=int("19" + str(year)))
+            return YearInterval(year=int(float(year)))
+        else :
+            if len(years[1]) == 2:
+                if years[1].startswith('0') and years[0].startswith('19'): 
+                    return Interval(start_time=int(years[0]), end_time=int("20"+years[1]))
+                else :
+                    return Interval(start_time=int(years[0]), end_time=int(years[0][:2]+years[1]))
+            else :
+                return Interval(start_time=int(years[0]), end_time=int(years[1]))
 
     def add_computation_to_observation(self, observation, register):
         """
@@ -190,7 +212,7 @@ class ModelObjectBuilder(object):
         for indicator in indicator_codes:
          try:
            ind = Indicator(chain_for_id=self._org_id,
-                                          int_for_id=int(self._read_config_value(indicator, "id")))
+                                          int_for_id=self._read_config_value(indicator, "id"))
            ind.name_en = self._read_config_value(indicator, "name_en")
            ind.name_es = self._read_config_value(indicator, "name_es")
            ind.name_fr = self._read_config_value(indicator, "name_fr")
