@@ -18,7 +18,7 @@ from ConfigParser import ConfigParser
 
 def configure_log():
     FORMAT = "%(asctime)s - %(name)s - %(levelname)s [%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
-    logging.basicConfig(filename='faostat-asti.log', level=logging.INFO, 
+    logging.basicConfig(filename='faostat-norm.log', level=logging.INFO, 
                         format=FORMAT)
 
 def main(argv):
@@ -39,10 +39,10 @@ def main(argv):
 def run(config_file):
 	basepath = os.path.dirname(__file__)
 	config_path = os.path.abspath(os.path.join(basepath, config_file)) #"./files/configuration-ASTI_Research_Spending.ini"
-        config_path_org = os.path.abspath(os.path.join(basepath, "files/configuration-FAO-ASTI.ini"))
+        config_path_org = os.path.abspath(os.path.join(basepath, "files/configuration-org-FAOSTAT.ini"))
         config = ConfigParser()
         config.read([config_path, config_path_org])
-        log = logging.getLogger('faostat-asti-log')
+        log = logging.getLogger('faostat-norm-log')
         configure_log()
         look_for_historical = config.getboolean("TRANSLATOR", "historical_mode")
         try:
