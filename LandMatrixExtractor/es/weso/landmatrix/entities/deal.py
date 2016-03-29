@@ -30,4 +30,15 @@ class Deal(object):
         self.sectors = sectors
         self.negotiation_status = negotiation_status
 
-
+    def __str__(self):
+	sb = []
+	for key in self.__dict__:
+	    value = (self.__dict__[key])
+	    if isinstance(value, unicode):
+		value = (self.__dict__[key]).encode('utf-8') # transfor to str to allow 
+	    sb.append("{key}='{value}'".format(key=key, value=value))
+ 
+	return ', '.join(str(sb))
+ 
+    def __repr__(self):
+	return self.__str__() 
