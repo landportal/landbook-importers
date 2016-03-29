@@ -6,7 +6,7 @@ Created on 22/01/2014
 
 #from ConfigParser import ConfigParser
 import codecs
-import os
+import os, sys, traceback
 from lpentities.observation import Observation
 from lpentities.value import Value
 from lpentities.indicator import Indicator
@@ -254,9 +254,15 @@ class LandMatrixTranslator(object):
         result = []
         for info_node in info_nodes:
             try:
-                result.append(DealsBuilder.turn_node_into_deal_object(info_node))
+		self._log.debug("Parsing deal id = " + info_node.findtext("./field[@name='deal_id']").strip())
+		deal = DealsBuilder.turn_node_into_deal_object(info_node)
+		self._log.debug("Parsing finished of deal = " + str(deal))
+                result.append(deal)
             except BaseException as ex:
                 self._log.warning("Problem while parsing a node of a deal. Deal will be ignored. Cause: " + ex.message)
+		e = sys.exc_info()[0]
+	        print "Error: %s" % e
+		traceback.print_exc(file=sys.stdout)
         return result
 
     def _get_info_nodes_from_file(self):
