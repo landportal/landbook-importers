@@ -1,7 +1,7 @@
 __author__ = 'Dani'
 
 from ..entities.deal import Deal
-
+import re
 
 class DealsBuilder(object):
 
@@ -22,7 +22,6 @@ class DealsBuilder(object):
         a_deal.contract_hectares = _extract_contract_hectares(info_node)
         a_deal.sectors = _extract_sectors(info_node)
         a_deal.negotiation_status = _extract_negotiation_status(info_node)
-
         return a_deal
 
 
@@ -85,37 +84,28 @@ def _extract_negotiation_status(info_node):
 def _extract_target_country(info_node):
     for subnode in info_node.getchildren():
         if subnode.attrib[PROPERTY] == TARGET_COUNTRY:
-            return subnode.text
+            return subnode.text.strip()
     _raise_error("country", "not found")
 
 
 def _extract_date(info_node):
+    # 2016/03/29: Pattern of negotiation_status node "[YYYY] STATUS (XXXX XXXXXX)" or "STATUS (XXXX XXXXXX)"
+
     #Looking for the target text
     date_container = _get_node_data(info_node, NEGOTIATION_STATUS)
+    # return None if there is no negotiation_status value
     if date_container == NO_VALUE:
         return None
 
-    #Obtaining possible dates
-    aperture_sign_list = _find_index_all_occurrences_of_a_sequence(date_container, "[")
-    closure_sign_list = _find_index_all_occurrences_of_a_sequence(date_container, "]")
-
-    complete_pairs = _lower_lenght(aperture_sign_list, closure_sign_list)
-
-    candidate_dates = []
-    for i in range(0, complete_pairs):
-        candidate_dates.append(date_container[aperture_sign_list[i] + 1:closure_sign_list[i]])
-
-    #Chechking if they are valid dates and returning the highest
-    result = -1
-    for a_date in candidate_dates:
-        if len(a_date) == 4 and a_date.isdigit():
-            int_date = int(a_date)
-            if int_date > result:
-                result = int_date
-    if result == -1:
+    # return None if there is no year in negotiation_status node. STATUS (XXXX XXXXXXXX)
+    if '[' not in date_container:
         return None
-    else:
-        return result
+
+    candidate_years = re.findall(r'\[([^]]*)\]', date_container) # get the years (as string)
+    candidate_years = map(int, candidate_years) # convert to integer
+    negotiation_status_year = max(candidate_years) # obtain the highest value
+
+    return negotiation_status_year
 
 
 def _lower_lenght(elem1, elem2):
@@ -141,6 +131,9 @@ def _get_node_data(info_node, tag):
     return NO_VALUE
 
 def _remove_blanks(text):
+    if text is None:
+	return NO_VALUE
+
     result = text.replace("\t", "")
     result = result.replace("\n", "")
     result = result.replace("\r", "")
@@ -159,7 +152,7 @@ def _extract_sectors(info_node):
     candidate_sectors = text.split(",")
     for candidate in candidate_sectors:
         if not (candidate is None or candidate == ""):
-            result.append(candidate.replace(" ", ""))
+            result.append(candidate.replace(" ", "")) # Should we replace blank space ?
     if len(result) == 0:
         _raise_error("sectors", "not found")
 
