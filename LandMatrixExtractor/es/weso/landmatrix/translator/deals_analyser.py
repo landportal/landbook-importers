@@ -38,7 +38,7 @@ class DealsAnalyser(object):
             else:
                 raise RuntimeError("We have found a deal with a non recognized country."
                                    " Agregate values cuold be incorrect form this point, execution should stop. "
-                                   "Conuntry: " + a_deal.target_country)
+                                   "Country: " + a_deal.target_country)
 
         return self._deals_dict
 
