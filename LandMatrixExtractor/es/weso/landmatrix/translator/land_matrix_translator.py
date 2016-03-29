@@ -138,9 +138,13 @@ class LandMatrixTranslator(object):
         """
         try:
             info_nodes = self._get_info_nodes_from_file()
+	    self._log.info("Number of info_nodes read = %i" %len(info_nodes))
             deals = self._turn_info_nodes_into_deals(info_nodes)
+	    self._log.info("Number of info_nodes turn into deals = %i" %len(deals))
             deal_entrys = self._turn_deals_into_deal_entrys(deals)
+	    self._log.info("Number of deals turn into deal_entries = %i" %len(deal_entrys))
             observations = self._turn_deal_entrys_into_obs_objects(deal_entrys)
+	    self._log.info("Number of observations generated = %i" %len(observations))
             for obs in observations:
                 self._default_dataset.add_observation(obs)
         except BaseException as e:
