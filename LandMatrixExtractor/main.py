@@ -19,7 +19,7 @@ from es.weso.landmatrix.translator.land_matrix_translator import LandMatrixTrans
 
 
 def configure_log():
-    FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    FORMAT = "%(asctime)s - %(name)s - %(levelname)s [%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
     logging.basicConfig(filename='land_matrix_extractor.log', level=logging.INFO, 
                         format=FORMAT)
 
