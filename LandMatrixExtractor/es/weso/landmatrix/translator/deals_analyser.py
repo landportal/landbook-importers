@@ -77,6 +77,7 @@ class DealsAnalyser(object):
         self._update_date_of_an_entry(KeyDicts.INTENDED_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.CONCLUDED_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.FAILED_DEALS, country, date)
+
         self._update_date_of_an_entry(KeyDicts.AGRICULTURE_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.BIOFUELS_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.FOOD_CROPS_DEALS, country, date)
@@ -85,7 +86,12 @@ class DealsAnalyser(object):
         self._update_date_of_an_entry(KeyDicts.AGRIUNSPECIFIED_DEALS, country, date)
 
         self._update_date_of_an_entry(KeyDicts.CONSERVATION_DEALS, country, date)
+
         self._update_date_of_an_entry(KeyDicts.FORESTRY_DEALS, country, date)
+        self._update_date_of_an_entry(KeyDicts.FOR_WOOD_AND_FIBRE_DEALS, country, date)
+        self._update_date_of_an_entry(KeyDicts.FOR_CARBON_SEQUESTRATION_REDD_DEALS, country, date)
+        self._update_date_of_an_entry(KeyDicts.FORESTUNSPECIFIED_DEALS, country, date)
+
         self._update_date_of_an_entry(KeyDicts.INDUSTRY_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.RENEWABLE_ENERGY_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.TOURISM_DEALS, country, date)
@@ -125,8 +131,17 @@ class DealsAnalyser(object):
 
         if Deal.CONSERVATION in deal.sectors:
             self._increase_counter_indicator(KeyDicts.CONSERVATION_DEALS, target_country)
+
         if Deal.FORESTRY in deal.sectors:
             self._increase_counter_indicator(KeyDicts.FORESTRY_DEALS, target_country)
+        if Deal.FOR_WOOD_AND_FIBRE in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.FOR_WOOD_AND_FIBRE_DEALS, target_country)
+        if Deal.FOR_CARBON_SEQUESTRATION_REDD in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.FOR_CARBON_SEQUESTRATION_REDD_DEALS, target_country)
+        if Deal.FORESTUNSPECIFIED in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.FORESTUNSPECIFIED_DEALS, target_country)
+
+
         if Deal.INDUSTRY in deal.sectors:
             self._increase_counter_indicator(KeyDicts.INDUSTRY_DEALS, target_country)
         if Deal.RENEWABLE_ENERGY in deal.sectors:

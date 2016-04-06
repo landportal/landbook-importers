@@ -8,6 +8,7 @@ class Deal(object):
     CONCLUDED = "Concluded"
     FAILED = "Failed"
 
+    # This must match the intention value, removing the blank spaces"
     #Sectors
     AGRICULTURE = "Agriculture"
     BIOFUELS = "Biofuels"
@@ -18,6 +19,11 @@ class Deal(object):
 
     CONSERVATION = "Conservation"
     FORESTRY = "Forestry"
+
+    FOR_WOOD_AND_FIBRE = "Forwoodandfibre"
+    FOR_CARBON_SEQUESTRATION_REDD = "Forcarbonsequestration/REDD"
+    FORESTUNSPECIFIED = "Forestunspecified"
+
     INDUSTRY = "Industry"
     RENEWABLE_ENERGY = "RenewableEnergy"
     TOURISM = "Tourism"
