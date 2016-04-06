@@ -105,6 +105,10 @@ class DealsAnalyser(object):
     def _process_deals_by_topic(self, deal, target_country):
         if Deal.AGRICULTURE in deal.sectors:
             self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
+
+        if Deal.BIOFUELS in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.BIOFUELS_DEALS, target_country)
+
         if Deal.CONSERVATION in deal.sectors:
             self._increase_counter_indicator(KeyDicts.CONSERVATION_DEALS, target_country)
         if Deal.FORESTRY in deal.sectors:

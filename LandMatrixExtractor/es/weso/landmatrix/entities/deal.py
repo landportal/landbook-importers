@@ -10,6 +10,7 @@ class Deal(object):
 
     #Sectors
     AGRICULTURE = "Agriculture"
+    BIOFUELS = "Biofuels"
     CONSERVATION = "Conservation"
     FORESTRY = "Forestry"
     INDUSTRY = "Industry"
