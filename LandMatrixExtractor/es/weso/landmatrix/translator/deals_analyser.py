@@ -78,6 +78,12 @@ class DealsAnalyser(object):
         self._update_date_of_an_entry(KeyDicts.CONCLUDED_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.FAILED_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.AGRICULTURE_DEALS, country, date)
+        self._update_date_of_an_entry(KeyDicts.BIOFUELS_DEALS, country, date)
+        self._update_date_of_an_entry(KeyDicts.FOOD_CROPS_DEALS, country, date)
+        self._update_date_of_an_entry(KeyDicts.LIVESTOCK_DEALS, country, date)
+        self._update_date_of_an_entry(KeyDicts.NON_FOOD_AGRICULTURAL_COMMODITIES_DEALS, country, date)
+        self._update_date_of_an_entry(KeyDicts.AGRIUNSPECIFIED_DEALS, country, date)
+
         self._update_date_of_an_entry(KeyDicts.CONSERVATION_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.FORESTRY_DEALS, country, date)
         self._update_date_of_an_entry(KeyDicts.INDUSTRY_DEALS, country, date)
@@ -108,6 +114,14 @@ class DealsAnalyser(object):
 
         if Deal.BIOFUELS in deal.sectors:
             self._increase_counter_indicator(KeyDicts.BIOFUELS_DEALS, target_country)
+        if Deal.FOOD_CROPS in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.FOOD_CROPS_DEALS, target_country)
+        if Deal.LIVESTOCK in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.LIVESTOCK_DEALS, target_country)
+        if Deal.NON_FOOD_AGRICULTURAL_COMMODITIES in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.NON_FOOD_AGRICULTURAL_COMMODITIES_DEALS, target_country)
+        if Deal.AGRIUNSPECIFIED in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.AGRIUNSPECIFIED_DEALS, target_country)
 
         if Deal.CONSERVATION in deal.sectors:
             self._increase_counter_indicator(KeyDicts.CONSERVATION_DEALS, target_country)

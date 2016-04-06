@@ -11,6 +11,11 @@ class Deal(object):
     #Sectors
     AGRICULTURE = "Agriculture"
     BIOFUELS = "Biofuels"
+    FOOD_CROPS = "Foodcrops"
+    LIVESTOCK = "Livestock"
+    NON_FOOD_AGRICULTURAL_COMMODITIES = "Non-foodagriculturalcommodities"
+    AGRIUNSPECIFIED = "Agriunspecified"
+
     CONSERVATION = "Conservation"
     FORESTRY = "Forestry"
     INDUSTRY = "Industry"
