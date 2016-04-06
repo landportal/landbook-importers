@@ -115,31 +115,35 @@ class DealsAnalyser(object):
 
 
     def _process_deals_by_topic(self, deal, target_country):
-        if Deal.AGRICULTURE in deal.sectors:
-            self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
 
         if Deal.BIOFUELS in deal.sectors:
             self._increase_counter_indicator(KeyDicts.BIOFUELS_DEALS, target_country)
+            self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
         if Deal.FOOD_CROPS in deal.sectors:
             self._increase_counter_indicator(KeyDicts.FOOD_CROPS_DEALS, target_country)
+            self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
         if Deal.LIVESTOCK in deal.sectors:
             self._increase_counter_indicator(KeyDicts.LIVESTOCK_DEALS, target_country)
+            self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
         if Deal.NON_FOOD_AGRICULTURAL_COMMODITIES in deal.sectors:
             self._increase_counter_indicator(KeyDicts.NON_FOOD_AGRICULTURAL_COMMODITIES_DEALS, target_country)
+            self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
         if Deal.AGRIUNSPECIFIED in deal.sectors:
             self._increase_counter_indicator(KeyDicts.AGRIUNSPECIFIED_DEALS, target_country)
+            self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
 
         if Deal.CONSERVATION in deal.sectors:
             self._increase_counter_indicator(KeyDicts.CONSERVATION_DEALS, target_country)
 
-        if Deal.FORESTRY in deal.sectors:
-            self._increase_counter_indicator(KeyDicts.FORESTRY_DEALS, target_country)
         if Deal.FOR_WOOD_AND_FIBRE in deal.sectors:
             self._increase_counter_indicator(KeyDicts.FOR_WOOD_AND_FIBRE_DEALS, target_country)
+            self._increase_counter_indicator(KeyDicts.FORESTRY_DEALS, target_country)
         if Deal.FOR_CARBON_SEQUESTRATION_REDD in deal.sectors:
             self._increase_counter_indicator(KeyDicts.FOR_CARBON_SEQUESTRATION_REDD_DEALS, target_country)
+            self._increase_counter_indicator(KeyDicts.FORESTRY_DEALS, target_country)
         if Deal.FORESTUNSPECIFIED in deal.sectors:
             self._increase_counter_indicator(KeyDicts.FORESTUNSPECIFIED_DEALS, target_country)
+            self._increase_counter_indicator(KeyDicts.FORESTRY_DEALS, target_country)
 
 
         if Deal.INDUSTRY in deal.sectors:
