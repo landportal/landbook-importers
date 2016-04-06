@@ -7,6 +7,7 @@ Created on 22/01/2014
 #from ConfigParser import ConfigParser
 import codecs
 import os, sys, traceback
+import json
 from lpentities.observation import Observation
 from lpentities.value import Value
 from lpentities.indicator import Indicator
@@ -289,7 +290,6 @@ class LandMatrixTranslator(object):
         # I am not sure of which one is the most dangerous option, but also i'm not sure about if
         # that is a question that deserves to waste time with it. So huge and ugly code.
 
-
         hectares = MeasurementUnit(name="hectares",
                                    convert_to=MeasurementUnit.SQ_KM,
                                    factor=0.01)
@@ -299,236 +299,47 @@ class LandMatrixTranslator(object):
 
         result = {}
 
-        #TOTAL DEALS
-        total_deals = Indicator(chain_for_id=self._org_id,
-                                int_for_id=self._read_config_value("INDICATORS", "total_deals_id"))
-        total_deals.name_en = self._read_config_value("INDICATORS", "total_deals_name_en")
-        total_deals.name_es = self._read_config_value("INDICATORS", "total_deals_name_es")
-        total_deals.name_fr = self._read_config_value("INDICATORS", "total_deals_name_fr")
-        total_deals.description_en = self._read_config_value("INDICATORS", "total_deals_desc_en")
-        total_deals.description_es = self._read_config_value("INDICATORS", "total_deals_desc_es")
-        total_deals.description_fr = self._read_config_value("INDICATORS", "total_deals_desc_fr")
-        total_deals.topic = default_topic
-        total_deals.measurement_unit = units
-        total_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.TOTAL_DEALS] = total_deals
+        indicator_codes = json.loads(self._config.get("INDICATORS", "codes"))
+        self._log.info("Init process to add %d indicators in the indicators dictionary" %len(indicator_codes))
+        for indicator in indicator_codes:
+            try:
+              id = int(self._read_config_value(indicator, "id"))
+              ind = Indicator(chain_for_id=self._org_id, int_for_id=id)
+              ind.name_en = self._read_config_value(indicator, "name_en")
+              ind.name_es = self._read_config_value(indicator, "name_es")
+              ind.name_fr = self._read_config_value(indicator, "name_fr")
+           
+              ind.description_en = self._read_config_value(indicator, "desc_en")
+              ind.description_es = self._read_config_value(indicator, "desc_es")
+              ind.description_fr = self._read_config_value(indicator, "desc_fr")
+              ind.topic = default_topic # TODO improve
+              ind.preferable_tendency = Indicator.IRRELEVANT # TODO improve
+              ind.measurement_unit = self._get_unit("UNITS")#TODO
+              # Generate a code using the patter ITEM_CODE-ELEMENT_CODE
+              generated_code = id
+              result[generated_code] = ind # Add the indicator in the dictionary
+    	    except:
+              print("exception on id") #TODO improve exception
 
-
-        #BY TOPIC
-        #Agriculture
-        agriculture_deals = Indicator(chain_for_id=self._org_id,
-                                      int_for_id=self._read_config_value("INDICATORS", "agriculture_deals_id"))
-        agriculture_deals.name_en = self._read_config_value("INDICATORS", "agriculture_deals_name_en")
-        agriculture_deals.name_es = self._read_config_value("INDICATORS", "agriculture_deals_name_es")
-        agriculture_deals.name_fr = self._read_config_value("INDICATORS", "agriculture_deals_name_fr")
-        agriculture_deals.description_en = self._read_config_value("INDICATORS", "agriculture_deals_desc_en")
-        agriculture_deals.description_es = self._read_config_value("INDICATORS", "agriculture_deals_desc_es")
-        agriculture_deals.description_fr = self._read_config_value("INDICATORS", "agriculture_deals_desc_fr")
-        agriculture_deals.topic = default_topic
-        agriculture_deals.measurement_unit = units
-        agriculture_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.AGRICULTURE_DEALS] = agriculture_deals
-
-        #Conservation
-        conservation_deals = Indicator(chain_for_id=self._org_id,
-                                       int_for_id=self._read_config_value("INDICATORS", "conservation_deals_id"))
-        conservation_deals.name_en = self._read_config_value("INDICATORS", "conservation_deals_name_en")
-        conservation_deals.name_es = self._read_config_value("INDICATORS", "conservation_deals_name_es")
-        conservation_deals.name_fr = self._read_config_value("INDICATORS", "conservation_deals_name_fr")
-        conservation_deals.description_en = self._read_config_value("INDICATORS", "conservation_deals_desc_en")
-        conservation_deals.description_es = self._read_config_value("INDICATORS", "conservation_deals_desc_es")
-        conservation_deals.description_fr = self._read_config_value("INDICATORS", "conservation_deals_desc_fr")
-        conservation_deals.topic = default_topic
-        conservation_deals.measurement_unit = units
-        conservation_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.CONSERVATION_DEALS] = conservation_deals
-
-        #Forestry
-        forestry_deals = Indicator(chain_for_id=self._org_id,
-                                   int_for_id=self._read_config_value("INDICATORS", "forestry_deals_id"))
-        forestry_deals.name_en = self._read_config_value("INDICATORS", "forestry_deals_name_en")
-        forestry_deals.name_es = self._read_config_value("INDICATORS", "forestry_deals_name_es")
-        forestry_deals.name_fr = self._read_config_value("INDICATORS", "forestry_deals_name_fr")
-        forestry_deals.description_en = self._read_config_value("INDICATORS", "forestry_deals_desc_en")
-        forestry_deals.description_es = self._read_config_value("INDICATORS", "forestry_deals_desc_es")
-        forestry_deals.description_fr = self._read_config_value("INDICATORS", "forestry_deals_desc_fr")
-        forestry_deals.topic = default_topic
-        forestry_deals.measurement_unit = units
-        forestry_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.FORESTRY_DEALS] = forestry_deals
-
-        #Industry
-        industry_deals = Indicator(chain_for_id=self._org_id,
-                                   int_for_id=self._read_config_value("INDICATORS", "industry_deals_id"))
-        industry_deals.name_en = self._read_config_value("INDICATORS", "industry_deals_name_en")
-        industry_deals.name_es = self._read_config_value("INDICATORS", "industry_deals_name_es")
-        industry_deals.name_fr = self._read_config_value("INDICATORS", "industry_deals_name_fr")
-        industry_deals.description_en = self._read_config_value("INDICATORS", "industry_deals_desc_en")
-        industry_deals.description_es = self._read_config_value("INDICATORS", "industry_deals_desc_es")
-        industry_deals.description_fr = self._read_config_value("INDICATORS", "industry_deals_desc_fr")
-        industry_deals.topic = default_topic
-        industry_deals.measurement_unit = units
-        industry_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.INDUSTRY_DEALS] = industry_deals
-
-        #Renewable energy
-        renewable_energy_deals = Indicator(chain_for_id=self._org_id,
-                                           int_for_id=self._read_config_value("INDICATORS", "renewable_energy_deals_id"))
-        renewable_energy_deals.name_en = self._read_config_value("INDICATORS", "renewable_energy_deals_name_en")
-        renewable_energy_deals.name_es = self._read_config_value("INDICATORS", "renewable_energy_deals_name_es")
-        renewable_energy_deals.name_fr = self._read_config_value("INDICATORS", "renewable_energy_deals_name_fr")
-        renewable_energy_deals.description_en = self._read_config_value("INDICATORS", "renewable_energy_deals_desc_en")
-        renewable_energy_deals.description_es = self._read_config_value("INDICATORS", "renewable_energy_deals_desc_es")
-        renewable_energy_deals.description_fr = self._read_config_value("INDICATORS", "renewable_energy_deals_desc_fr")
-        renewable_energy_deals.topic = default_topic
-        renewable_energy_deals.measurement_unit = units
-        renewable_energy_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.RENEWABLE_ENERGY_DEALS] = renewable_energy_deals
-
-        #Tourism
-        tourism_deals = Indicator(chain_for_id=self._org_id,
-                                  int_for_id=self._read_config_value("INDICATORS", "tourism_deals_id"))
-        tourism_deals.name_en = self._read_config_value("INDICATORS", "tourism_deals_name_en")
-        tourism_deals.name_es = self._read_config_value("INDICATORS", "tourism_deals_name_es")
-        tourism_deals.name_fr = self._read_config_value("INDICATORS", "tourism_deals_name_fr")
-        tourism_deals.description_en = self._read_config_value("INDICATORS", "tourism_deals_desc_en")
-        tourism_deals.description_es = self._read_config_value("INDICATORS", "tourism_deals_desc_es")
-        tourism_deals.description_fr = self._read_config_value("INDICATORS", "tourism_deals_desc_fr")
-        tourism_deals.topic = default_topic
-        tourism_deals.measurement_unit = units
-        tourism_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.TOURISM_DEALS] = tourism_deals
-
-        #Other
-        other_topic_deals = Indicator(chain_for_id=self._org_id,
-                                      int_for_id=self._read_config_value("INDICATORS", "other_topic_deals_id"))
-        other_topic_deals.name_en = self._read_config_value("INDICATORS", "other_topic_deals_name_en")
-        other_topic_deals.name_es = self._read_config_value("INDICATORS", "other_topic_deals_name_es")
-        other_topic_deals.name_fr = self._read_config_value("INDICATORS", "other_topic_deals_name_fr")
-        other_topic_deals.description_en = self._read_config_value("INDICATORS", "other_topic_deals_desc_en")
-        other_topic_deals.description_es = self._read_config_value("INDICATORS", "other_topic_deals_desc_es")
-        other_topic_deals.description_fr = self._read_config_value("INDICATORS", "other_topic_deals_desc_fr")
-        other_topic_deals.topic = default_topic
-        other_topic_deals.measurement_unit = units
-        other_topic_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.OTHER_DEALS] = other_topic_deals
-
-        #Unknown
-        unknown_topic_deals = Indicator(chain_for_id=self._org_id,
-                                        int_for_id=self._read_config_value("INDICATORS", "unknown_topic_deals_id"))
-        unknown_topic_deals.name_en = self._read_config_value("INDICATORS", "unknown_topic_deals_name_en")
-        unknown_topic_deals.name_es = self._read_config_value("INDICATORS", "unknown_topic_deals_name_es")
-        unknown_topic_deals.name_fr = self._read_config_value("INDICATORS", "unknown_topic_deals_name_fr")
-        unknown_topic_deals.description_en = self._read_config_value("INDICATORS", "unknown_topic_deals_desc_en")
-        unknown_topic_deals.description_es = self._read_config_value("INDICATORS", "unknown_topic_deals_desc_es")
-        unknown_topic_deals.description_fr = self._read_config_value("INDICATORS", "unknown_topic_deals_desc_fr")
-        unknown_topic_deals.topic = default_topic
-        unknown_topic_deals.measurement_unit = units
-        unknown_topic_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.UNKNOWN_DEALS] = unknown_topic_deals
-
-        #BY NEGOTIATION STATUS
-        #Intended
-        intended_deals = Indicator(chain_for_id=self._org_id,
-                                   int_for_id=self._read_config_value("INDICATORS", "intended_deals_id"))
-        intended_deals.name_en = self._read_config_value("INDICATORS", "intended_deals_name_en")
-        intended_deals.name_es = self._read_config_value("INDICATORS", "intended_deals_name_es")
-        intended_deals.name_fr = self._read_config_value("INDICATORS", "intended_deals_name_fr")
-        intended_deals.description_en = self._read_config_value("INDICATORS", "intended_deals_desc_en")
-        intended_deals.description_es = self._read_config_value("INDICATORS", "intended_deals_desc_es")
-        intended_deals.description_fr = self._read_config_value("INDICATORS", "intended_deals_desc_fr")
-        intended_deals.topic = default_topic
-        intended_deals.measurement_unit = units
-        intended_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.INTENDED_DEALS] = intended_deals
-
-        #Concluded
-        concluded_deals = Indicator(chain_for_id=self._org_id,
-                                    int_for_id=self._read_config_value("INDICATORS", "concluded_deals_id"))
-        concluded_deals.name_en = self._read_config_value("INDICATORS", "concluded_deals_name_en")
-        concluded_deals.name_es = self._read_config_value("INDICATORS", "concluded_deals_name_es")
-        concluded_deals.name_fr = self._read_config_value("INDICATORS", "concluded_deals_name_fr")
-        concluded_deals.description_en = self._read_config_value("INDICATORS", "concluded_deals_desc_en")
-        concluded_deals.description_es = self._read_config_value("INDICATORS", "concluded_deals_desc_es")
-        concluded_deals.description_fr = self._read_config_value("INDICATORS", "concluded_deals_desc_fr")
-        concluded_deals.topic = default_topic
-        concluded_deals.measurement_unit = units
-        concluded_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.CONCLUDED_DEALS] = concluded_deals
-
-        #Failed
-        failed_deals = Indicator(chain_for_id=self._org_id,
-                                 int_for_id=self._read_config_value("INDICATORS", "failed_deals_id"))
-        failed_deals.name_en = self._read_config_value("INDICATORS", "failed_deals_name_en")
-        failed_deals.name_es = self._read_config_value("INDICATORS", "failed_deals_name_es")
-        failed_deals.name_fr = self._read_config_value("INDICATORS", "failed_deals_name_fr")
-        failed_deals.description_en = self._read_config_value("INDICATORS", "failed_deals_desc_en")
-        failed_deals.description_es = self._read_config_value("INDICATORS", "failed_deals_desc_es")
-        failed_deals.description_fr = self._read_config_value("INDICATORS", "failed_deals_desc_fr")
-        failed_deals.topic = default_topic
-        failed_deals.measurement_unit = units
-        failed_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.FAILED_DEALS] = failed_deals
-
-        #ABOUT HECTARES
-        #Total hectares
-        hectares_total_deals = Indicator(chain_for_id=self._org_id,
-                                         int_for_id=self._read_config_value("INDICATORS", "hectares_total_deals_id"))
-        hectares_total_deals.name_en = self._read_config_value("INDICATORS", "hectares_total_deals_name_en")
-        hectares_total_deals.name_es = self._read_config_value("INDICATORS", "hectares_total_deals_name_es")
-        hectares_total_deals.name_fr = self._read_config_value("INDICATORS", "hectares_total_deals_name_fr")
-        hectares_total_deals.description_en = self._read_config_value("INDICATORS", "hectares_total_deals_desc_en")
-        hectares_total_deals.description_es = self._read_config_value("INDICATORS", "hectares_total_deals_desc_es")
-        hectares_total_deals.description_fr = self._read_config_value("INDICATORS", "hectares_total_deals_desc_fr")
-        hectares_total_deals.topic = default_topic
-        hectares_total_deals.measurement_unit = hectares
-        hectares_total_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.HECTARES_TOTAL_DEALS] = hectares_total_deals
-
-        #intended hectares
-        hectares_intended_deals = Indicator(chain_for_id=self._org_id,
-                                            int_for_id=self._read_config_value("INDICATORS", "hectares_intended_deals_id"))
-        hectares_intended_deals.name_en = self._read_config_value("INDICATORS", "hectares_intended_deals_name_en")
-        hectares_intended_deals.name_es = self._read_config_value("INDICATORS", "hectares_intended_deals_name_es")
-        hectares_intended_deals.name_fr = self._read_config_value("INDICATORS", "hectares_intended_deals_name_fr")
-        hectares_intended_deals.description_en = self._read_config_value("INDICATORS", "hectares_intended_deals_desc_en")
-        hectares_intended_deals.description_es = self._read_config_value("INDICATORS", "hectares_intended_deals_desc_es")
-        hectares_intended_deals.description_fr = self._read_config_value("INDICATORS", "hectares_intended_deals_desc_fr")
-        hectares_intended_deals.topic = default_topic
-        hectares_intended_deals.measurement_unit = hectares
-        hectares_intended_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.HECTARES_INTENDED_DEALS] = hectares_intended_deals
-
-        #contract hectares
-        hectares_contract_deals = Indicator(chain_for_id=self._org_id,
-                                            int_for_id=self._read_config_value("INDICATORS", "hectares_contract_deals_id"))
-        hectares_contract_deals.name_en = self._read_config_value("INDICATORS", "hectares_contract_deals_name_en")
-        hectares_contract_deals.name_es = self._read_config_value("INDICATORS", "hectares_contract_deals_name_es")
-        hectares_contract_deals.name_fr = self._read_config_value("INDICATORS", "hectares_contract_deals_name_fr")
-        hectares_contract_deals.description_en = self._read_config_value("INDICATORS", "hectares_contract_deals_desc_en")
-        hectares_contract_deals.description_es = self._read_config_value("INDICATORS", "hectares_contract_deals_desc_es")
-        hectares_contract_deals.description_fr = self._read_config_value("INDICATORS", "hectares_contract_deals_desc_fr")
-        hectares_contract_deals.topic = default_topic
-        hectares_contract_deals.measurement_unit = hectares
-        hectares_contract_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.HECTARES_CONTRACT_DEALS] = hectares_contract_deals
-
-        #production hectares
-        hectares_production_deals = Indicator(chain_for_id=self._org_id,
-                                              int_for_id=self._read_config_value("INDICATORS", "hectares_production_deals_id"))
-        hectares_production_deals.name_en = self._read_config_value("INDICATORS", "hectares_production_deals_name_en")
-        hectares_production_deals.name_es = self._read_config_value("INDICATORS", "hectares_production_deals_name_es")
-        hectares_production_deals.name_fr = self._read_config_value("INDICATORS", "hectares_production_deals_name_fr")
-        hectares_production_deals.description_en = self._read_config_value("INDICATORS", "hectares_production_deals_desc_en")
-        hectares_production_deals.description_es = self._read_config_value("INDICATORS", "hectares_production_deals_desc_es")
-        hectares_production_deals.description_fr = self._read_config_value("INDICATORS", "hectares_production_deals_desc_fr")
-        hectares_production_deals.topic = default_topic
-        hectares_production_deals.measurement_unit = hectares
-        hectares_production_deals.preferable_tendency = Indicator.IRRELEVANT
-        result[KeyDicts.HECTARES_PRODUCTION_DEALS] = hectares_production_deals
-
-        #And, at last, return the dict
+        self._log.info("Added %d indicators in the indicators dictionary" % len(result))
         return result
-    
+
+
     def _read_config_value(self, section, field):
         return (self._config.get(section, field)).decode(encoding="utf-8")
+
+    @staticmethod
+    def _get_unit(unit):
+        hectares = MeasurementUnit(name="hectares",
+                                   convert_to=MeasurementUnit.SQ_KM,
+                                   factor=0.01)
+        units = MeasurementUnit(name="units",
+                                convert_to=MeasurementUnit.UNITS)
+	unit = unit.upper()
+
+        if unit == "UNITS":
+           return units
+        elif unit == "HECTARES":
+	   return hectares
+        else:
+           raise ValueError("No valid units value: %s" %unit)
