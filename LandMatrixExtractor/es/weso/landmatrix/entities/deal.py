@@ -3,13 +3,19 @@ __author__ = 'Dani'
 
 class Deal(object):
 
-    #Negotiation status
+    # Negotiation status
     INTENDED = "Intended"
     CONCLUDED = "Concluded"
     FAILED = "Failed"
 
+    # Implementation status
+    IN_OPERATION = "In operation (production)"
+    STARTUP_PHASE = "Startup phase (no production)"
+    PROJECT_NOT_STARTED = "Project not started"
+    PROJECT_ABANDONED = "Project abandoned"
+
     # This must match the intention value, removing the blank spaces"
-    #Sectors
+    # Sectors
     AGRICULTURE = "Agriculture"
     BIOFUELS = "Biofuels"
     FOOD_CROPS = "Foodcrops"
@@ -33,7 +39,7 @@ class Deal(object):
 
 
     def __init__(self, target_country=None, production_hectares=None, contract_hectares=None,
-                 intended_hectares=None, date=None, sectors=None, negotiation_status=None):
+                 intended_hectares=None, date=None, sectors=None, negotiation_status=None, implementation_status=None):
         self.target_country = target_country
         self.production_hectares = production_hectares
         self.contract_hectares = contract_hectares
@@ -41,6 +47,7 @@ class Deal(object):
         self.date = date
         self.sectors = sectors
         self.negotiation_status = negotiation_status
+	self.implementation_status = implementation_status
 
     def __str__(self):
 	sb = []
