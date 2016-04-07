@@ -159,45 +159,39 @@ class DealsAnalyser(object):
 
 
     def _process_deals_by_hectares(self, deal, target_country):
-        max_hectares = None
+        """ The algorithm to obtain the value to add to the total hectares is:
+             1) Try to obtain the contract hectares
+             2) If not, try to obtain the intended hectares
+             3) If not, try to obtain the production hectares
+             4) If not, add 0 (zero)
+            To run the algorithm, the initial value is set to 0 and the process write over the best value in reverse order.
+        """
 
-        if not deal.production_hectares is None:
-            max_hectares = self._update_max_hectares(max_hectares, deal.production_hectares)
+        total_hectares_to_add = 0
+
+        if deal.production_hectares is not None:
+            total_hectares_to_add = deal.production_hectares
             self._increase_hectares_indicator(KeyDicts.HECTARES_PRODUCTION_DEALS,
                                               deal.production_hectares,
                                               target_country)
-        if not deal.intended_hectares is None:
-            max_hectares = self._update_max_hectares(max_hectares, deal.intended_hectares)
+
+        if deal.intended_hectares is not None:
+            total_hectares_to_add = deal.intended_hectares
             self._increase_hectares_indicator(KeyDicts.HECTARES_INTENDED_DEALS,
                                               deal.intended_hectares,
                                               target_country)
-        if not deal.contract_hectares is None:
-            max_hectares = self._update_max_hectares(max_hectares, deal.contract_hectares)
+
+        if deal.contract_hectares is not None:
+            total_hectares_to_add = deal.contract_hectares
             self._increase_hectares_indicator(KeyDicts.HECTARES_CONTRACT_DEALS,
                                               deal.contract_hectares,
                                               target_country)
-        if not max_hectares is None:
-            self._increase_hectares_indicator(KeyDicts.HECTARES_TOTAL_DEALS,
-                                              max_hectares,
-                                              target_country)
-        pass
 
-
-    @staticmethod
-    def _update_max_hectares(old_hectares, new_hectares):
-        """
-        It simply return the max value of the received ones. The problem is that old_hectares could be None.
-        We expect new_hectares to not be None
-
-        """
-        if old_hectares is None:
-            return new_hectares
-        elif old_hectares > new_hectares:
-            return old_hectares
-        else:
-            return new_hectares
-
-
+	# Add the total hectares calculated value
+	if total_hectares_to_add > 0 :
+           self._increase_hectares_indicator(KeyDicts.HECTARES_TOTAL_DEALS,
+                                             total_hectares_to_add,
+                                             target_country)
 
     def _increase_hectares_indicator(self, deal_key, hectares, country):
         """

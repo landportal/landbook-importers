@@ -54,6 +54,16 @@ meanwhile the old observations are aggregates of every available date. The meani
 By removing all the old observations we will obtain new ones that are aggregates of the old and the new values.
 The date is obtained parsing the negotiation_status field.
 
+How to calculate the total hectares
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The algorithm to obtain the value to add to the total hectares is:
+1) Try to obtain the contract hectares
+2) If not, try to obtain the intended hectares
+3) If not, try to obtain the production hectares
+4) If not, not add any value
+
+
+
 
 INDICATORS SUPPORTED
 ====================
