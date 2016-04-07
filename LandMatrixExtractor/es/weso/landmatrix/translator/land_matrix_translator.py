@@ -13,6 +13,7 @@ from lpentities.value import Value
 from lpentities.indicator import Indicator
 from lpentities.computation import Computation
 from lpentities.instant import Instant
+from lpentities.interval import Interval
 from lpentities.measurement_unit import MeasurementUnit
 from lpentities.dataset import Dataset
 from lpentities.user import User
@@ -314,8 +315,8 @@ class LandMatrixTranslator(object):
               ind.description_fr = self._read_config_value(indicator, "desc_fr")
               ind.topic = default_topic # TODO improve
               ind.preferable_tendency = Indicator.IRRELEVANT # TODO improve
-              ind.measurement_unit = self._get_unit("UNITS")#TODO
-              # Generate a code using the patter ITEM_CODE-ELEMENT_CODE
+              ind.measurement_unit = self._get_unit(self._read_config_value(indicator, "unit"))
+              
               generated_code = id
               result[generated_code] = ind # Add the indicator in the dictionary
     	    except:
