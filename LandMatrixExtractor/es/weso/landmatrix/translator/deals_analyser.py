@@ -167,31 +167,52 @@ class DealsAnalyser(object):
             To run the algorithm, the initial value is set to 0 and the process write over the best value in reverse order.
         """
 
-        total_hectares_to_add = 0
-
         if deal.production_hectares is not None:
-            total_hectares_to_add = deal.production_hectares
             self._increase_hectares_indicator(KeyDicts.HECTARES_PRODUCTION_DEALS,
                                               deal.production_hectares,
                                               target_country)
 
         if deal.intended_hectares is not None:
-            total_hectares_to_add = deal.intended_hectares
             self._increase_hectares_indicator(KeyDicts.HECTARES_INTENDED_DEALS,
                                               deal.intended_hectares,
                                               target_country)
 
         if deal.contract_hectares is not None:
-            total_hectares_to_add = deal.contract_hectares
             self._increase_hectares_indicator(KeyDicts.HECTARES_CONTRACT_DEALS,
                                               deal.contract_hectares,
                                               target_country)
 
-	# Add the total hectares calculated value
+	# Calculate and process the total hectares to add
+        total_hectares_to_add = self._get_hectares_to_add(deal)
+
 	if total_hectares_to_add > 0 :
            self._increase_hectares_indicator(KeyDicts.HECTARES_TOTAL_DEALS,
                                              total_hectares_to_add,
                                              target_country)
+
+
+    def _get_hectares_to_add(self, deal):
+        """ The algorithm to obtain the hectares to add is:
+             1) Try to obtain the contract hectares
+             2) If not, try to obtain the intended hectares
+             3) If not, try to obtain the production hectares
+             4) If not, add 0 (zero)
+            To run the algorithm, the initial value is set to 0 and the process write over the best value in reverse order.
+        """
+
+        total_hectares_to_add = 0
+
+        if deal.production_hectares is not None:
+            total_hectares_to_add = deal.production_hectares
+
+        if deal.intended_hectares is not None:
+            total_hectares_to_add = deal.intended_hectares
+
+        if deal.contract_hectares is not None:
+            total_hectares_to_add = deal.contract_hectares
+
+	return total_hectares_to_add
+
 
     def _increase_hectares_indicator(self, deal_key, hectares, country):
         """
