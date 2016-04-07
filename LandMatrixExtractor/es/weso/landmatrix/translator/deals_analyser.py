@@ -237,17 +237,18 @@ class DealsAnalyser(object):
              3) If not, try to obtain the production hectares
              4) If not, add 0 (zero)
             To run the algorithm, the initial value is set to 0 and the process write over the best value in reverse order.
+	    Values equal or under 0 are discarded.
         """
 
         total_hectares_to_add = 0
 
-        if deal.production_hectares is not None:
+        if deal.production_hectares is not None and deal.production_hectares > 0:
             total_hectares_to_add = deal.production_hectares
 
-        if deal.intended_hectares is not None:
+        if deal.intended_hectares is not None and deal.intended_hectares > 0:
             total_hectares_to_add = deal.intended_hectares
 
-        if deal.contract_hectares is not None:
+        if deal.contract_hectares is not None and deal.contract_hectares > 0:
             total_hectares_to_add = deal.contract_hectares
 
 	return total_hectares_to_add
