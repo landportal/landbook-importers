@@ -115,22 +115,28 @@ class DealsAnalyser(object):
 
 
     def _process_deals_by_topic(self, deal, target_country):
+	hectares_to_add = self._get_hectares_to_add(deal)
 
         if Deal.BIOFUELS in deal.sectors:
             self._increase_counter_indicator(KeyDicts.BIOFUELS_DEALS, target_country)
             self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_AGRICULTURE_DEALS, hectares_to_add, target_country)
         if Deal.FOOD_CROPS in deal.sectors:
             self._increase_counter_indicator(KeyDicts.FOOD_CROPS_DEALS, target_country)
             self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_AGRICULTURE_DEALS, hectares_to_add, target_country)
         if Deal.LIVESTOCK in deal.sectors:
             self._increase_counter_indicator(KeyDicts.LIVESTOCK_DEALS, target_country)
             self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_AGRICULTURE_DEALS, hectares_to_add, target_country)
         if Deal.NON_FOOD_AGRICULTURAL_COMMODITIES in deal.sectors:
             self._increase_counter_indicator(KeyDicts.NON_FOOD_AGRICULTURAL_COMMODITIES_DEALS, target_country)
             self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_AGRICULTURE_DEALS, hectares_to_add, target_country)
         if Deal.AGRIUNSPECIFIED in deal.sectors:
             self._increase_counter_indicator(KeyDicts.AGRIUNSPECIFIED_DEALS, target_country)
             self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_AGRICULTURE_DEALS, hectares_to_add, target_country)
 
         if Deal.CONSERVATION in deal.sectors:
             self._increase_counter_indicator(KeyDicts.CONSERVATION_DEALS, target_country)
@@ -184,11 +190,9 @@ class DealsAnalyser(object):
 
 	# Calculate and process the total hectares to add
         total_hectares_to_add = self._get_hectares_to_add(deal)
-
-	if total_hectares_to_add > 0 :
-           self._increase_hectares_indicator(KeyDicts.HECTARES_TOTAL_DEALS,
-                                             total_hectares_to_add,
-                                             target_country)
+        self._increase_hectares_indicator(KeyDicts.HECTARES_TOTAL_DEALS,
+                                          total_hectares_to_add,
+                                          target_country)
 
 
     def _get_hectares_to_add(self, deal):
@@ -219,6 +223,10 @@ class DealsAnalyser(object):
         It increases in "max_hectares" the value of the entry under the key "deal_key + country"
         If the entry does not exist in the internal dict, it creates it.
         """
+	# If hectares value is 0 or below, exit the function
+	if hectares <= 0:
+	   return
+		
         compound_key = _get_compound_key(deal_key, country)
 
         #Creating new entry if needed
