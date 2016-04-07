@@ -225,6 +225,14 @@ class DealsAnalyser(object):
 
 	# Calculate and process the total hectares to add
         total_hectares_to_add = self._get_hectares_to_add(deal)
+
+        if deal.negotiation_status == Deal.FAILED:
+            self._increase_hectares_indicator(KeyDicts.HECTARES_FAILED_DEALS,
+                                              total_hectares_to_add,
+                                              target_country)
+
+
+
         self._increase_hectares_indicator(KeyDicts.HECTARES_TOTAL_DEALS,
                                           total_hectares_to_add,
                                           target_country)
