@@ -22,6 +22,7 @@ class DealsBuilder(object):
         a_deal.contract_hectares = _extract_contract_hectares(info_node)
         a_deal.sectors = _extract_sectors(info_node)
         a_deal.negotiation_status = _extract_negotiation_status(info_node)
+        a_deal.implementation_status = _extract_implementation_status(info_node)
         return a_deal
 
 
@@ -36,6 +37,7 @@ PROPERTY = "name"
 TARGET_COUNTRY = "target_country"
 SECTORS = "intention"
 NEGOTIATION_STATUS = "negotiation_status"
+IMPLEMENTATION_STATUS = "implementation_status"
 NO_VALUE = "None"
 INTENDED_SIZE = "intended_size"
 CONTRACT_SIZE = "contract_size"
@@ -80,6 +82,22 @@ def _extract_negotiation_status(info_node):
     else:
         raise RuntimeError("Unrecognized negotiation status in node: " + status_container)
 
+
+def _extract_implementation_status(info_node):
+    #Looking for the target text
+    implementation_status_container = _get_node_data(info_node, IMPLEMENTATION_STATUS)
+    if implementation_status_container == NO_VALUE:
+        return None
+    elif implementation_status_container.__contains__(Deal.IN_OPERATION):
+        return Deal.IN_OPERATION
+    elif implementation_status_container.__contains__(Deal.STARTUP_PHASE):
+        return Deal.STARTUP_PHASE
+    elif implementation_status_container.__contains__(Deal.PROJECT_NOT_STARTED):
+        return Deal.PROJECT_NOT_STARTED
+    elif implementation_status_container.__contains__(Deal.PROJECT_ABANDONED):
+        return Deal.PROJECT_ABANDONED
+    else:
+        raise RuntimeError("Unrecognized implementation status in node: " + implementation_status_container)
 
 def _extract_target_country(info_node):
     for subnode in info_node.getchildren():

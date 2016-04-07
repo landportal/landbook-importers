@@ -32,6 +32,7 @@ class DealsAnalyser(object):
             if not target_country is None:
                 self._process_the_fact_that_the_deal_has_valid_country(target_country)
                 self._process_deals_by_negotiation_status(a_deal, target_country)
+                self._process_deals_by_implementation_status(a_deal, target_country)
                 self._process_deals_by_topic(a_deal, target_country)
                 self._process_deals_by_hectares(a_deal, target_country)
                 self._procces_date(a_deal, target_country)
@@ -60,6 +61,10 @@ class DealsAnalyser(object):
             self._increase_counter_indicator(KeyDicts.FAILED_DEALS, target_country)
         elif deal.negotiation_status == Deal.INTENDED:
             self._increase_counter_indicator(KeyDicts.INTENDED_DEALS, target_country)
+
+    def _process_deals_by_implementation_status(self, deal, target_country):
+        if (deal.implementation_status == Deal.IN_OPERATION) or (deal.implementation_status == Deal.STARTUP_PHASE):
+            self._increase_counter_indicator(KeyDicts.IN_PRODUCTION_DEALS, target_country)
 
 
     def _procces_date(self, deal, target_country):
