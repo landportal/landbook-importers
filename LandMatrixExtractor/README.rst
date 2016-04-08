@@ -78,20 +78,20 @@ The algorithm to obtain the value to add to the total hectares is:
 INDICATORS SUPPORTED
 ====================
 
-:0:Total Number of Deals
-:12:Total Hectares in Deals
+:0: Total Number of Deals
+:12: Total Hectares in Deals
 
-:10:Total Number of Concluded Deals
-:14:Total Hectares in Concluded Deals
+:10: Total Number of Concluded Deals
+:14: Total Hectares in Concluded Deals
 
-:9:Total Number of Intended Deals
-:13:Total Hectares in Intended Deals
+:9: Total Number of Intended Deals
+:13: Total Hectares in Intended Deals
 
-:11:Total Number of Failed Deals
-:40:Total hectares of Failed Deals
+:11: Total Number of Failed Deals
+:40: Total hectares of Failed Deals
 
-:41:Total Number of Deals in Production
-:15:Total Hectares in Deals in Production
+:41: Total Number of Deals in Production
+:15: Total Hectares in Deals in Production
 
 :1: Total Number of Agriculture Deals
 :24: Total Hectares in Agriculture Deals
@@ -130,7 +130,7 @@ INDICATORS SUPPORTED
 :35: Total hectares in Non-food agricultural commodities (Agriculture) deals
 
 :20: Total number of Agriunspecified (Agriculture) deals
-:36:Total hectares in Agriunspecified (Agriculture) deals
+:36: Total hectares in Agriunspecified (Agriculture) deals
 
 :21: Total number of For wood and fibre (Forestry) deals
 :37: Total hectares in For wood and fibre (Forestry) deals
