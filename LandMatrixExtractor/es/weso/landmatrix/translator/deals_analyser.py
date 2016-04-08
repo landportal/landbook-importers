@@ -23,7 +23,7 @@ class DealsAnalyser(object):
         self._reconciler = CountryReconciler()
         self._deals_dict = {}
         self._indicators_dict = indicators_dict
-        self.latest_date = 0  # It will store the latest date found between the date of every observations.
+        self.latest_date = 0  # It will store the latest date found for all the deals (no matter about the country)
 
 
     def run(self):
@@ -35,11 +35,12 @@ class DealsAnalyser(object):
                 self._process_deals_by_implementation_status(a_deal, target_country)
                 self._process_deals_by_topic(a_deal, target_country)
                 self._process_deals_by_hectares(a_deal, target_country)
-                self._procces_date(a_deal, target_country)
+                self._update_latest_date(a_deal)
             else:
                 raise RuntimeError("We have found a deal with a non recognized country."
                                    " Agregate values cuold be incorrect form this point, execution should stop. "
                                    "Country: " + a_deal.target_country)
+	self._set_last_date_for_all_indicators()
 
         return self._deals_dict
 
@@ -66,58 +67,15 @@ class DealsAnalyser(object):
         if (_is_in_production(deal)):
             self._increase_counter_indicator(KeyDicts.IN_PRODUCTION_DEALS, target_country)
 
-
-    def _procces_date(self, deal, target_country):
-        compound_key = _get_compound_key(KeyDicts.TOTAL_DEALS, target_country)  # We have to get an entry of some
-                                                                        #indicator, it does not matter which...
-                                                                        #but we know that TOTAL_DEALS exists with                                                                     #no doucbt when reaching this point
-        current_date = self._deals_dict[compound_key].date
-        if deal.date is not None and deal.date > current_date:
-            self._update_date_of_all_entrys_of_a_country(target_country, deal.date)
+    def _update_latest_date(self, deal):
         if deal.date is not None and deal.date > self.latest_date:
             self.latest_date = deal.date
 
-    def _update_date_of_all_entrys_of_a_country(self, country, date):
-        self._update_date_of_an_entry(KeyDicts.TOTAL_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.INTENDED_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.CONCLUDED_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.FAILED_DEALS, country, date)
-
-        self._update_date_of_an_entry(KeyDicts.AGRICULTURE_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.BIOFUELS_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.FOOD_CROPS_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.LIVESTOCK_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.NON_FOOD_AGRICULTURAL_COMMODITIES_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.AGRIUNSPECIFIED_DEALS, country, date)
-
-        self._update_date_of_an_entry(KeyDicts.CONSERVATION_DEALS, country, date)
-
-        self._update_date_of_an_entry(KeyDicts.FORESTRY_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.FOR_WOOD_AND_FIBRE_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.FOR_CARBON_SEQUESTRATION_REDD_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.FORESTUNSPECIFIED_DEALS, country, date)
-
-        self._update_date_of_an_entry(KeyDicts.INDUSTRY_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.RENEWABLE_ENERGY_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.TOURISM_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.OTHER_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.UNKNOWN_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.HECTARES_TOTAL_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.HECTARES_INTENDED_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.HECTARES_CONTRACT_DEALS, country, date)
-        self._update_date_of_an_entry(KeyDicts.HECTARES_PRODUCTION_DEALS, country, date)
-
-    def _update_date_of_an_entry(self, deal_key, country, date):
-        """
-        It updates the date of the entry if it exists. If not, it simply returns without doing anything
-
-        """
-        compound_key = _get_compound_key(deal_key, country)
-        if not compound_key in self._deals_dict:  # If there is no entry, nothing to do
-            return
-        else:
-            self._deals_dict[compound_key].date = date
-
+    """ This method set the last_date of all the deal_entries using the latest date found in all the deals.
+    """
+    def _set_last_date_for_all_indicators(self):
+	for deal_entry in self._deals_dict.itervalues():
+	    deal_entry.last_date = self.latest_date
 
     def _process_deals_by_topic(self, deal, target_country):
 	hectares_to_add = self._get_hectares_to_add(deal)
@@ -282,7 +240,7 @@ class DealsAnalyser(object):
         if not compound_key in self._deals_dict:
             new_entry = DealAnalyserEntry(indicator=self._indicators_dict[deal_key],
                                           country=country,
-                                          date=None,
+                                          last_date=None,
                                           value=0)
             self._deals_dict[compound_key] = new_entry
 
@@ -306,7 +264,7 @@ class DealsAnalyser(object):
         if not compound_key in self._deals_dict:
             new_entry = DealAnalyserEntry(indicator=self._indicators_dict[deal_key],
                                           country=country,
-                                          date=None,
+                                          last_date=None,
                                           value=0)
             self._deals_dict[compound_key] = new_entry
         #Updating entry

@@ -79,8 +79,6 @@ class LandMatrixTranslator(object):
 
         self._relate_common_objects()
 
-
-        self._latest_date_found = 0  # It will have a value during the executing. It will store the last date found.
     @staticmethod
     def _build_default_user():
         return User(user_login="LANDMATRIXIMPORTER")
@@ -230,11 +228,7 @@ class LandMatrixTranslator(object):
         return Instant(datetime.now())
 
     def _build_ref_time_object(self, deal_entry):
-        if deal_entry.date is not None:
-            return YearInterval(deal_entry.date)
-        else:
-            return YearInterval(self._latest_date_found)
-
+	return Interval(start_time=deal_entry.first_date, end_time=deal_entry.last_date)
 
     @staticmethod
     def _build_value_object(deal_entry):
@@ -248,7 +242,6 @@ class LandMatrixTranslator(object):
     def _turn_deals_into_deal_entrys(self, deals):
         analyser = DealsAnalyser(deals, self._indicators_dict)
         result = analyser.run()
-        self._latest_date_found = analyser.latest_date
         return result
 
 
