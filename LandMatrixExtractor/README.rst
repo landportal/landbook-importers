@@ -72,7 +72,19 @@ The algorithm to obtain the value to add to the total hectares is:
 3) If not, try to obtain the production hectares
 4) If not, not add any value
 
+If the value of the hectares is zero (or below), the proccess discard this value and tries the next one in the chain.
 
+
+Upper categories calculation algorithm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+There is two upper categories in the LandMatrix: Agriculture and Forestry.
+The values of the indicators related to them are the aggregation of the values of the subcategories that contains.
+
+In production
+^^^^^^^^^^^^^
+The algorithm to calculate the indicators "Total Number of Deals in Production" and 
+"Total Hectares in Deals in Production" take into account deals with 
+"implementation_status" equals to "In operation (production)".
 
 
 INDICATORS SUPPORTED
