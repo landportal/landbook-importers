@@ -170,7 +170,7 @@ class LandMatrixTranslator(object):
         self._config.set("TRANSLATOR", "sli_int", self._sli_int)
         self._config.set("TRANSLATOR", "igr_int", self._igr_int)
 
-        with open("./files/configuration.ini", 'wb') as config_file:
+        with open("./config/configuration.ini", 'wb') as config_file:
             self._config.write(config_file)
 
 
