@@ -90,69 +90,67 @@ The algorithm to calculate the indicators "Total Number of Deals in Production" 
 INDICATORS SUPPORTED
 ====================
 
-:0: Total Number of Deals
-:12: Total Hectares in Deals
+:N1: Total number of deals
+:HA1: Total hectares in deals
+	
+:N2: Total number of Concluded deals
+:HA2: Total hectares in Concluded deals
+	
+:N3: Total number of Intended deals
+:HA3: Total hectares in Intended deals
+	
+:N4: Total number of Failed deals
+:HA4: Total hectares of Failed deals
+	
+:N5: Total number of deals in Production
+:HA5: Total hectares in deals in Production
+	
+:N6: Total number of Agriculture deals
+:HA6: Total hectares in Agriculture deals
+	
+:N7: Total number of Conservation deals
+:HA7: Total hectares in Conservation deals
+	
+:N8: Total number of Forestry deals
+:HA8: Total hectares in Forestry deals
+	
+:N9: Total number of Industry deals
+:HA9: Total hectares in Industry deals
+	
+:N10: Total number of Renewable Energy deals
+:HA10: Total hectares in Renewable Energy deals
+	
+:N11: Total number of Tourism deals
+:HA11: Total hectares in Tourism deals
+	
+:N12: Total number of deals of Other Topic
+:HA12: Total hectares in deals of Other Topic
+	
+:N13: Total number of deals of Unknown Topic
+:HA13: Total hectares in deals of Unknown Topic
+	
+:N14: Total number of biofuel (Agriculture) deals
+:HA14: Total hectares in biofuel (Agriculture) deals
+	
+:N15: Total number of Food crops (Agriculture) deals
+:HA15: Total hectares in Food crops (Agriculture) deals
+	
+:N16: Total number of Livestock (Agriculture) deals
+:HA16: Total hectares in Livestock (Agriculture) deals
+	
+:N17: Total number of Non-food agricultural commodities (Agriculture) deals
+:HA17: Total hectares in Non-food agricultural commodities (Agriculture) deals
+	
+:N18: Total number of Agriunspecified (Agriculture) deals
+:HA18: Total hectares in Agriunspecified (Agriculture) deals
+	
+:N19: Total number of For wood and fibre (Forestry) deals
+:HA19: Total hectares in For wood and fibre (Forestry) deals
+	
+:N20: Total number of For carbon sequestration/REDD (Forestry) deals
+:HA20: Total hectares in For carbon sequestration/REDD (Forestry) deals
+	
+:N21: Total number of Forestunspecified (Forestry) deals
+:HA21: Total hectares in Forestunspecified (Forestry) deals
 
-:10: Total Number of Concluded Deals
-:14: Total Hectares in Concluded Deals
-
-:9: Total Number of Intended Deals
-:13: Total Hectares in Intended Deals
-
-:11: Total Number of Failed Deals
-:40: Total hectares of Failed Deals
-
-:41: Total Number of Deals in Production
-:15: Total Hectares in Deals in Production
-
-:1: Total Number of Agriculture Deals
-:24: Total Hectares in Agriculture Deals
-
-:2: Total Number of Conservation Deals
-:25: Total Hectares in Conservation Deals
-
-:3: Total Number of Forestry Deals
-:26: Total Hectares in Forestry Deals
-
-:4: Total Number of Industry Deals
-:27: Total Hectares in Industry Deals
-
-:5: Total Number of Renewable Energy Deals
-:28: Total Hectares in Renewable Energy Deals
-
-:6: Total Number of Tourism Deals
-:29: Total Hectares in Tourism Deals
-
-:7: Total Number of Deals of Other Topic
-:30: Total Hectares in Deals of Other Topic
-
-:8: Total Number of Deals of Unknown Topic
-:31: Total Hectares in Deals of Unknown Topic
-
-:16: Total number of biofuel (Agriculture) deals
-:32: Total hectares in biofuel (Agriculture) deals
-
-:17: Total number of Food crops (Agriculture) deals
-:33: Total hectares in Food crops (Agriculture) deals
-
-:18: Total number of Livestock (Agriculture) deals
-:34: Total hectares in Livestock (Agriculture) deals
-
-:19: Total number of Non-food agricultural commodities (Agriculture) deals
-:35: Total hectares in Non-food agricultural commodities (Agriculture) deals
-
-:20: Total number of Agriunspecified (Agriculture) deals
-:36: Total hectares in Agriunspecified (Agriculture) deals
-
-:21: Total number of For wood and fibre (Forestry) deals
-:37: Total hectares in For wood and fibre (Forestry) deals
-
-:22: Total number of For carbon sequestration/REDD (Forestry) deals
-:38: Total hectares in For carbon sequestration/REDD (Forestry) deals
-
-:23: Total number of Forestunspecified (Forestry) deals
-:39: Total hectares in Forestunspecified (Forestry) deals
-
-:23: Total number of Forestunspecified (Forestry) deals
-:39: Total hectares in Forestunspecified (Forestry) deals
 

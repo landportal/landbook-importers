@@ -149,7 +149,6 @@ class LandMatrixTranslator(object):
                 self._default_dataset.add_observation(obs)
         except BaseException as e:
             raise RuntimeError("Error while trying to build model objects: " + e.message)
-
         m2x = ModelToXMLTransformer(dataset=self._default_dataset,
                                     import_process=ModelToXMLTransformer.XML,
                                     user=self._default_user,
@@ -158,7 +157,7 @@ class LandMatrixTranslator(object):
             m2x.run()
             self._actualize_config_values()
         except BaseException as e:
-            raise RuntimeError("Error wuile sendig info to te receiver module: " + e.message)
+            raise RuntimeError("Error while sendig info to te receiver module: " + e.message)
 
     def _path_to_original_file(self):
         raw_path = self._config.get("LAND_MATRIX", "target_file")
@@ -297,7 +296,7 @@ class LandMatrixTranslator(object):
         self._log.info("Init process to add %d indicators in the indicators dictionary" %len(indicator_codes))
         for indicator in indicator_codes:
             try:
-              id = int(self._read_config_value(indicator, "id"))
+              id = self._read_config_value(indicator, "id")
               ind = Indicator(chain_for_id=self._org_id, int_for_id=id)
               ind.name_en = self._read_config_value(indicator, "name_en")
               ind.name_es = self._read_config_value(indicator, "name_es")
@@ -313,7 +312,7 @@ class LandMatrixTranslator(object):
               generated_code = id
               result[generated_code] = ind # Add the indicator in the dictionary
     	    except:
-              print("exception on id") #TODO improve exception
+              print("exception on id = %s" %id) #TODO improve exception
 
         self._log.info("Added %d indicators in the indicators dictionary" % len(result))
         return result
