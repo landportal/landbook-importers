@@ -28,7 +28,7 @@ def run():
     configure_log()
     log = logging.getLogger("lmextractor")
     config = ConfigParser()
-    config.read("./files/configuration.ini")
+    config.read("./config/configuration.ini")
     look_for_historical = config.getboolean("TRANSLATOR", "historical_mode")
     try:
         xml_extractor = LandMatrixExtractorXML(log, config)
