@@ -63,7 +63,7 @@ class DealsAnalyser(object):
             self._increase_counter_indicator(KeyDicts.INTENDED_DEALS, target_country)
 
     def _process_deals_by_implementation_status(self, deal, target_country):
-        if (deal.implementation_status == Deal.IN_OPERATION) or (deal.implementation_status == Deal.STARTUP_PHASE):
+        if (_is_in_production(deal)):
             self._increase_counter_indicator(KeyDicts.IN_PRODUCTION_DEALS, target_country)
 
 
@@ -213,7 +213,7 @@ class DealsAnalyser(object):
             To run the algorithm, the initial value is set to 0 and the process write over the best value in reverse order.
         """
 
-        if deal.production_hectares is not None:
+        if (deal.production_hectares is not None) and (_is_in_production(deal)):
             self._increase_hectares_indicator(KeyDicts.HECTARES_PRODUCTION_DEALS,
                                               deal.production_hectares,
                                               target_country)
@@ -323,3 +323,10 @@ class DealsAnalyser(object):
 
 def _get_compound_key(deal_key, country):
     return str(deal_key) + country.iso3
+
+# This method could me moved to Deal entity
+def _is_in_production(deal):
+   if (deal.implementation_status == Deal.IN_OPERATION):
+      return True
+   else:
+      return False
