@@ -39,7 +39,7 @@ class Parser(object):
         if not self._look_for_historical:
             self._historical_year = self.config.getint("TRANSLATOR", "historical_year")
         
-        self._org_id = self.config.get("TRANSLATOR", "org_id")
+        self._org_id = self.config.get("ORGANIZATION", "acronym")
         self._obs_int = self.config.getint("TRANSLATOR", "obs_int")
         self._sli_int = self.config.getint("TRANSLATOR", "sli_int")
         self._dat_int = self.config.getint("TRANSLATOR", "dat_int")
@@ -88,7 +88,8 @@ class Parser(object):
                             url_logo=self.config.get("ORGANIZATION", "url_logo"),
                             description_en=self._read_config_value("ORGANIZATION", "description_en"),
                             description_es=self._read_config_value("ORGANIZATION", "description_es"),
-                            description_fr=self._read_config_value("ORGANIZATION", "description_fr"))
+                            description_fr=self._read_config_value("ORGANIZATION", "description_fr"),
+                            acronym=self.config.get("ORGANIZATION", "acronym"))
 
     def _read_config_value(self, section, field):
         return (self.config.get(section, field)).decode(encoding="utf-8")
@@ -122,7 +123,7 @@ class Parser(object):
     
     def _build_indicator(self, indicator_code, dataset, measurement_unit):
         indicator = Indicator(chain_for_id=self._org_id,
-                              int_for_id=int(self.config.get(indicator_code, "indicator_id")),
+                              int_for_id=self.config.get(indicator_code, "indicator_id"),
                               name_en=self.config.get(indicator_code, "name_en").decode(encoding="utf-8"),
                               name_es=self.config.get(indicator_code, "name_es").decode(encoding="utf-8"),
                               name_fr=self.config.get(indicator_code, "name_fr").decode(encoding="utf-8"), 
