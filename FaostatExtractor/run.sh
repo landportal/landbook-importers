@@ -1,6 +1,9 @@
 ./clean.sh # this scripts include to remove all .xml files
 
-python main.py #generate the intermediate XML
+python main.py -c files/configuration.ini #generate the intermediate XML
+mv DATFAO0_1_0.xml DAT-FAO.xml
+python main.py -c files/configuration-water.ini #generate the intermediate XML
+mv DATFAO0_1_0.xml DAT-FAO-water.xml
 
 for file in *.xml
 do

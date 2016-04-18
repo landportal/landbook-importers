@@ -22,6 +22,7 @@ from reconciler.exceptions.unknown_country_error import UnknownCountryError
 
 from es.weso.faostat.translator.translator_const import TranslatorConst
 import json
+import sys
 
 class ModelObjectBuilder(object):
     """
@@ -38,7 +39,7 @@ class ModelObjectBuilder(object):
         self.log = log
         self._config = config
 
-        self._org_id = self._config.get("TRANSLATOR", "org_id")
+        self._org_id = self._config.get("ORGANIZATION", "acronym")
 
         if not look_for_historical:
             self._last_checked_year = int(self._config.get("HISTORICAL", "first_valid_year"))
@@ -87,7 +88,8 @@ class ModelObjectBuilder(object):
                            url_logo=self._config.get("ORGANIZATION", "url_logo"),
                            description_en=self._read_config_value("ORGANIZATION", "description_en"),
                            description_es=self._read_config_value("ORGANIZATION", "description_es"),
-                           description_fr=self._read_config_value("ORGANIZATION", "description_fr"))
+                           description_fr=self._read_config_value("ORGANIZATION", "description_fr"),
+                           acronym=self._read_config_value("ORGANIZATION", "acronym"))
         #datasource
         datasource = DataSource(name=self._config.get("SOURCE", "name"),
                                 chain_for_id=self._org_id,
@@ -168,8 +170,8 @@ class ModelObjectBuilder(object):
 
 
     def add_indicator_to_observation(self, observation, register):
-
-        indicator = self._indicators_dict[register[TranslatorConst.ITEM_CODE]]
+        indicator_code = str(register[TranslatorConst.ITEM_CODE])+'-'+str(register[TranslatorConst.ELEMENT_CODE])
+        indicator = self._indicators_dict[indicator_code]
         observation.indicator = indicator
 
 
@@ -189,8 +191,9 @@ class ModelObjectBuilder(object):
 
         for indicator in indicator_codes:
          try:
+           id = self._read_config_value(indicator, "id")
            ind = Indicator(chain_for_id=self._org_id,
-                                          int_for_id=int(self._read_config_value(indicator, "id")))
+                                          int_for_id=id)
            ind.name_en = self._read_config_value(indicator, "name_en")
            ind.name_es = self._read_config_value(indicator, "name_es")
            ind.name_fr = self._read_config_value(indicator, "name_fr")
@@ -213,12 +216,9 @@ class ModelObjectBuilder(object):
            ind.topic = self._read_config_value(indicator, "topic")
            ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value(indicator, "tendency"))
 
-	   #FAO CODE
-           faocode = int(self._read_config_value(indicator, "faocode"))
-
-           result[faocode] = ind
+           result[id] = ind
 	 except:
-           print("exception on %s!" % option)
+           print "Unexpected error:", sys.exc_info()[0]
 	self.log.info("Added %d indicators in the indicators dictionary" % len(result))
 	return result
 

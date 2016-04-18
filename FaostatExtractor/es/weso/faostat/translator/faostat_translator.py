@@ -7,6 +7,7 @@ Created on 27/01/2014
 import codecs
 import os
 import re
+import sys, traceback
 
 from lpentities.computation import Computation
 from lpentities.user import User
@@ -53,18 +54,22 @@ class FaostatTranslator(object):
         """
 
         registers = self.turn_raw_data_into_registers(self._look_for_historical)
+        self._log.info("Raw registers read=%d" %len(registers))
         registers += RelativeRegistersCalculator(self._log,
                                                  registers,
                                                  self._land_area_reference,
                                                  self.key_for_land_area_ref).run()  # The last arg. is a function
+        self._log.info("Raw + relatives registers read=%d" %len(registers))
         builder = ModelObjectBuilder(registers, self._config, self._log, self._reconciler, self._look_for_historical)
         try:
             dataset_model = builder.run()
             self.generate_xml_from_dataset_model(dataset_model)
             self._update_config_values(builder)
         except BaseException as e:
-            self._log.error("Error while trying to send xml to the receiver: " + e.message)
-            raise e
+            #e = sys.exc_info()[0]
+            #print "Error: %s" % e
+            #traceback.print_exc(file=sys.stdout)
+            self._log.error("Error while trying to send xml to the receiver: " + str(e))
 
 
     def _update_config_values(self, object_builder):
@@ -120,7 +125,8 @@ class FaostatTranslator(object):
 
 
     def actualize_land_area_data_if_needed(self, candidate_register):
-        if not candidate_register[TranslatorConst.ITEM_CODE] == TranslatorConst.CODE_LAND_AREA:
+	code = str(candidate_register[TranslatorConst.ITEM_CODE]) + '-' + str(candidate_register[TranslatorConst.ELEMENT_CODE])
+        if not (code == TranslatorConst.CODE_LAND_AREA):
             return
         key = self.key_for_land_area_ref(candidate_register[TranslatorConst.COUNTRY_CODE],
                                          candidate_register[TranslatorConst.YEAR])
