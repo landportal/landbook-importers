@@ -77,5 +77,5 @@ class Indicator(object):
     preferable_tendency = property(fget=__get_preferable_tendency, fset=__set_preferable_tendency, doc="Preferable tendency of the indicator")
     
     @staticmethod
-    def _generate_id(chain_for_id, int_for_id):
-        return "IND" + chain_for_id.upper() + str(int_for_id).upper()
+    def _generate_id(org_acronym, internal_id):
+        return org_acronym.upper() + "-" + str(internal_id).upper()

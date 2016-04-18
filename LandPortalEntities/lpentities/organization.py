@@ -14,7 +14,7 @@ class Organization(object):
 
 
     def __init__(self, chain_for_id, name=None, url=None, description_en=None, description_es=None,
-                 description_fr=None, url_logo=None, is_part_of=None):
+                 description_fr=None, url_logo=None, is_part_of=None, acronym=None):
         """
         Constructor
 
@@ -27,7 +27,7 @@ class Organization(object):
         self.description_es = description_es
         self.description_fr = description_fr
         self.url_logo = url_logo
-
+	self.acronym = acronym
         self.data_sources = []
         self.users = []
 

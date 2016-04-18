@@ -53,7 +53,6 @@ class LandMatrixTranslator(object):
         self._look_for_historical = look_for_historical
 
         #Initializing variable ids
-        self._org_id = self._config.get("TRANSLATOR", "org_id")
         if self._look_for_historical:
             self._obs_int = 0
             self._sli_int = 0
@@ -65,13 +64,14 @@ class LandMatrixTranslator(object):
             self._dat_int = int(self._config.get("TRANSLATOR", "dat_int"))
             self._igr_int = int(self._config.get("TRANSLATOR", "igr_int"))
 
+        # Organization (included acronym)
+        self._default_organization = self._build_default_organization()
+
         #Indicators's dict
         self._indicators_dict = self._build_indicators_dict()
 
-
         #Common objects
         self._default_user = self._build_default_user()
-        self._default_organization = self._build_default_organization()
         self._default_datasource = self._build_default_datasource()
         self._default_dataset = self._build_default_dataset()
         self._default_license = self._build_default_license()
@@ -89,7 +89,9 @@ class LandMatrixTranslator(object):
         return Computation(Computation.RAW)
 
     def _build_default_organization(self):
-        result = Organization(chain_for_id=self._org_id)
+        acronym = self._read_config_value("ORGANIZATION", "acronym")
+        result = Organization(chain_for_id=acronym)
+        result.acronym = acronym
         result.name = self._read_config_value("ORGANIZATION", "name")
         result.url = self._read_config_value("ORGANIZATION", "url")
         result.description_en = self._read_config_value("ORGANIZATION", "description_en")
@@ -99,13 +101,13 @@ class LandMatrixTranslator(object):
         return result
 
     def _build_default_datasource(self):
-        result = DataSource(chain_for_id=self._org_id,
+        result = DataSource(chain_for_id=self._default_organization.acronym,
                             int_for_id=self._config.get("DATASOURCE", "id"))
         result.name = self._config.get("DATASOURCE", "name")
         return result
 
     def _build_default_dataset(self):
-        result = Dataset(chain_for_id=self._org_id, int_for_id=self._dat_int)
+        result = Dataset(chain_for_id=self._default_organization.acronym, int_for_id=self._dat_int)
         self._dat_int += 1  # Needed increment
 
         for key in self._indicators_dict:
@@ -204,7 +206,7 @@ class LandMatrixTranslator(object):
         return int(self._config.get("HISTORICAL", "first_valid_year"))
 
     def _turn_deal_entry_into_obs(self, deal_entry):
-        result = Observation(chain_for_id=self._org_id, int_for_id=self._obs_int)
+        result = Observation(chain_for_id=self._default_organization.acronym, int_for_id=self._obs_int)
         self._obs_int += 1  # Updating obs id
 
         #Indicator
@@ -297,7 +299,7 @@ class LandMatrixTranslator(object):
         for indicator in indicator_codes:
             try:
               id = self._read_config_value(indicator, "id")
-              ind = Indicator(chain_for_id=self._org_id, int_for_id=id)
+              ind = Indicator(chain_for_id=self._default_organization.acronym, int_for_id=id)
               ind.name_en = self._read_config_value(indicator, "name_en")
               ind.name_es = self._read_config_value(indicator, "name_es")
               ind.name_fr = self._read_config_value(indicator, "name_fr")
