@@ -103,6 +103,7 @@ class ModelToXMLTransformer(object):
 
     IMPORT_PROCESS = "import_process"
     IMPORT_PROCESS_ORGANIZATION_NAME = "organization_name"
+    IMPORT_PROCESS_ORGANIZATION_ACRONYM = "organization_acronym"
     IMPORT_PROCESS_ORGANIZATION_URL = "organization_url"
     IMPORT_PROCESS_ORGANIZATION_DESC_EN = "organization_description_en"
     IMPORT_PROCESS_ORGANIZATION_DESC_ES = "organization_description_es"
@@ -219,12 +220,12 @@ class ModelToXMLTransformer(object):
                     file_content = xml.read()
                     file_identifier = self._obtain_content_of_original_path()
                     api_key = self._config.get("USER", "api_key")
-                    req = requests.post(url=url,
+                    '''req = requests.post(url=url,
                                         data={'xml': unicode(file_content).encode('utf-8'),
                                               'api_key': api_key},
                                         files={'file': file_identifier})
                     print req.status_code
-                    print req.text
+                    print req.text'''
 
             except BaseException as e:
                 e.message = 'File "{0}": {1}'.format(file_path, e.message)
@@ -551,7 +552,7 @@ class ModelToXMLTransformer(object):
 
 
     def _persist_tree(self):
-
+	print "self._dataset.dataset_id=%s" %self._dataset.dataset_id
         return XmlSplitter(self._root, self._dataset.dataset_id).run()
 
 
@@ -699,6 +700,10 @@ class ModelToXMLTransformer(object):
         organization_name_node = Element(self.IMPORT_PROCESS_ORGANIZATION_NAME)
         organization_name_node.text = self._datasource.organization.name
         metadata.append(organization_name_node)
+        #organization_id
+        organization_acronym_node = Element(self.IMPORT_PROCESS_ORGANIZATION_ACRONYM)
+        organization_acronym_node.text = self._datasource.organization.acronym
+        metadata.append(organization_acronym_node)
         #Organization_url
         organization_url_node = Element(self.IMPORT_PROCESS_ORGANIZATION_URL)
         organization_url_node.text = self._datasource.organization.url

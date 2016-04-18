@@ -19,6 +19,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="organization_name"/>
+        <xs:element ref="organization_acronym"/>
         <xs:element ref="organization_url"/>
         <xs:element ref="organization_id"/>
         <xs:element ref="organization_description_en"/>
@@ -34,6 +35,7 @@
   </xs:element>
   
   <xs:element name="organization_name" type="xs:string"/>
+  <xs:element name="organization_acronym" type="xs:string"/>
   <xs:element name="organization_url" type="xs:anyURI"/>
   <xs:element name="organization_id" type="xs:string"/>
   <xs:element name="organization_description_en" type="xs:string"/>
