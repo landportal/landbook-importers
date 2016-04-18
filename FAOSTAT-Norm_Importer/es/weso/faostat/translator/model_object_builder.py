@@ -39,7 +39,7 @@ class ModelObjectBuilder(object):
         self.log = log
         self._config = config
 
-        self._org_id = self._config.get("TRANSLATOR", "org_id")
+        self._org_id = self._read_config_value("ORGANIZATION", "acronym") # FIXME read the organization object
 
         if not look_for_historical:
             self._last_checked_year = int(self._config.get("HISTORICAL", "first_valid_year"))
@@ -88,7 +88,8 @@ class ModelObjectBuilder(object):
                            url_logo=self._config.get("ORGANIZATION", "url_logo"),
                            description_en=self._read_config_value("ORGANIZATION", "description_en"),
                            description_es=self._read_config_value("ORGANIZATION", "description_es"),
-                           description_fr=self._read_config_value("ORGANIZATION", "description_fr"))
+                           description_fr=self._read_config_value("ORGANIZATION", "description_fr"),
+                           acronym=self._read_config_value("ORGANIZATION", "acronym"))
         #datasource
         datasource = DataSource(name=self._config.get("SOURCE", "name"),
                                 chain_for_id=self._org_id,
