@@ -30,7 +30,7 @@ class Observation(object):
         self.group = None
         self.indicator_group = None
 
-        self.observation_id = self._generate_id(chain_for_id, int_for_id)
+        self.observation_id = self._generate_id(int_for_id)
 
     def __get_computation(self):
         return self._computation
@@ -85,5 +85,5 @@ class Observation(object):
                       doc="The dataset for the observation")
 
     @staticmethod
-    def _generate_id(chain_for_id, int_for_id):
-        return "OBS" + chain_for_id.upper() + str(int_for_id).upper()
+    def _generate_id(int_for_id):
+        return str(int_for_id).upper()
