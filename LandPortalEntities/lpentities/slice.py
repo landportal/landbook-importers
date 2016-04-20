@@ -27,7 +27,7 @@ class Slice(object):
 
         self.observations = []
 
-        self.slice_id = self._generate_id(chain_for_id, int_for_id)
+        self.slice_id = self._generate_id(int_for_id)
 
     def __get_dataset(self):
         return self._dataset
@@ -69,8 +69,8 @@ class Slice(object):
                       doc="The dimension for the slice")
     
     @staticmethod
-    def _generate_id(chain_for_id, int_for_id):
-        return "SLI" + chain_for_id.upper() + str(int_for_id).upper()
+    def _generate_id(id):
+        return str(id).upper()
         
     def add_observation(self, observation):
         if isinstance(observation, Observation):
