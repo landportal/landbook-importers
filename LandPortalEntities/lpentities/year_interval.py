@@ -35,3 +35,6 @@ class YearInterval(Interval):
     
     def get_time_string(self):
         return str(self.year)
+
+    def __str__(self):
+        return str(self.year)

@@ -24,6 +24,9 @@ class Value(object):
         self._value_type = value_type
         self._obs_status = obs_status
         
+    def __str__(self):
+        return str(self.value) +" (type="+str(self._value_type)+")"
+    
     def __get_value_type(self):
         return self._value_type
     
