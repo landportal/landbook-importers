@@ -1,9 +1,9 @@
 ./clean.sh # this scripts include to remove all .xml files
 
-python main.py -i data/example_c_y_v.xlsx #generate the intermediate XML
-mv ORG-DAT-1_1_0.xml DAT-RAW-C_Y_V.xml
-python main.py -i data/example_multiple_years.xlsx #generate the intermediate XML
-mv ORG-DAT-1_1_0.xml DAT-RAW-MULTIPLE_YEARS.xml
+python main.py -i data/HDI_for_Ingestion_reduced_consistent_FINAL_HDI_index.xls #generate the intermediate XML
+mv UNDP-HDI_1_0.xml UNDP-HDI_index.xml
+python main.py -i data/HDI_for_Ingestion_reduced_consistent_FINAL_HDI_ranking.xls #generate the intermediate XML
+mv UNDP-HDI_1_0.xml UNDP-HDI_ranking.xml
 
 for file in *.xml
 do
