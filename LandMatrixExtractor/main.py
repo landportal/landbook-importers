@@ -41,7 +41,10 @@ def run():
         translator = LandMatrixTranslator(log, config, look_for_historical=look_for_historical)
         translator.run()
     except BaseException as execpp:
-        log.error("While trying to incropore raw info into our model: " + execpp.message)
+        #log.error("While trying to incorporate raw info into our model: " + execpp.message)
+        e = sys.exc_info()[0]
+        print "Error: %s" % e
+	traceback.print_exc(file=sys.stdout)
         raise RuntimeError()
 
 
