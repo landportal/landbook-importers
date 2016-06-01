@@ -25,17 +25,16 @@ def update_ini_file(config, config_path, importer, log):
     
     if hasattr(importer, '_historical_year'):
         config.set("TRANSLATOR", 'historical_year', importer._historical_year)
-    with open("files/configuration.ini", 'wb') as configfile:
+    with open("config/configuration.ini", 'wb') as configfile:
         config.write(configfile)
                 
 def run():
     configure_log()
-    log = logging.getLogger("faoextractor")
-    config_path = "files/configuration.ini"
+    log = logging.getLogger("faoagriculturalcensus")
+    config_path = "config/configuration.ini"
+    config_path_org = "config/configuration-org-FAO.ini"
     config = ConfigParser.RawConfigParser()
-    config.read(config_path)
-
-
+    config.read([config_path, config_path_org])
     fao_importer = FaoImporter(log, config, config.getboolean("TRANSLATOR", "historical_mode"))
     fao_importer.run()
     update_ini_file(config, config_path, fao_importer, log)
