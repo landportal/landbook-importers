@@ -28,7 +28,7 @@ class FaoImporter(object):
         self._log = log
         self._config = config
         self._look_for_historical = look_for_historical
-        self._org_id = self._config.get("TRANSLATOR", "org_id")
+        self._org_id = self._config.get("ORGANIZATION", "chain_for_id")
         if not self._look_for_historical:
             self._historical_year = self._config.getint("TRANSLATOR", "historical_year")
             self._obs_int = self._config.getint("TRANSLATOR", "obs_int")
