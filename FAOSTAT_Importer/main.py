@@ -38,8 +38,8 @@ def main(argv):
 
 def run(config_file):
 	basepath = os.path.dirname(__file__)
-	config_path = os.path.abspath(os.path.join(basepath, config_file)) #"./files/configuration-ASTI_Research_Spending.ini"
-        config_path_org = os.path.abspath(os.path.join(basepath, "files/configuration-org-FAOSTAT.ini"))
+	config_path = os.path.abspath(os.path.join(basepath, config_file)) #"./config/configuration-ASTI_Research_Spending.ini"
+        config_path_org = os.path.abspath(os.path.join(basepath, "config/configuration-org-FAOSTAT.ini"))
         config = ConfigParser()
         config.read([config_path, config_path_org])
         log = logging.getLogger('faostat-log')
