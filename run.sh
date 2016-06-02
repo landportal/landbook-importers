@@ -1,3 +1,5 @@
+./clean.sh
+
 cd LandMatrix_Importer
 ./run.sh
 
