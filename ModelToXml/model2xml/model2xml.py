@@ -184,7 +184,7 @@ class ModelToXMLTransformer(object):
 
         #Sending xml to the receiver
         try:
-            self._send_to_receiver(paths)
+            #self._send_to_receiver(paths)
             pass
         except BaseException as e:
             raise RuntimeError("Error while sending xml to the receiver module. " + e.message)
