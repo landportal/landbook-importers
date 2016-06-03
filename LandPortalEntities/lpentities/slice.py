@@ -27,7 +27,12 @@ class Slice(object):
 
         self.observations = []
 
-        self.slice_id = self._generate_id(int_for_id)
+        self.slice_id = int_for_id
+
+    def get_slice_id(self):
+        indicator_id = str(self._indicator.indicator_id)
+        dimension_str = self._dimension.get_dimension_string()
+        return indicator_id + "_" + dimension_str
 
     def __get_dataset(self):
         return self._dataset
@@ -67,11 +72,7 @@ class Slice(object):
     dimension = property(fget=__get_dimension,
                       fset=__set_dimension,
                       doc="The dimension for the slice")
-    
-    @staticmethod
-    def _generate_id(id):
-        return str(id).upper()
-        
+            
     def add_observation(self, observation):
         if isinstance(observation, Observation):
             self.observations.append(observation)

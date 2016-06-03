@@ -361,7 +361,7 @@ class ModelToXMLTransformer(object):
         slice_node = Element(self.SLICE)
         #Attaching info
         #id
-        slice_node.attrib[self.SLICE_ATT_ID] = data_slice.slice_id
+        slice_node.attrib[self.SLICE_ATT_ID] = data_slice.get_slice_id()
         #metadata
         slice_node.append(self.build_metadata_slice_node(data_slice))
         #referred obs
