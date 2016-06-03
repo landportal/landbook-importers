@@ -1,7 +1,6 @@
 import ConfigParser
 import logging
-import os
-import sys
+import sys, traceback, os
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir), "CountryReconciler"))
@@ -47,4 +46,12 @@ def run():
         log.error("OOPS! Something went wrong %s" %detail)
 
 if __name__ == '__main__':
-    run()
+    try:
+        run()
+        print "Done!"
+    except:
+        print "Execution finalized with errors. Check logs. "
+        e = sys.exc_info()[0]
+        print "Error: %s" % e
+traceback.print_exc(file=sys.stdout)
+
