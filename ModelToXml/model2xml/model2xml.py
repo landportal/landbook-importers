@@ -409,7 +409,7 @@ class ModelToXMLTransformer(object):
         #Adding info
         for data_obs in data_slice.observations:
             obs_node = Element(self.OBSERVATION_REF)
-            obs_node.attrib[self.OBSERVATION_ATT_ID] = data_obs.observation_id
+            obs_node.attrib[self.OBSERVATION_ATT_ID] = data_obs.get_observation_id()
             referred_node.append(obs_node)
         #returnig node
         return referred_node
@@ -563,7 +563,7 @@ class ModelToXMLTransformer(object):
         #Attaching info
         #id (attrib.)
         observation_node.attrib[self.OBSERVATION_ATT_ID] = \
-            str(data_obs.observation_id)
+            str(data_obs.get_observation_id())
         #issued
         issued_node = Element(self.OBSERVATION_ISSUED)
         issued_node.text = data_obs.issued.get_time_string()
@@ -668,7 +668,7 @@ class ModelToXMLTransformer(object):
             #
             # #Adding obs to node
             # obs_node_ref = Element(self.OBSERVATION_REF)
-            # obs_node_ref.attrib[self.OBSERVATION_REF_ID] = data_obs.observation_id
+            # obs_node_ref.attrib[self.OBSERVATION_REF_ID] = data_obs.get_observation_id()
             # group_node.append(obs_node_ref)
 
     def include_indicator_if_needed(self, data_indicator):

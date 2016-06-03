@@ -20,7 +20,6 @@ class Observation(object):
         Constructor
         '''
 
-
         self.ref_time = ref_time
         self.issued = issued
         self._computation = computation
@@ -29,8 +28,13 @@ class Observation(object):
         self._dataset = dataset
         self.group = None
         self.indicator_group = None
+        self._int_for_id = int_for_id
 
-        self.observation_id = self._generate_id(int_for_id)
+    def get_observation_id(self):
+	indicator_id = str(self._indicator.indicator_id)
+	country_id = self.region._iso3
+	time_id = self.ref_time.get_time_string()
+	return indicator_id + "_" + country_id + "_" + time_id
 
     def __get_computation(self):
         return self._computation
@@ -83,7 +87,3 @@ class Observation(object):
     dataset = property(fget=__get_dataset,
                       fset=__set_dataset,
                       doc="The dataset for the observation")
-
-    @staticmethod
-    def _generate_id(int_for_id):
-        return str(int_for_id).upper()
