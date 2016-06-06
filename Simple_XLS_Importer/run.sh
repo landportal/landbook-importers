@@ -9,9 +9,9 @@
 # UNDP Human Development Index  #
 #################################
 
-python main.py -i data/HDI_for_Ingestion_reduced_consistent_FINAL_HDI_index.xls #generate the intermediate XML
+python main.py -i data/UNDP-HDI/HDI_for_Ingestion_reduced_consistent_FINAL_HDI_index.xls #generate the intermediate XML
 mv UNDP-HDI_1_0.xml UNDP-HDI_index.xml
-python main.py -i data/HDI_for_Ingestion_reduced_consistent_FINAL_HDI_ranking.xls #generate the intermediate XML
+python main.py -i data/UNDP-HDI/HDI_for_Ingestion_reduced_consistent_FINAL_HDI_ranking.xls #generate the intermediate XML
 mv UNDP-HDI_1_0.xml UNDP-HDI_ranking.xml
 
 
