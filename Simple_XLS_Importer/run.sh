@@ -19,14 +19,14 @@ mv UNDP-HDI_1_0.xml UNDP-HDI_ranking.xml
 # Donor's Platform - Map of Donors #
 ####################################
 
-python main.py -i data/Map_of_donors_Concluded_Final_number.xlsx #generate the intermediate XML
+python main.py -i data/DP-MOD/Map_of_donors_Concluded_Final_number.xlsx #generate the intermediate XML
 mv DP-MOD_1_0.xml map-of-donors-concluded-number.xml
-python main.py -i data/Map_of_donors_Concluded_Final_funding.xlsx #generate the intermediate XML
+python main.py -i data/DP-MOD/Map_of_donors_Concluded_Final_funding.xlsx #generate the intermediate XML
 mv DP-MOD_1_0.xml map-of-donors-concluded-funding.xml
 
-python main.py -i data/Map_of_donors_Ongoing_Final_number.xlsx #generate the intermediate XML
+python main.py -i data/DP-MOD/Map_of_donors_Ongoing_Final_number.xlsx #generate the intermediate XML
 mv DP-MOD_1_0.xml map-of-donors-ongoing-number.xml
-python main.py -i data/Map_of_donors_Ongoing_Final_funding.xlsx #generate the intermediate XML
+python main.py -i data/DP-MOD/Map_of_donors_Ongoing_Final_funding.xlsx #generate the intermediate XML
 mv DP-MOD_1_0.xml map-of-donors-ongoing-funding.xml
 
 ###############################
