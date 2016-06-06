@@ -33,20 +33,20 @@ mv DP-MOD_1_0.xml map-of-donors-ongoing-funding.xml
 # IFPRI - Global Hunger Index #
 ###############################
 
-python main.py -i data/IFPRI/IFPRI-HDI-Child_Mortality.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-HDI-Child_Mortality.xml
+python main.py -i data/IFPRI-GHI/IFPRI-GHI-Child_Mortality.xlsx #generate the intermediate XML
+mv IFPRI-DAT-0_1_0.xml IFPRI-GHI-Child_Mortality.xml
 
-python main.py -i data/IFPRI/IFPRI-HDI-Child_Stunting.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-HDI-Child_Stunting.xml
+python main.py -i data/IFPRI-GHI/IFPRI-GHI-Child_Stunting.xlsx #generate the intermediate XML
+mv IFPRI-DAT-0_1_0.xml IFPRI-GHI-Child_Stunting.xml
 
-python main.py -i data/IFPRI/IFPRI-HDI-Child_Wasting.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-HDI-Child_Wasting.xml
+python main.py -i data/IFPRI-GHI/IFPRI-GHI-Child_Wasting.xlsx #generate the intermediate XML
+mv IFPRI-DAT-0_1_0.xml IFPRI-GHI-Child_Wasting.xml
 
-python main.py -i data/IFPRI/IFPRI-HDI.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-HDI.xml
+python main.py -i data/IFPRI-GHI/IFPRI-GHI.xlsx #generate the intermediate XML
+mv IFPRI-DAT-0_1_0.xml IFPRI-GHI.xml
 
-python main.py -i data/IFPRI/IFPRI-HDI-Undernourishment.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-HDI-Undernourishment.xml
+python main.py -i data/IFPRI-GHI/IFPRI-GHI-Undernourishment.xlsx #generate the intermediate XML
+mv IFPRI-DAT-0_1_0.xml IFPRI-GHI-Undernourishment.xml
 
 
 #####################
