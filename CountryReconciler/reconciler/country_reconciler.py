@@ -30,6 +30,9 @@ class CountryReconciler(object):
 
     def get_country_by_iso3(self, iso3):
         #Checking first preference iso available
+	if isinstance(iso3, str): # convert to unicode
+            iso3 = unicode(iso3, "utf-8")
+
         for country in self.parsed_countries:
             if country.get_iso3() == iso3:
                 return country.model_object
