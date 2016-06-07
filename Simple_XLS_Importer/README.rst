@@ -22,7 +22,7 @@ You may notice that the log of this importers produces warnings.
 
 Shape of the XLS file
 ^^^^^^^^^^^^^^^^^^^^^
-The file MUST contain 2 tabs: data and metadata.
+The file MUST contain 2 tabs: oe calle "data" and and one called "metadata".
 
 In the metadata tab, it MUST be present, and in that order:
  - cell (0,0) the string "org_acronym"
@@ -33,6 +33,8 @@ In the metadata tab, it MUST be present, and in that order:
  - cell (2,1) the value for indicator_internal_id" (for instance "IND-1")
  - cell (3,0) the string "read_as"
  - cell (3,1) the value for read_as. The possible values are: "country_multiple_values" and "country_year_value".
+ 
+ The dataset_internal_id and indicator_internal_id MUST be a string using only the characters [a-z][A-Z][0-9]['_', '-', '.']
 
 In the data tab, there are 2 cases: "country_multiple_values" and "country_year_value".
 
