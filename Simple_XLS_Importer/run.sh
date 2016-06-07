@@ -44,7 +44,7 @@ do
   file_name="${file%.*}"
   file_extension="${file##*.}"
 
-  mv IFPRI-DAT-0_1_0.xml $file_name.xml
+  mv IFPRI-GHI_1_0.xml $file_name.xml
 done
 
 
@@ -62,7 +62,7 @@ do
   file_name="${file%.*}"
   file_extension="${file##*.}"
 
-  mv FAO-LANDANDGENDER_1_0.xml $file_name.xml
+  mv FAO-LG_1_0.xml $file_name.xml
 done
 
 
