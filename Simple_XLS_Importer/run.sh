@@ -66,6 +66,23 @@ do
   mv FAO-LANDANDGENDER_1_0.xml $file_name.xml
 done
 
+
+#############
+# OECD SIGI #
+#############
+
+for file_path in data/OECD-SIGI/OECD-SIGI-*.xlsx
+do
+  python main.py -i $file_path #generate the intermediate XML
+
+  # obtain the filename and the extension
+  file=${file_path#data/OECD-SIGI/*}
+  file_name="${file%.*}"
+  file_extension="${file##*.}"
+
+  mv OECD-SIGI_1_0.xml $file_name.xml
+done
+
 ###################################################################
 ###################################################################
 ###################################################################
