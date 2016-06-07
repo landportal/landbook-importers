@@ -552,7 +552,7 @@ class ModelToXMLTransformer(object):
 
 
     def _persist_tree(self):
-	print "self._dataset.dataset_id=%s" %self._dataset.dataset_id
+	print "Saving the dataset=%s" %self._dataset.dataset_id
         return XmlSplitter(self._root, self._dataset.dataset_id).run()
 
 
