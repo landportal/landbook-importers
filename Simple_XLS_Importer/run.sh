@@ -19,34 +19,33 @@ mv UNDP-HDI_1_0.xml UNDP-HDI_ranking.xml
 # Donor's Platform - Map of Donors #
 ####################################
 
-python main.py -i data/DP-MOD/Map_of_donors_Concluded_Final_number.xlsx #generate the intermediate XML
-mv DP-MOD_1_0.xml map-of-donors-concluded-number.xml
-python main.py -i data/DP-MOD/Map_of_donors_Concluded_Final_funding.xlsx #generate the intermediate XML
-mv DP-MOD_1_0.xml map-of-donors-concluded-funding.xml
+for file_path in data/DP-MOD/Map_of_donors*.xlsx
+do
+  python main.py -i $file_path #generate the intermediate XML
 
-python main.py -i data/DP-MOD/Map_of_donors_Ongoing_Final_number.xlsx #generate the intermediate XML
-mv DP-MOD_1_0.xml map-of-donors-ongoing-number.xml
-python main.py -i data/DP-MOD/Map_of_donors_Ongoing_Final_funding.xlsx #generate the intermediate XML
-mv DP-MOD_1_0.xml map-of-donors-ongoing-funding.xml
+  # obtain the filename and the extension
+  file=${file_path#data/DP-MOD/*}
+  file_name="${file%.*}"
+  file_extension="${file##*.}"
+
+  mv DP-MOD_1_0.xml $file_name.xml
+done
 
 ###############################
 # IFPRI - Global Hunger Index #
 ###############################
 
-python main.py -i data/IFPRI-GHI/IFPRI-GHI-Child_Mortality.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-GHI-Child_Mortality.xml
+for file_path in data/IFPRI-GHI/IFPRI-GHI*.xlsx
+do
+  python main.py -i $file_path #generate the intermediate XML
 
-python main.py -i data/IFPRI-GHI/IFPRI-GHI-Child_Stunting.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-GHI-Child_Stunting.xml
+  # obtain the filename and the extension
+  file=${file_path#data/IFPRI-GHI/*}
+  file_name="${file%.*}"
+  file_extension="${file##*.}"
 
-python main.py -i data/IFPRI-GHI/IFPRI-GHI-Child_Wasting.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-GHI-Child_Wasting.xml
-
-python main.py -i data/IFPRI-GHI/IFPRI-GHI.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-GHI.xml
-
-python main.py -i data/IFPRI-GHI/IFPRI-GHI-Undernourishment.xlsx #generate the intermediate XML
-mv IFPRI-DAT-0_1_0.xml IFPRI-GHI-Undernourishment.xml
+  mv IFPRI-DAT-0_1_0.xml $file_name.xml
+done
 
 
 #####################
