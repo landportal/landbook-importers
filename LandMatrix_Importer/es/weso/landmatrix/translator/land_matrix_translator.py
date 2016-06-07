@@ -107,7 +107,8 @@ class LandMatrixTranslator(object):
         return result
 
     def _build_default_dataset(self):
-        result = Dataset(chain_for_id=self._default_organization.acronym, int_for_id=self._dat_int)
+        result = Dataset(chain_for_id=self._default_organization.acronym, int_for_id=self._config.get("DATASOURCE", "id")
+)
         self._dat_int += 1  # Needed increment
 
         for key in self._indicators_dict:
