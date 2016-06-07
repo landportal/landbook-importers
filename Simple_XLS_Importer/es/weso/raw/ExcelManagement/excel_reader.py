@@ -13,7 +13,7 @@ class XslReader(object):
         data_dictionary = {}
 	data_dictionary["org_acronym"] = worksheet.cell_value(0, 1).decode("UTF-8")
 	data_dictionary["dataset_internal_id"] = worksheet.cell_value(1, 1).decode("UTF-8")
-	data_dictionary["indicator_internal_id"] = worksheet.cell_value(2, 1).decode("UTF-8")
+	data_dictionary["indicator_internal_id"] = self._get_string_from_cell_value(worksheet.cell_value(2, 1))
 	data_dictionary["read_as"] = worksheet.cell_value(3, 1).decode("UTF-8")
 
         return data_dictionary
@@ -56,3 +56,14 @@ class XslReader(object):
          return int(cell_value)
       else: #float
          return float(cell_value)
+
+    @staticmethod
+    def _get_string_from_cell_value(cell_value):
+	# in case the cell is read as float, because there is only numbers
+        if isinstance(cell_value, float):
+	   if cell_value.is_integer():
+              return str(int(cell_value))
+           else:
+              return str(cell_value)
+        else:
+	   return cell_value.decode("UTF-8")
