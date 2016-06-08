@@ -1,7 +1,7 @@
 ./clean.sh # this scripts include to remove all .xml files
 
 python main.py #generate the intermediate XML
-mv FAO-ACI_1_0.xml FAO-AgriculturalCensus.xml
+mv FAO-ACI_1_0.xml FAO-ACI-AgriculturalCensus.xml
 
 for file in *.xml
 do
