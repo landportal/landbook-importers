@@ -77,7 +77,7 @@ class ModelObjectBuilder(object):
 
     def build_dataset(self):
         #Creating dataset object
-        dataset = Dataset(chain_for_id=self._org_id, int_for_id=self._config.get("SOURCE", "datasource_id"), frequency=Dataset.YEARLY)
+        dataset = Dataset(chain_for_id=self._org_id, int_for_id=self._config.get("DATASOURCE", "datasource_id"), frequency=Dataset.YEARLY)
         self._dat_int += 1  # Updating id value
 
         #creating related objects
@@ -91,9 +91,9 @@ class ModelObjectBuilder(object):
                            description_fr=self._read_config_value("ORGANIZATION", "description_fr"),
                            acronym=self._read_config_value("ORGANIZATION", "acronym"))
         #datasource
-        datasource = DataSource(name=self._config.get("SOURCE", "name"),
+        datasource = DataSource(name=self._config.get("DATASOURCE", "name"),
                                 chain_for_id=self._org_id,
-                                int_for_id=self._config.get("SOURCE", "datasource_id"))
+                                int_for_id=self._config.get("DATASOURCE", "datasource_id"))
         #license
         license_type = License(description=self._config.get("LICENSE", "description"),
                                name=self._config.get("LICENSE", "name"),
