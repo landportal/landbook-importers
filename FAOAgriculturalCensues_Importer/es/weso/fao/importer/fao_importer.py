@@ -28,7 +28,7 @@ class FaoImporter(object):
         self._log = log
         self._config = config
         self._look_for_historical = look_for_historical
-        self._org_id = self._config.get("ORGANIZATION", "chain_for_id")
+        self._org_id = self._config.get("ORGANIZATION", "acronym")
         if not self._look_for_historical:
             self._historical_year = self._config.getint("TRANSLATOR", "historical_year")
             self._obs_int = self._config.getint("TRANSLATOR", "obs_int")
@@ -318,13 +318,13 @@ class FaoImporter(object):
         return result
 
     def _build_default_dataset(self):
-        result = Dataset(chain_for_id=self._org_id, int_for_id=self._dat_int)
+        result = Dataset(chain_for_id=self._org_id, int_for_id=self._config.get("DATASOURCE", "datasource_id"))
         self._dat_int += 1  # Needed increment
         result.frequency = Dataset.YEARLY
         return result
 
     def _build_default_organization(self):
-        result = Organization(chain_for_id=self._config.get("ORGANIZATION", "chain_for_id"))
+        result = Organization(chain_for_id=self._config.get("ORGANIZATION", "acronym"))
         result.name = self._config.get("ORGANIZATION", "name")
         result.url = self._config.get("ORGANIZATION", "url")
         result.url_logo = self._config.get("ORGANIZATION", "url_logo")
