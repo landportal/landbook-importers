@@ -77,12 +77,12 @@ class ModelObjectBuilder(object):
 
     def build_dataset(self):
         #Creating dataset object
-        dataset = Dataset(chain_for_id=self._org_id, int_for_id=self._dat_int, frequency=Dataset.YEARLY)
+        dataset = Dataset(chain_for_id=self._org_id, int_for_id=self._config.get("SOURCE", "datasource_id"), frequency=Dataset.YEARLY)
         self._dat_int += 1  # Updating id value
 
         #creating related objects
         #Organization
-        org = Organization(chain_for_id=self._config.get("ORGANIZATION", "chain_for_id"),
+        org = Organization(chain_for_id=self._config.get("ORGANIZATION", "acronym"),
                            name=self._config.get("ORGANIZATION", "name"),
                            url=self._config.get("ORGANIZATION", "url"),
                            url_logo=self._config.get("ORGANIZATION", "url_logo"),
