@@ -24,8 +24,8 @@ class Deal(object):
     AGRIUNSPECIFIED = "Agriunspecified"
 
     CONSERVATION = "Conservation"
-    FORESTRY = "Forestry"
 
+    FORESTRY = "Forestry"
     FOR_WOOD_AND_FIBRE = "Forwoodandfibre"
     FOR_CARBON_SEQUESTRATION_REDD = "Forcarbonsequestration/REDD"
     FORESTUNSPECIFIED = "Forestunspecified"
@@ -33,7 +33,7 @@ class Deal(object):
     INDUSTRY = "Industry"
     RENEWABLE_ENERGY = "RenewableEnergy"
     TOURISM = "Tourism"
-    OTHER = "Other"
+    OTHER = "Other(pleasespecify)"
     UNKNOWN = "Unknown"
 
 
