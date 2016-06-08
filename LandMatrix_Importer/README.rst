@@ -87,6 +87,25 @@ The algorithm to calculate the indicators "Total Number of Deals in Production" 
 "implementation_status" equals to "In operation (production)".
 
 
+Intention of the investment (hierarchy 2016/06/08)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Agriculture
+    - Biofuels
+    - Food crops
+    - Livestock
+    - Non-food agricultural commodities
+    - Agriunspecified
+- Forestry
+    - For wood and fibre
+    - For carbon sequestration/REDD
+    - Forestunspecified
+- Mining
+- Tourism
+- Industry
+- Conservation
+- Renewable Energy
+- Other (please specify)
+
 INDICATORS SUPPORTED
 ====================
 
