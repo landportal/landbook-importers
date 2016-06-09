@@ -1,6 +1,10 @@
 ./clean.sh # this scripts include to remove all .xml files
 
-python main.py #generate the intermediate XML
+python main.py -c config/configuration-WB-DEM.ini #generate the intermediate XML
+python main.py -c config/configuration-WB-HN.ini #generate the intermediate XML
+python main.py -c config/configuration-WB-RD.ini #generate the intermediate XML
+python main.py -c config/configuration-WB-SE.ini #generate the intermediate XML
+python main.py -c config/configuration-WB-WGI.ini #generate the intermediate XML
 
 for file in *.xml
 do

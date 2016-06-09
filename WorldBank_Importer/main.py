@@ -1,6 +1,7 @@
 import ConfigParser
 import logging
 import sys, traceback, os
+import getopt
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(os.path.join(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir), "CountryReconciler"))
@@ -25,21 +26,40 @@ def update_ini_file(config, config_path, importer, log):
     
     if hasattr(importer, '_historical_year'):
         config.set("TRANSLATOR", 'historical_year', importer._historical_year)
-    with open("config/configuration.ini.new", 'wb') as configfile:
+    new_config_path = config_path+".new"
+    with open(new_config_path, 'wb') as configfile:
         config.write(configfile)
+
+
+def main(argv):
+   config_file = ''
+   try:
+      opts, args = getopt.getopt(argv,"hc:",["cfile="])
+   except getopt.GetoptError:
+      print 'main.py -c <inputfile>'
+      sys.exit(2)
+   for opt, arg in opts:
+      if opt == '-h':
+         print 'main.py -c <inputfile>'
+         sys.exit()
+      elif opt in ("-c", "--config"):
+         config_file = arg
+   run(config_file)
                 
-def run():
+def run(config_file):
+    print config_file
     configure_log()
     log = logging.getLogger("worldbanklog")
-    config_path = "config/configuration.ini"
+    basepath = os.path.dirname(__file__)
+    config_path = os.path.abspath(os.path.join(basepath, config_file))
+    config_path_org = os.path.abspath(os.path.join(basepath, "config/configuration-org-WB.ini"))
     config = ConfigParser.RawConfigParser()
-    config.read(config_path)
+    config.read([config_path, config_path_org])
 
     try:
         wb_importer = Parser(config, log)
         wb_importer.run()
-        update_ini_file(config, config_path, wb_importer, log)
-        
+        update_ini_file(config, config_path, wb_importer, log)        
         log.info("Done!")
     
     except Exception as detail:
@@ -47,7 +67,7 @@ def run():
 
 if __name__ == '__main__':
     try:
-        run()
+        main(sys.argv[1:])
         print "Done!"
     except:
         print "Execution finalized with errors. Check logs. "

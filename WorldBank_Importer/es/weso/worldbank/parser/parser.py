@@ -114,7 +114,7 @@ class Parser(object):
     def _build_data_set(self, data_source):
         frequency = Dataset.YEARLY
         dataset = Dataset(chain_for_id=self._org_id,
-                              int_for_id=self._dat_int,
+                              int_for_id=self.config.get("datasource", "datasource_id"),
                               frequency=frequency,
                               license_type=self._license,
                               source=data_source)
