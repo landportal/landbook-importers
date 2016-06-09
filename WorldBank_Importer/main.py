@@ -47,7 +47,6 @@ def main(argv):
    run(config_file)
                 
 def run(config_file):
-    print config_file
     configure_log()
     log = logging.getLogger("worldbanklog")
     basepath = os.path.dirname(__file__)
