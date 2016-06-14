@@ -18,6 +18,30 @@ class XslReader(object):
 
         return data_dictionary
 
+    def load_xsl_indicator_country_year_value(self, file_path):
+        workbook = xlrd.open_workbook(file_path)
+        worksheet = workbook.sheet_by_name("data")
+        indicator_col = 0
+        country_col = 1
+        year_col = 2
+        value_col = 3
+
+        data_array = []
+        for curr_row in range (0, worksheet.nrows):
+            indicator = worksheet.cell_value(curr_row, indicator_col).encode("UTF-8")
+            country = worksheet.cell_value(curr_row, country_col).encode("UTF-8")
+            year = self._get_string_from_cell_value(worksheet.cell_value(curr_row, year_col)) #float
+            if worksheet.cell_type(curr_row, value_col) == 1:  # text cell
+                value = worksheet.cell_value(curr_row, value_col).encode("UTF-8");
+            else:
+		value = self._get_value_from_cell(worksheet.cell_value(curr_row, value_col))
+            obs = {'indicator': indicator, 'country': country, 'year': year, 'value': value }
+            data_array.append(obs)
+
+	# TODO not add None values. Add log
+        return data_array
+
+
     def load_xsl_country_year_value(self, file_path):
         workbook = xlrd.open_workbook(file_path)
         worksheet = workbook.sheet_by_name("data")

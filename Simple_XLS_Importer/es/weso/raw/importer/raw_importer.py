@@ -43,7 +43,7 @@ class RawImporter(object):
         self._indicator_internal_id = self._metadata_sheet_dictionary["indicator_internal_id"]
         self._read_as = self._metadata_sheet_dictionary["read_as"]
 
-        self._indicator = self._build_indicator()
+#        self._indicator = self._build_indicator(self._indicator_internal_id)
         
         self._organization = self._build_organization()
         self._license = self._build_license()
@@ -74,6 +74,8 @@ class RawImporter(object):
 
         if self._read_as == "country_year_value":
             observations = self._load_observations_data_country_year_value()
+        elif self._read_as == "indicator_country_year_value":
+            observations = self._load_observations_indicator_country_year_value()
         elif self._read_as == "country_multiple_values":
             observations = self._load_observations_data_multiple_columns_by_year()
         else:
@@ -97,15 +99,10 @@ class RawImporter(object):
     def _load_metadata_data(self):
 	return self._xsl_reader.load_metadata_sheet(self._file_path)
 
-    def _build_indicator(self):
-        if hasattr(self, 'custom_ind_int'):
-            ind_int = self.custom_ind_int
-        else:
-            self._ind_int+=1
-            ind_int = self._ind_int
-            
+    def _build_indicator(self, internal_id):
+        self._ind_int+=1
         return Indicator(chain_for_id=self._org_id,
-                         int_for_id=self._indicator_internal_id,
+                         int_for_id=internal_id,
                          measurement_unit= MeasurementUnit(name= "FIXME",
                                                            convert_to = "FIXME",
                                                            )
@@ -117,9 +114,32 @@ class RawImporter(object):
     def _build_license(self): # TODO remove this license
         return License()
     
+    def _load_observations_indicator_country_year_value(self):
+        result = []
+        data = self._xsl_reader.load_xsl_indicator_country_year_value(self._file_path)
+        for i in range(1, len(data)):
+            indicator_internal_id = data[i]['indicator']
+            indicator = self._build_indicator(indicator_internal_id)
+            country = self._get_country(data[i]['country'])
+            if country is None:
+                continue
+                # TODO add some log
+
+            year = self._build_ref_time_object(data[i]['year'])
+
+            raw_value = data[i]['value']
+            if not(_is_valid_value(raw_value)):
+                continue
+                # TODO add some log
+            value = self._build_value_object(raw_value)
+            result.append(self._build_observation_for_cell(year, value, country, indicator))
+
+        return result
+
 
     def _load_observations_data_multiple_columns_by_year(self):
         result = []
+        indicator = self._build_indicator(self._indicator_internal_id)
         data = self._xsl_reader.load_xsl_country_year_value(self._file_path)
         for i in range(1, len(data)):
             country = self._get_country(data[i][0])
@@ -130,12 +150,12 @@ class RawImporter(object):
                     if _is_valid_value(raw_value):
                        value = self._build_value_object(raw_value)
                        # Add only if there is a value
-                       result.append(self._build_observation_for_cell(year, value, country))
-        
+                       result.append(self._build_observation_for_cell(year, value, country, indicator))
         return result
 
     def _load_observations_data_country_year_value(self):
         result = []
+        indicator = self._build_indicator(self._indicator_internal_id)
         data = self._xsl_reader.load_xsl_country_year_value(self._file_path)
         for i in range(1, len(data)):
             country = self._get_country(data[i][0])
@@ -145,10 +165,10 @@ class RawImporter(object):
 	       if _is_valid_value(raw_value): 
                   value = self._build_value_object(raw_value)
 		  # Add only if there is a value
-                  result.append(self._build_observation_for_cell(year, value, country)) 
+                  result.append(self._build_observation_for_cell(year, value, country, indicator))
         return result
     
-    def _filter_historical_observations(self, year): 
+    def _filter_historical_observations(self, year):
         if self._look_for_historical:
             return True
         else :
@@ -157,11 +177,10 @@ class RawImporter(object):
             else:
                 return year.end_time > self._historical_year 
     
-    def _build_observation_for_cell(self, year, value, country):
+    def _build_observation_for_cell(self, year, value, country, indicator):
         result = Observation(chain_for_id=self._org_id, int_for_id=self._obs_int)
         self._obs_int += 1  # Updating id value
-        
-        result.indicator = self._indicator
+        result.indicator = indicator
         result.value = value
         result.computation = self._get_computation_object()  # Always the same, no param needed
         result.issued = self._build_issued_object()  # No param needed
