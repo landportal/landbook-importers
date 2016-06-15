@@ -82,6 +82,16 @@ do
   mv OECD-SIGI_1_0.xml $file_name.xml
 done
 
+
+###########
+# WB LGAF #
+###########
+
+for file_path in data/WB-LGAF/LGAF*.xlsx
+do
+  python main.py -i $file_path #generate the intermediate XML
+done
+
 ###################################################################
 ###################################################################
 ###################################################################
