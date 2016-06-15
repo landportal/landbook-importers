@@ -14,6 +14,7 @@ class Value(object):
     AVAILABLE = "obsStatus-A"
     FLOAT = "float"
     INTEGER = "int"
+    STRING = "str"
 
 
     def __init__(self, value=None, value_type=None, obs_status=None):
@@ -31,7 +32,7 @@ class Value(object):
         return self._value_type
     
     def __set_value_type(self, value_type):
-        if value_type == self.INTEGER or value_type == self.FLOAT :
+        if value_type == self.INTEGER or value_type == self.FLOAT or value_type == self.STRING: # FIXME change for in []
             self._value_type = value_type
         else:
             raise ValueError("Value type not in the given ones")

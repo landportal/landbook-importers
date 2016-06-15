@@ -224,6 +224,10 @@ class RawImporter(object):
               result.value = value
               result.value_type = Value.FLOAT
               result.obs_status = Value.AVAILABLE
+	   elif isinstance(value, basestring):
+              result.value = value
+              result.value_type = Value.STRING
+              result.obs_status = Value.AVAILABLE
         return result
 
     
