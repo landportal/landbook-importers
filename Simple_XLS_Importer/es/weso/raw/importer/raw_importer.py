@@ -120,8 +120,10 @@ class RawImporter(object):
         for i in range(1, len(data)):
             indicator_internal_id = data[i]['indicator']
             indicator = self._build_indicator(indicator_internal_id)
-            country = self._get_country(data[i]['country'])
+            raw_country = data[i]['country']
+            country = self._get_country(raw_country)
             if country is None:
+		self._log.warning("Unkown country = " + raw_country)
                 continue
                 # TODO add some log
 
@@ -129,6 +131,7 @@ class RawImporter(object):
 
             raw_value = data[i]['value']
             if not(_is_valid_value(raw_value)):
+		self._log.warning("Not valid value = " + str(raw_value))
                 continue
                 # TODO add some log
             value = self._build_value_object(raw_value)
