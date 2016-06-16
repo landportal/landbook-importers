@@ -87,9 +87,16 @@ done
 # WB LGAF #
 ###########
 
-for file_path in data/WB-LGAF/LGAF*.xlsx
+for file_path in data/WB-LGAF/WB-LGAF*.xlsx
 do
   python main.py -i $file_path #generate the intermediate XML
+
+  # obtain the filename and the extension
+  file=${file_path#data/WB-LGAF/*}
+  file_name="${file%.*}"
+  file_extension="${file##*.}"
+
+  mv ${file_name}_1_0.xml $file_name.xml
 done
 
 ###################################################################
