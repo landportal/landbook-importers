@@ -13,7 +13,7 @@ The way in which importer works is:
 
 * It turns that intermediate objects in objects of the common model.
 
-It looks that the file that contains the entire database has a name that does not depend on dates, so it could be possible that in the next time that the importer need to execute the Download url may not change. If it does, the new URL must be specified in "zip_url", in the configuration.ini file. 
+It looks that the file that contains the entire database has a name that does not depend on dates, so it could be possible that in the next time that the importer need to execute the Download url may not change. If it does, the new URL must be specified in "zip_url", in the configuration-XXXX.ini file. 
 
 The importer expects an URL pointing to a zip that contains a single CSV file.
 
@@ -26,7 +26,7 @@ But that observations should not be present in the final system.
 In order to generate the relatives indicators, the indicator FAO-6601-5110 (Land area) MUST be generated.
 
 To select the indicators to generate, you need to:
-* describe them in to the configuration.ini
+* describe them in to the configuration-XXXX.ini
 * add them into the section [INDICATORS], in the codes list
 * add them in the "indicator_names.txt"
 * add them in the \es\weso\faostat\translator\translator_const
