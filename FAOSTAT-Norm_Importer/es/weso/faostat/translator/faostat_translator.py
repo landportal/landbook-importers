@@ -298,12 +298,10 @@ class FaostatTranslator(object):
     def _parse_value(primitive_data):
         """
         We are receiving a number with an " at the end and possibly a "."
-        because of ot presentation format. Ej: 1000 = 1.000
-        I THINK it works like this. It also coulb be expressing decimals.
-        We have to check that
-
+        because of presentation format. Ej: 10.000 = 10,00
+	The dot represent the decimal separator. Must be changed to comma.
         """
-        return re.sub('\.|\"', "", primitive_data)
+        return re.sub('\.', ",", primitive_data[:-1])
 
     @staticmethod
     def _parse_flag(primitive_data):
