@@ -289,11 +289,9 @@ class FaostatTranslator(object):
     @staticmethod
     def _parse_value(primitive_data):
 	"""
-        We are receiving a number with an " at the end and possibly a "."
-        because of presentation format. Ej: 10.000 = 10,00
-        The dot represent the decimal separator. Must be changed to comma.
+        We are receiving the value of the measure with an '"' at the end
         """
-        return re.sub('\.', ",", primitive_data[:-1])
+        return primitive_data[:-1]
 
     @staticmethod
     def _parse_flag(primitive_data):
