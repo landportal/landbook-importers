@@ -16,3 +16,4 @@ HKG=Hong Kong Special Administrative Region of China
 MDA=Moldova, Republic of
 TZA=Tanzania, United Republic of
 PRK=Korea, Democratic People's Republic of
+MNP=Northern Marianas
