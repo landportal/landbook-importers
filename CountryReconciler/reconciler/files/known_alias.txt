@@ -17,3 +17,4 @@ MDA=Moldova, Republic of
 TZA=Tanzania, United Republic of
 PRK=Korea, Democratic People's Republic of
 MNP=Northern Marianas
+TWN=Chinese Taipei
