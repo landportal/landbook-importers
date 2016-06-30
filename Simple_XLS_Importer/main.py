@@ -9,7 +9,7 @@ from es.weso.raw.importer.raw_importer import RawImporter
 
 def configure_log():
     FORMAT = "%(asctime)s - %(name)s - %(levelname)s [%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
-    logging.basicConfig(filename='raw_importer.log', level=logging.INFO, format=FORMAT)
+    logging.basicConfig(filename='simple_xls_importer.log', level=logging.INFO, format=FORMAT)
 
 def main(argv):
    input_file = ''
