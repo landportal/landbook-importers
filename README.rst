@@ -34,7 +34,7 @@ Simple_XLS_Importer
 -------------------
 :DP-MOD: Extracted from web (https://landgov.donorplatform.org/) (June 2016)
 :FAO-LandAndGender: Extracted from web (http://www.fao.org/gender-landrights-database/data-map/statistics/en/) (June 2016)
-:IFPRI-GHI: Extracted from web (http://ghi.ifpri.org/ and http://data.ifpri.org/lod/ghi) and FIXME (June 2016)
+:IFPRI-GHI: Extracted from web (http://ghi.ifpri.org/ and http://data.ifpri.org/lod/ghi) (June 2016)
 :OECD-SIGI: Extracted from web (http://stats.oecd.org) (June 2016)
 :UNDP-HDI: Extracted from web (http://hdr.undp.org/en/content/human-development-index-hdi) (June 2016)
 :WB-LGAF: LGAF 2013 & LGAF 2016 Provided by LGAF team (June 2016)
