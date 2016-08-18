@@ -99,6 +99,23 @@ do
   mv ${file_name}_1_0.xml $file_name.xml
 done
 
+
+###########
+# RRI FTD #
+###########
+
+for file_path in data/RRI-FTD/RRI-FTD*.xlsx
+do
+  python main.py -i $file_path #generate the intermediate XML
+
+  # obtain the filename and the extension
+  file=${file_path#data/RRI-FTD/*}
+  file_name="${file%.*}"
+  file_extension="${file##*.}"
+
+  mv ${file_name}_1_0.xml $file_name.xml
+done
+
 ###################################################################
 ###################################################################
 ###################################################################
