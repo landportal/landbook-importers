@@ -38,7 +38,7 @@ Simple_XLS_Importer
 :OECD-SIGI: Extracted from web (http://stats.oecd.org) (June 2016)
 :RRI-FTD: Shared by email from RRI team  (Original data from http://rightsandresources.org/en/resources/tenure-data/tenure-data-tool/) (July 2016)
 :UNDP-HDI: Extracted from web (http://hdr.undp.org/en/content/human-development-index-hdi) (June 2016)
-:WB-LGAF: LGAF 2013 & LGAF 2016 Provided by LGAF team (June 2016)
+:WB-LGAF: LGAF 2013 & LGAF 2016 Provided by LGAF team (Original data from http://go.worldbank.org/21M7S7AZO0) (June 2016)
 
 WorldBank_Importer
 ------------------
