@@ -43,3 +43,6 @@ class Country(Region):
     
     def get_dimension_string(self):
         return self.iso3
+
+    def __repr__(self):
+        return "name=" + self.name + " / iso2=" + self.iso2 + " / iso3=" + self.iso3 + " / uncode=" + self._un_code
