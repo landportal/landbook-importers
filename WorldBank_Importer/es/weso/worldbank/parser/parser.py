@@ -26,7 +26,7 @@ from es.weso.worldbank.rest.rest_client import RestClient
 
 
 class Parser(object):
-    countries = []
+    countries = {}
     observations = []
 
 
@@ -74,12 +74,13 @@ class Parser(object):
 
     def extract_countries(self):
         response = RestClient.get(self.countries_url, {"format": "json"})
-        countries = response[1]
-        for country in countries:
+        countries_response = response[1]
+        for possible_country in countries_response:
             try:
-                self.countries.append(self._reconciler.get_country_by_iso2(country['iso2Code']))
+                country = self._reconciler.get_country_by_iso2(possible_country['iso2Code'])
+                self.countries[country.iso3] = country
             except:
-                self.logger.warning("No country matches found for iso code" + country['iso2Code'])
+                self.logger.warning("No country matches found for iso code=" + possible_country['iso2Code'])
                 
     def _build_default_organization(self):
         return Organization(chain_for_id=self._org_id,
@@ -197,7 +198,7 @@ class Parser(object):
             dataset = self._build_data_set(data_source)
             data_source.add_dataset(dataset)
             
-            #print data_source_name
+            # Iterate over the indicators
             for indicator_element in requested_indicators:
                 indicator_code = self.config.get(indicators_section, indicator_element)
                 measurement_unit = MeasurementUnit(name = self.config.get(indicator_code, "indicator_unit_name"),
@@ -205,40 +206,52 @@ class Parser(object):
                 indicator = self._build_indicator(indicator_code, dataset, measurement_unit)
                 
                 print '\t' + indicator.name_en  + "--------------" + indicator.preferable_tendency + "-----------"
-                for country in self.countries:
+
+                # Create an slice by country
+                slice_by_country={}
+                for iso3, country in self.countries.iteritems():
                     slice_object = self._build_slice(country, dataset, indicator)
-                    #print '\t\t' + slice_object.slice_id + '\t' + slice_object.dimension.get_dimension_string()
-                    uri = self.observations_url.replace('{ISO3CODE}', country.iso3)
-                    uri = uri.replace('{INDICATOR.CODE}', indicator_code)
-                    try:
-                        response = RestClient.get(uri, {"format": "json"})
-                        observations = response[1]
-                        if observations is not None:
-                            for observation_element in observations:
-				value = observation_element['value']
+                    slice_by_country[iso3] = slice_object
 
-				if value is not None: # Only create an observation if there is a value for it
-                                   observation = self._build_observation(indicator, 
-                                                                      dataset, 
-                                                                      country, 
-                                                                      observation_element['value'], 
-                                                                      observation_element['date'])
-                                
-                                   if self._filter_historical_observations(observation.ref_time):
-                                    		country.add_observation(observation)
-                                    		dataset.add_observation(observation)
-                                    		slice_object.add_observation(observation)
-                                    #if observation.value.obs_status is not Value.MISSING:
-                                    #    print '\t\t\t' + observation.ref_time.get_time_string() + '\t' + str(observation.value.value) + ' ' + indicator.measurement_unit.name
-                                    #else:
-                                    #    print '\t\t\t' + observation.ref_time.get_time_string() + '\tMissing'
+                # Compound the URL to request
+                uri = self.observations_url.replace('{INDICATOR.CODE}', indicator_code)
 
-			# Only add the slice if there area observations
-			if len(slice_object.observations) > 0:
-				dataset.add_slice(slice_object) 
+                try:
+                   response = RestClient.get(uri, {"format": "json"})
+                   response_info = response[0]
+		   if response_info['pages'] != 1:
+			print "The URL request needs pagination"
+			self.logger.error("The URL request needs pagination")
+			sys.exit(1)
+                   observations = response[1]
+                   if observations is not None:
+                      for observation_element in observations:
+                         iso3code = observation_element['countryiso3code']
+                         if (iso3code is None) or iso3code=="":
+                            self.logger.warning("Not country iso3code in observation: " + str(observation_element))
+                            continue # pass to the next observation
 
-                    except (KeyError, ConnectionError, ValueError):
-                        self.logger.error('Error retrieving response for \'' + uri + '\'')
+                         if iso3code in self.countries:
+                            country = self.countries[iso3code]
+                         else:
+                            self.logger.warning("Not country returned by country_reconcilier using the iso3code: " + iso3code)
+                            continue # pass to the next observation
+
+                         value = observation_element['value']
+                         if value is not None: # Only create an observation if there is a value for it
+                            observation = self._build_observation(indicator, dataset, country, observation_element['value'], observation_element['date'])
+                            if self._filter_historical_observations(observation.ref_time):
+                               country.add_observation(observation)
+                               dataset.add_observation(observation)
+                               slice_by_country[iso3code].add_observation(observation)
+                except (KeyError, ConnectionError, ValueError):
+                   self.logger.error('Error retrieving response for \'' + uri + '\'')
+
+                # Add the slices to the dataset
+                for slice in slice_by_country.itervalues():
+                   if len(slice.observations) > 0:
+			dataset.add_slice(slice)
+
                 self.logger.info("FINISHED: " + indicator.name_en)
 
     @staticmethod
