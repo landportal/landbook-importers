@@ -5,6 +5,14 @@
 #############################
 
 
+##################
+# NKT VGGT 2016  #
+##################
+
+python main.py -i data/NKT-VGGT16/NKT-VGGT16.xlsx #generate the intermediate XML
+mv NKT-VGGT16_1_0.xml NKT-VGGT16.xml
+
+
 #################################
 # UNDP Human Development Index  #
 #################################
