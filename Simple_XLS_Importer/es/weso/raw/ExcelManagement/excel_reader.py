@@ -54,15 +54,31 @@ class XslReader(object):
         workbook = xlrd.open_workbook(file_path)
         worksheet = workbook.sheet_by_name("data")
         
-        data_matrix = [[0 for x in xrange(worksheet.ncols)] for x in xrange(worksheet.nrows)]       
-        for curr_row in range (0, worksheet.nrows):
-            for curr_col in range (0, worksheet.ncols):
-                if worksheet.cell_type(curr_row, curr_col) == 1:  # text cell
-                    data_matrix[curr_row][curr_col] = worksheet.cell_value(curr_row, curr_col).encode("UTF-8");
-                else:
-		    data_matrix[curr_row][curr_col] = self._get_value_from_cell(worksheet.cell_value(curr_row, curr_col))
+        country_col = 0
+        year_col = 1
+        value_col = 2
+        note_col = 3
 
-        return data_matrix
+        data_array = []
+        for curr_row in range (0, worksheet.nrows):
+            country = worksheet.cell_value(curr_row, country_col).encode("UTF-8")
+            year = self._get_string_from_cell_value(worksheet.cell_value(curr_row, year_col)) #float
+            if worksheet.cell_type(curr_row, value_col) == xlrd.XL_CELL_TEXT:  # text cell
+                value = worksheet.cell_value(curr_row, value_col).encode("UTF-8");
+            else:
+		value = self._get_value_from_cell(worksheet.cell_value(curr_row, value_col))
+            # The note is optional
+	    note = None
+            if (worksheet.ncols >= (note_col+1)) and (worksheet.cell_type(curr_row, note_col) != xlrd.XL_CELL_EMPTY):  # empty cell
+                note = worksheet.cell_value(curr_row, note_col).encode("UTF-8");
+
+            obs = {'country': country, 'year': year, 'value': value}
+	    if (note is not None):
+		obs.update({'note': note})
+            data_array.append(obs)
+
+	# TODO not add None values. Add log
+        return data_array
 
     def load_xsl_multiple_columns_by_year(self, file_path):
         workbook = xlrd.open_workbook(file_path)
