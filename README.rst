@@ -47,4 +47,4 @@ WorldBank_Importer
 
 Software license
 ================
-Public domain
+This software project is under MIT license (see LICENSE)
