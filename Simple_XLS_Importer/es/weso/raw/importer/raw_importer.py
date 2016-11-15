@@ -133,7 +133,12 @@ class RawImporter(object):
                 continue
                 # TODO add some log
             value = self._build_value_object(raw_value)
-            result.append(self._build_observation_for_cell(year, value, country, indicator))
+
+	    note = None
+            if 'note' in data[i]:
+		note = data[i]['note']
+
+            result.append(self._build_observation_for_cell(year, value, country, indicator, note))
 
         return result
 
@@ -158,15 +163,28 @@ class RawImporter(object):
         result = []
         indicator = self._build_indicator(self._indicator_internal_id)
         data = self._xsl_reader.load_xsl_country_year_value(self._file_path)
+
         for i in range(1, len(data)):
-            country = self._get_country(data[i][0])
-	    if country is not None:
-               year = self._build_ref_time_object(data[i][1])
-	       raw_value = data[i][2]
-	       if _is_valid_value(raw_value): 
-                  value = self._build_value_object(raw_value)
-		  # Add only if there is a value
-                  result.append(self._build_observation_for_cell(year, value, country, indicator))
+            raw_country = data[i]['country']
+            country = self._get_country(raw_country)
+            if country is None:
+                continue
+
+            year = self._build_ref_time_object(data[i]['year'])
+
+            raw_value = data[i]['value']
+            if not(_is_valid_value(raw_value)):
+		self._log.warning("Not valid value = " + str(raw_value))
+                continue
+                # TODO add some log
+            value = self._build_value_object(raw_value)
+
+	    note = None
+            if 'note' in data[i]:
+		note = data[i]['note']
+
+            result.append(self._build_observation_for_cell(year, value, country, indicator, note))
+
         return result
     
     def _filter_historical_observations(self, year):
@@ -178,13 +196,14 @@ class RawImporter(object):
             else:
                 return year.end_time > self._historical_year 
     
-    def _build_observation_for_cell(self, year, value, country, indicator):
+    def _build_observation_for_cell(self, year, value, country, indicator, note=None):
         result = Observation(chain_for_id=self._org_id, int_for_id=self._obs_int)
         self._obs_int += 1  # Updating id value
         result.indicator = indicator
         result.value = value
         result.computation = self._get_computation_object()  # Always the same, no param needed
         result.issued = self._build_issued_object()  # No param needed
+        result.note = note
         result.ref_time = year
         country.add_observation(result)  # And that stablish the relation in both directions
         

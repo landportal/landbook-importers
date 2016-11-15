@@ -15,7 +15,7 @@ class Observation(object):
     '''
 
     def __init__(self, chain_for_id, int_for_id, ref_time=None, issued=None,
-                 computation=None, value=None, indicator=None, dataset=None):
+                 computation=None, value=None, indicator=None, dataset=None, note=None):
         '''
         Constructor
         '''
@@ -26,6 +26,7 @@ class Observation(object):
         self._value = value
         self._indicator = indicator
         self._dataset = dataset
+        self._note = note 
         self.group = None
         self.indicator_group = None
         self._int_for_id = int_for_id
@@ -87,3 +88,13 @@ class Observation(object):
     dataset = property(fget=__get_dataset,
                       fset=__set_dataset,
                       doc="The dataset for the observation")
+
+    def __get_note(self):
+        return self._note
+    
+    def __set_note(self, note):
+        self._note = note
+        
+    note = property(fget=__get_note,
+                    fset=__set_note,
+                    doc="The note for the observation")
