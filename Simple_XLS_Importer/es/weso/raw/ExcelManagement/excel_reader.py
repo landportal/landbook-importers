@@ -25,17 +25,25 @@ class XslReader(object):
         country_col = 1
         year_col = 2
         value_col = 3
+        note_col = 4
 
         data_array = []
         for curr_row in range (0, worksheet.nrows):
             indicator = worksheet.cell_value(curr_row, indicator_col).encode("UTF-8")
             country = worksheet.cell_value(curr_row, country_col).encode("UTF-8")
             year = self._get_string_from_cell_value(worksheet.cell_value(curr_row, year_col)) #float
-            if worksheet.cell_type(curr_row, value_col) == 1:  # text cell
+            if worksheet.cell_type(curr_row, value_col) == xlrd.XL_CELL_TEXT:  # text cell
                 value = worksheet.cell_value(curr_row, value_col).encode("UTF-8");
             else:
 		value = self._get_value_from_cell(worksheet.cell_value(curr_row, value_col))
-            obs = {'indicator': indicator, 'country': country, 'year': year, 'value': value }
+            # The note is optional
+	    note = None
+            if (worksheet.ncols >= (note_col+1)) and (worksheet.cell_type(curr_row, note_col) != xlrd.XL_CELL_EMPTY):  # empty cell
+                note = worksheet.cell_value(curr_row, note_col).encode("UTF-8");
+
+            obs = {'indicator': indicator, 'country': country, 'year': year, 'value': value}
+	    if (note is not None):
+		obs.update({'note': note})
             data_array.append(obs)
 
 	# TODO not add None values. Add log

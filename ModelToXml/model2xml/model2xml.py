@@ -87,6 +87,7 @@ class ModelToXMLTransformer(object):
     OBSERVATION = "observation"
     OBSERVATION_ATT_ID = "id"
     OBSERVATION_ISSUED = "issued"
+    OBSERVATION_NOTE = "note"
     OBSERVATION_OBS_STATUS = "obs-status"
     OBSERVATION_COMPUTATION = "computation"
     OBSERVATION_COMPUTATION_TYPE_ATT = "type"
@@ -568,6 +569,13 @@ class ModelToXMLTransformer(object):
         issued_node = Element(self.OBSERVATION_ISSUED)
         issued_node.text = data_obs.issued.get_time_string()
         observation_node.append(issued_node)
+
+        #note
+        if (data_obs.note is not None):
+	   note_node = Element(self.OBSERVATION_NOTE)
+           note_node.text = data_obs.note
+           observation_node.append(note_node)
+
         #obs-staus, value
         self.attach_value_to_observation(observation_node, data_obs)
 

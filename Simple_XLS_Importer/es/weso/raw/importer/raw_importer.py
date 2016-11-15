@@ -133,7 +133,12 @@ class RawImporter(object):
                 continue
                 # TODO add some log
             value = self._build_value_object(raw_value)
-            result.append(self._build_observation_for_cell(year, value, country, indicator))
+
+	    note = None
+            if 'note' in data[i]:
+		note = data[i]['note']
+
+            result.append(self._build_observation_for_cell(year, value, country, indicator, note))
 
         return result
 
@@ -178,13 +183,14 @@ class RawImporter(object):
             else:
                 return year.end_time > self._historical_year 
     
-    def _build_observation_for_cell(self, year, value, country, indicator):
+    def _build_observation_for_cell(self, year, value, country, indicator, note=None):
         result = Observation(chain_for_id=self._org_id, int_for_id=self._obs_int)
         self._obs_int += 1  # Updating id value
         result.indicator = indicator
         result.value = value
         result.computation = self._get_computation_object()  # Always the same, no param needed
         result.issued = self._build_issued_object()  # No param needed
+        result.note = note
         result.ref_time = year
         country.add_observation(result)  # And that stablish the relation in both directions
         
