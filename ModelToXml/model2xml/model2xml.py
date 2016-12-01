@@ -145,6 +145,7 @@ class ModelToXMLTransformer(object):
     LICENSE_NAME = "lic_name"
     LICENSE_DESCRIPTION = "lic_description"
     LICENSE_REPUBLISH = "republish"
+    LICENSE_REPUBLISH_DEFAULT_VALUE = "false"
     LICENSE_URL = "lic_url"
 
     TIME = "time"
@@ -472,9 +473,10 @@ class ModelToXMLTransformer(object):
         result.append(node_topic)
 
         #preferable_tendency
-        node_tendency = Element(self.INDICATOR_PREFERABLE_TENDENCY)
-        node_tendency.text = data_indicator.preferable_tendency
-        result.append(node_tendency)
+        if (data_indicator.preferable_tendency is not None):
+           node_tendency = Element(self.INDICATOR_PREFERABLE_TENDENCY)
+	   node_tendency.text = data_indicator.preferable_tendency
+	   result.append(node_tendency)
 
         #MeasureUnit
         node_measure = Element(self.INDICATOR_MEASURE_UNIT)
@@ -538,8 +540,11 @@ class ModelToXMLTransformer(object):
         license_node.append(desc_node)
 
         #republish
-        republish_node = Element(self.LICENSE_REPUBLISH)
-        republish_node.text = str(self._dataset.license_type.republish).lower()
+	republish_node = Element(self.LICENSE_REPUBLISH)
+	if (self._dataset.license_type.republish is not None):
+	   republish_node.text = str(self._dataset.license_type.republish).lower()
+	else:
+	   republish_node.text = self.LICENSE_REPUBLISH_DEFAULT_VALUE
         license_node.append(republish_node)
 
         #url

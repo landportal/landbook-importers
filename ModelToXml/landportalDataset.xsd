@@ -200,9 +200,9 @@
         <xs:element ref="ind_description_es"/>
         <xs:element ref="ind_description_fr"/>
         <xs:element ref="topic-ref"/>
-        <xs:element ref="preferable_tendency"/>
+        <xs:element ref="preferable_tendency" minOccurs="0" maxOccurs="1"/>
         <xs:element ref="measure_unit"/>
-		<xs:element ref="splitsIn" minOccurs="0" maxOccurs="1"/>
+	<xs:element ref="splitsIn" minOccurs="0" maxOccurs="1"/>
       </xs:sequence>
       <xs:attribute name="id" type="xs:string" use="required"/>
     </xs:complexType>
@@ -220,8 +220,8 @@
  	<xs:simpleType>
 	  <xs:restriction base="xs:string">
 	      <xs:enumeration value="increase" />
- 		  <xs:enumeration value="decrease" />
- 		  <xs:enumeration value="irrelevant" />
+ 	      <xs:enumeration value="decrease" />
+ 	      <xs:enumeration value="irrelevant" />
 	  </xs:restriction>
 	</xs:simpleType>
   </xs:element>  
