@@ -5,6 +5,17 @@
 #############################
 
 
+#############
+# LandMark  #
+#############
+
+python main.py -i data/LandMark/LMM-LSIC.xlsx #generate the intermediate XML
+mv LMM-LSIC_1_0.xml LMM-LSIC.xml
+
+python main.py -i data/LandMark/LMM-PICL.xlsx #generate the intermediate XML
+mv LMM-PICL_1_0.xml LMM-PICL.xml
+
+
 ##################
 # NKT VGGT 2016  #
 ##################
