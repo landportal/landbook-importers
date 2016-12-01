@@ -573,7 +573,7 @@ class ModelToXMLTransformer(object):
         #note
         if (data_obs.note is not None):
 	   note_node = Element(self.OBSERVATION_NOTE)
-           note_node.text = data_obs.note
+           note_node.text = unicode(data_obs.note, "utf-8")
            observation_node.append(note_node)
 
         #obs-staus, value
