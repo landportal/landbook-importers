@@ -33,24 +33,25 @@ class FileParser(object):
     LAST_ROW = 249
 
     #COLUMN INDEX
-    ISO3_FAO_COL = 4
-    ISO3_OFFICIAL_COL = 3
-    ISO3_A2_COL = 28
-    ISO2_COL = 27
-    UN_OFFICIAL_CODE_COL = 29
-    FAOSTAT_CODE_COL = 47
+    ISO3_OFFICIAL_COL = 0
+    ISO3_A2_COL = 0
 
-    SNAME_EN_FAO_COL = 6
-    SNAME_ES_FAO_COL = 8
-    SNAME_FR_FAO_COL = 10
+    LNAME_EN_FAO_COL = 1
+    SNAME_EN_FAO_COL = 2
 
-    LNAME_EN_FAO_COL = 5
-    LNAME_ES_FAO_COL = 7
-    LNAME_FR_FAO_COL = 9
+    LNAME_ES_FAO_COL = 3
+    SNAME_ES_FAO_COL = 4
 
-    ALT_EN_NAME_1_COL = 2
-    ALT_EN_NAME_2_COL = 11
+    LNAME_FR_FAO_COL = 5
+    SNAME_FR_FAO_COL = 6
 
+    ALT_EN_NAME_1_COL = 7
+    ALT_EN_NAME_2_COL = 8
+
+    ISO3_FAO_COL = 9
+    ISO2_COL = 10
+    UN_OFFICIAL_CODE_COL = 11
+    FAOSTAT_CODE_COL = 12
 
 
     def __init__(self):
