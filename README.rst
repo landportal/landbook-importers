@@ -16,14 +16,14 @@ FAOAgriculturalCensues_Importer
 FAOSTAT_Importer
 ----------------
 :Land: http://faostat.fao.org/Portals/_Faostat/Downloads/zip_files/Resources_Land_E_All_Data.zip
-:Water: http://faostat3.fao.org/faostat-bulkdownloads/Environment_Water_E_All_Data.zip
+:Water: http://fenixservices.fao.org/faostat/static/bulkdownloads/Environment_Water_E_All_Data.zip
 
 
 FAOSTAT-Norm_Importer
 ---------------------
-:Food Security: http://faostat3.fao.org/faostat-bulkdownloads/Food_Security_Data_E_All_Data_(Norm).zip
-:ASTI Researchers: http://faostat3.fao.org/faostat-bulkdownloads/ASTI_Researchers_E_All_Data_(Norm).zip
-:ASTI Research Spending: http://faostat3.fao.org/faostat-bulkdownloads/ASTI_Research_Spending_E_All_Data_(Norm).zip
+:Food Security: http://fenixservices.fao.org/faostat/static/bulkdownloads/Food_Security_Data_E_All_Data_(Norm).zip
+:ASTI Researchers: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Researchers_E_All_Data_(Norm).zip
+:ASTI Research Spending: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Research_Spending_E_All_Data_(Norm).zip
 
 LandMatrix_Importer
 -------------------
