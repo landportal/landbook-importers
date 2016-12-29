@@ -62,7 +62,8 @@ class FileParser(object):
         countries_source_file = os.path.dirname(__file__) + "/files/country_list.xlsx" # Without config, but works better
         self.parse_countries(countries_source_file)
         # alias_file = self.config.get('SOURCE', 'path_file_alias')
-        alias_file = os.path.dirname(__file__) + "/files/known_alias.txt"  # Without config, but works better
+        # Read English alias file
+        alias_file = os.path.dirname(__file__) + "/files/known_alias_en.txt"  # Without config, but works better
         self.parse_alias(alias_file)
         return self.country_list
 
