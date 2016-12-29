@@ -82,25 +82,10 @@ class CountryReconciler(object):
                 if normalized_parameter == normalized_parsed_country:
                     return parsed_country.model_object  # 2nd possible return
 
-        #Check alt names
-        #alt name 1
-        for parsed_country in self.parsed_countries:
-            if CountryReconciler._has_content(parsed_country.alt_en_name1):
-                normalized_parsed_country = self.normalizer.normalize_country_by_en_name(parsed_country.alt_en_name1)
-                if normalized_parameter == normalized_parsed_country:
-                    return parsed_country.model_object  # 3rd possible return
-
-        #alt name 2
-        for parsed_country in self.parsed_countries:
-            if CountryReconciler._has_content(parsed_country.alt_en_name2):
-                normalized_parsed_country = self.normalizer.normalize_country_by_en_name(parsed_country.alt_en_name2)
-                if normalized_parameter == normalized_parsed_country:
-                    return parsed_country.model_object  # 4th possible return
-
-        #check alias
+        #check alias (english)
         possible_return = self._get_country_by_alias(normalized_parameter)
         if possible_return is not None:
-            return possible_return  # 5th possible return
+            return possible_return  # 3rd possible return
 
         raise UnknownCountryError("Impossible to find coincidences in country names with '{0}'".format(name))
 
@@ -157,7 +142,6 @@ class CountryReconciler(object):
         for pcountry in self.parsed_countries:
             for an_alias in pcountry.alias:
                 normalized_parsed_alias = CountryNormalizer.normalize_country_by_en_name(an_alias)
-                # print "Atento a mi culo!!!!!", normalized_parsed_alias, "c", normalized_alias, "a", "b"
                 if normalized_parsed_alias == normalized_alias:
                     return pcountry.model_object
 

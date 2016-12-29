@@ -45,13 +45,10 @@ class FileParser(object):
     LNAME_FR_FAO_COL = 5
     SNAME_FR_FAO_COL = 6
 
-    ALT_EN_NAME_1_COL = 7
-    ALT_EN_NAME_2_COL = 8
-
-    ISO3_FAO_COL = 9
-    ISO2_COL = 10
-    UN_OFFICIAL_CODE_COL = 11
-    FAOSTAT_CODE_COL = 12
+    ISO3_FAO_COL = 7
+    ISO2_COL = 8
+    UN_OFFICIAL_CODE_COL = 9
+    FAOSTAT_CODE_COL = 10
 
 
     def __init__(self):
@@ -116,9 +113,6 @@ class FileParser(object):
             lname_es = self.parse_name(book, row, self.LNAME_ES_FAO_COL)
             lname_fr = self.parse_name(book, row, self.LNAME_FR_FAO_COL)
 
-            alt_en_name1 = self.parse_name(book, row, self.ALT_EN_NAME_1_COL)
-            alt_en_name2 = self.parse_name(book, row, self.ALT_EN_NAME_2_COL)
-
             country = ParsedCountry(iso3_official,
                                     iso3_fao,
                                     iso3_a2,
@@ -131,8 +125,6 @@ class FileParser(object):
                                     lname_en,
                                     lname_es,
                                     lname_fr,
-                                    alt_en_name1,
-                                    alt_en_name2
                                     )
             if country.get_iso3() is not None:
                 self.country_list.append(country)
