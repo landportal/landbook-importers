@@ -69,7 +69,9 @@ class RawImporter(object):
          - Send it to model2xml
          - Actualize config values (ids and last checked)
         """
-        
+
+	self._log.info("--- Start processing file="+self._file_path)
+
         # Generate observations and add it to the common objects
 
         if self._read_as == "country_year_value":
@@ -92,6 +94,8 @@ class RawImporter(object):
         translator.run()
 
         # And it is done. No return needed
+
+	self._log.info("--- End Processing file="+self._file_path)
 
     def _build_xsl_reader(self):
         return XslReader()
