@@ -1,0 +1,9 @@
+ISO3 code "CHI"
+In the ISO, Guernsey and Jersey are considered separately and have separate codes.
+In the World Development Indicators (WDI) the two are combined in one economic entity (Channel Islands) with ISO3 code CHI.
+The ISO3 code "CHI" is not official
+
+ISO3 code "KOS"
+"KOS" is used for Kosovo
+The ISO3 code "KOS" is not official
+The ISO2 code "XK" is a "user assigned" ISO 3166 code not designated by the standard, but used by the European Commission, Switzerland, the Deutsche Bundesbank and other organisations.
