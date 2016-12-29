@@ -9,7 +9,7 @@ from lpentities.country import Country
 
 class ParsedCountry(object):
 
-    def __init__(self, iso3_official=None, iso3_a2=None,
+    def __init__(self, iso3_official=None,
                  iso2=None, sname_en=None, sname_es=None, sname_fr=None,
                  un_code=None, faostat_code=None, lname_en=None,
                  lname_es=None, lname_fr=None):
@@ -22,7 +22,6 @@ class ParsedCountry(object):
         identifier must be in country_list Excel file!
         """
         self.iso3_official = iso3_official
-        self.iso3_a2 = iso3_a2
         self.iso2 = iso2
         self.sname_en = sname_en
         self.sname_es = sname_es
@@ -48,12 +47,8 @@ class ParsedCountry(object):
             return self.iso2.decode('utf-8', 'ignore')
 
     def get_iso3(self):
-        # This is a small validation for missing or malformed official ISO3 values
-        # In that cases we'll use the FAO ISO3 code
         if self.iso3_official is not None and len(self.iso3_official) == 3:
             return self.iso3_official.decode('utf-8', 'ignore')
-        else:
-            return self.iso3_a2.decode('utf-8', 'ignore')  # If this is None, we are doomed
 
     def _get_valid_en_name(self):
         if self.sname_en is not None:

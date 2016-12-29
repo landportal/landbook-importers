@@ -34,7 +34,6 @@ class FileParser(object):
 
     #COLUMN INDEX
     ISO3_OFFICIAL_COL = 0
-    ISO3_A2_COL = 0
 
     LNAME_EN_FAO_COL = 1
     SNAME_EN_FAO_COL = 2
@@ -98,7 +97,6 @@ class FileParser(object):
     def parse_row_range(self, book, first, last):
         for row in range(first, last + 1):
             iso3_official = self.parse_iso(book, row, self.ISO3_OFFICIAL_COL)
-            iso3_a2 = self.parse_iso(book, row, self.ISO3_A2_COL)
             iso2 = self.parse_iso(book, row, self.ISO2_COL)
 
             sname_en = self.parse_name(book, row, self.SNAME_EN_FAO_COL)
@@ -113,7 +111,6 @@ class FileParser(object):
             lname_fr = self.parse_name(book, row, self.LNAME_FR_FAO_COL)
 
             country = ParsedCountry(iso3_official,
-                                    iso3_a2,
                                     iso2,
                                     sname_en,
                                     sname_es,
