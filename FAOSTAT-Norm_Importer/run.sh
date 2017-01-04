@@ -1,5 +1,7 @@
 ./clean.sh # this scripts include to remove all .xml files
 
+python main.py -c config/configuration-land.ini #generate the intermediate XML
+mv FAO-LU_1_0.xml FAO-Land.xml
 python main.py -c config/configuration-ASTI_Researchers.ini #generate the intermediate XML
 mv FAO-ASTI_1_0.xml FAO-ASTI-Researchers.xml
 python main.py -c config/configuration-ASTI_Research_Spending.ini #generate the intermediate XML

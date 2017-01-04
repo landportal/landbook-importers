@@ -237,10 +237,13 @@ class ModelObjectBuilder(object):
            ind.preferable_tendency = self._parse_preferable_tendency(self._read_config_value(indicator, "tendency"))
 
 	   #FAO CODE
-           fao_item_code = self._read_config_value(indicator, "fao_item_code")
-           fao_element_code = self._read_config_value(indicator, "fao_element_code")
+           try:
+             fao_item_code = self._read_config_value(indicator, "fao_item_code")
+             fao_element_code = self._read_config_value(indicator, "fao_element_code")
+             generated_code = fao_item_code+'-'+fao_element_code
+           except: # calculated relatives indicators
+             generated_code = self._read_config_value(indicator, "id")
            # Generate a code using the patter ITEM_CODE-ELEMENT_CODE
-           generated_code = fao_item_code+'-'+fao_element_code
            result[generated_code] = ind
          except Exception as e:
            print str(e)

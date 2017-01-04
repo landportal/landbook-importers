@@ -6,6 +6,8 @@ Created on 31/01/2014
 from .translator_const import TranslatorConst
 from lpentities.computation import Computation
 
+import string
+
 class RelativeRegistersCalculator(object):
     '''
     classdocs
@@ -21,9 +23,6 @@ class RelativeRegistersCalculator(object):
         self.land_dictionary = land_dictionary
         self.key_generation_function = key_generation_function
         self._log = log
-
-
-
         
     def run(self):
         calculated_registers = []
@@ -43,16 +42,14 @@ class RelativeRegistersCalculator(object):
         relative.insert(TranslatorConst.COUNTRY, self._infer_country(imported))
         relative.insert(TranslatorConst.ITEM_CODE, self._infer_item_code(imported))
         relative.insert(TranslatorConst.ITEM, self._infer_item(imported))
-        relative.insert(TranslatorConst.ELEMENT_GROUP, self._infer_element_group(imported))
         relative.insert(TranslatorConst.ELEMENT_CODE, self._infer_element_code(imported))
         relative.insert(TranslatorConst.ELEMENT, self._infer_element(imported))
+        relative.insert(TranslatorConst.YEAR_CODE, self._infer_year(imported))
         relative.insert(TranslatorConst.YEAR, self._infer_year(imported))
         relative.insert(TranslatorConst.UNIT, self._infer_unit())  # Always the same, no parameter needed
         relative.insert(TranslatorConst.VALUE, self._infer_value(imported))
         relative.insert(TranslatorConst.FLAG, self._infer_flag(imported))
         relative.insert(TranslatorConst.COMPUTATION_PROCESS, self._infer_computation_type()) #Always the same
-
-
 
         return relative
 
@@ -68,7 +65,6 @@ class RelativeRegistersCalculator(object):
         key_land = self.key_generation_function(country_code=imported[TranslatorConst.COUNTRY_CODE],
                                                 year=imported[TranslatorConst.YEAR])
         try:
-
             land_area = self.land_dictionary[key_land]
             return 100 * float(imported[TranslatorConst.VALUE]) / float(land_area)
         except BaseException as e:
@@ -92,32 +88,26 @@ class RelativeRegistersCalculator(object):
         return imported[TranslatorConst.ELEMENT_CODE]
 
     @staticmethod
-    def _infer_element_group(imported):
-        return imported[TranslatorConst.ELEMENT_GROUP]
-
-    @staticmethod
     def _infer_item(imported):
-
-        imported_code = imported[TranslatorConst.ITEM_CODE]
+        imported_code = _get_imported_code(imported)
         if imported_code == TranslatorConst.CODE_FOREST_LAND:
             return "Relative forest land"
         elif imported_code == TranslatorConst.CODE_AGRICULTURAL_LAND:
             return "Relative agricultural land"
         elif imported_code == TranslatorConst.CODE_ARABLE_LAND:
-            return "Return relative agricultural land"
+            return "Relative agricultural land"
         else:
             raise RuntimeError("Unrecognised item code while generating calculated registers: {0}.".
                                                                                             format(imported_code))
     @staticmethod
     def _infer_item_code(imported):
-
-        imported_code = imported[TranslatorConst.ITEM_CODE]
+	imported_code = _get_imported_code(imported)
         if imported_code == TranslatorConst.CODE_FOREST_LAND:
-            return TranslatorConst.CODE_RELATIVE_FOREST_LAND
+            return _get_item_code_from_id(TranslatorConst.CODE_RELATIVE_FOREST_LAND)
         elif imported_code == TranslatorConst.CODE_AGRICULTURAL_LAND:
-            return TranslatorConst.CODE_RELATIVE_AGRICULTURAL_LAND
+            return _get_item_code_from_id(TranslatorConst.CODE_RELATIVE_AGRICULTURAL_LAND)
         elif imported_code == TranslatorConst.CODE_ARABLE_LAND:
-            return TranslatorConst.CODE_RELATIVE_ARABLE_LAND
+            return _get_item_code_from_id(TranslatorConst.CODE_RELATIVE_ARABLE_LAND)
         else:
             raise RuntimeError("Unrecognised item code while generating calculated registers: {0}.".
                                                                                             format(imported_code))
@@ -137,6 +127,15 @@ class RelativeRegistersCalculator(object):
         That info is precisely the used one to make the rest of relative calculations
 
         """
-        if imported[TranslatorConst.ITEM_CODE] == TranslatorConst.CODE_LAND_AREA:
+        imported_code = _get_imported_code(imported)
+        if imported_code == TranslatorConst.CODE_LAND_AREA:
             return False
         return True
+
+
+def _get_item_code_from_id(id):
+    last = string.rfind(id,'-')
+    return id[0:last]
+
+def _get_imported_code(imported):
+    return str(imported[TranslatorConst.ITEM_CODE]) + '-' + str(imported[TranslatorConst.ELEMENT_CODE])

@@ -30,6 +30,7 @@ configuration-ASTI_Researchers
 ------------------------------
 
 :Download URL: http://faostat3.fao.org/faostat-bulkdownloads/ASTI_Researchers_E_All_Data_(Norm).zip
+:Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Agricultural researchers (FTE) (Number)
 
@@ -46,6 +47,7 @@ configuration-ASTI_Research_Spending
 ------------------------------------
 
 :Download URL: http://faostat3.fao.org/faostat-bulkdownloads/ASTI_Research_Spending_E_All_Data_(Norm).zip
+:Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Agriculture research spending (2011 PPP$)
 
@@ -62,7 +64,7 @@ configuration-Food_Security
 ---------------------------
 
 :Download URL: http://faostat3.fao.org/faostat-bulkdownloads/Food_Security_Data_E_All_Data_(Norm).zip
-:Indicator ID pattern: IND-FAOSTAT-{ITEM_CODE}-{ELEMENT_CODE}
+:Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Domestic food price index (index)
 
@@ -93,3 +95,51 @@ configuration-Food_Security
 
   * FAOSTAT item_code = 21020
   * FAOSTAT element_code = 6121
+
+
+configuration-Land
+------------------
+
+:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/Inputs_Land_E_All_Data_(Normalized).zip
+:Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
+
+* Agricultural land
+
+  * FAOSTAT item_code = 6610
+  * FAOSTAT element_code = 5110
+
+* Arable land
+
+  * FAOSTAT item_code = 6621
+  * FAOSTAT element_code = 5110
+
+* Forest land
+
+  * FAOSTAT item_code = 6661
+  * FAOSTAT element_code = 5110
+
+* Land areaLand area
+
+  * FAOSTAT item_code = 6601
+  * FAOSTAT element_code = 5110
+
+* Relative agricultural land (FAO-X-6610-5110, from 6610-5110)
+
+* Relative arable land (FAO-X-6621-5110, from 6621-5110)
+
+* Relative forest land (FAO-X-6661-5110, from 6661-5110)
+
+* Permanent crops
+
+  * FAOSTAT item_code = 6650
+  * FAOSTAT element_code = 5110
+
+* Permanent meadows and pastures
+
+  * FAOSTAT item_code = 6655
+  * FAOSTAT element_code = 5110
+
+* Agricultural area organic, total
+
+  * FAOSTAT item_code = 6671
+  * FAOSTAT element_code = 5110

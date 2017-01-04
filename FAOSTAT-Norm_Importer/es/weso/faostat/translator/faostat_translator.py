@@ -53,10 +53,13 @@ class FaostatTranslator(object):
         """
 
         registers = self.turn_raw_data_into_registers(self._look_for_historical)
+        self._log.info("Raw registers read=%d" %len(registers))
         registers += RelativeRegistersCalculator(self._log,
                                                  registers,
                                                  self._land_area_reference,
                                                  self.key_for_land_area_ref).run()  # The last arg. is a function
+        self._log.info("Raw + relatives registers read=%d" %len(registers))
+
         builder = ModelObjectBuilder(registers, self._config, self._log, self._reconciler, self._look_for_historical)
         try:
             dataset_model = builder.run()
@@ -124,8 +127,10 @@ class FaostatTranslator(object):
 
 
     def actualize_land_area_data_if_needed(self, candidate_register):
-        if not candidate_register[TranslatorConst.ITEM_CODE] == TranslatorConst.CODE_LAND_AREA:
+        code = str(candidate_register[TranslatorConst.ITEM_CODE]) + '-' + str(candidate_register[TranslatorConst.ELEMENT_CODE])
+        if not (code == TranslatorConst.CODE_LAND_AREA):
             return
+
         key = self.key_for_land_area_ref(candidate_register[TranslatorConst.COUNTRY_CODE],
                                          candidate_register[TranslatorConst.YEAR])
         if not key in self._land_area_reference:
@@ -197,8 +202,6 @@ class FaostatTranslator(object):
         result.insert(TranslatorConst.COUNTRY, self._parse_country(primitive_data[TranslatorConst.COUNTRY]))
         result.insert(TranslatorConst.ITEM_CODE, self._parse_item_code(primitive_data[TranslatorConst.ITEM_CODE]))
         result.insert(TranslatorConst.ITEM, self._parse_item(primitive_data[TranslatorConst.ITEM]))
-        #result.insert(TranslatorConst.ELEMENT_GROUP,
-        #              self._parse_element_group(primitive_data[TranslatorConst.ELEMENT_GROUP]))
         result.insert(TranslatorConst.ELEMENT_CODE,
                       self._parse_element_code(primitive_data[TranslatorConst.ELEMENT_CODE]))
         result.insert(TranslatorConst.ELEMENT, self._parse_element(primitive_data[TranslatorConst.ELEMENT]))
@@ -251,15 +254,6 @@ class FaostatTranslator(object):
 
         """
         return primitive_data[:-1]
-
-    @staticmethod
-    def _parse_element_group(primitive_data):
-        """
-        We are receiving an string containing a int number with a "'" at the end
-
-        """
-        return int(primitive_data[:-1])
-
 
     @staticmethod
     def _parse_element_code(primitive_data):
