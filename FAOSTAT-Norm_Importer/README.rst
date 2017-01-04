@@ -29,7 +29,7 @@ INDICATORS SUPPORTED
 configuration-ASTI_Researchers
 ------------------------------
 
-:Download URL: http://faostat3.fao.org/faostat-bulkdownloads/ASTI_Researchers_E_All_Data_(Norm).zip
+:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Researchers_E_All_Data_(Norm).zip
 :Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Agricultural researchers (FTE) (Number)
@@ -46,7 +46,7 @@ configuration-ASTI_Researchers
 configuration-ASTI_Research_Spending
 ------------------------------------
 
-:Download URL: http://faostat3.fao.org/faostat-bulkdownloads/ASTI_Research_Spending_E_All_Data_(Norm).zip
+:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Research_Spending_E_All_Data_(Norm).zip
 :Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Agriculture research spending (2011 PPP$)
@@ -63,7 +63,7 @@ configuration-ASTI_Research_Spending
 configuration-Food_Security
 ---------------------------
 
-:Download URL: http://faostat3.fao.org/faostat-bulkdownloads/Food_Security_Data_E_All_Data_(Norm).zip
+:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/Food_Security_Data_E_All_Data_(Norm).zip
 :Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Domestic food price index (index)
