@@ -242,8 +242,8 @@ class ModelObjectBuilder(object):
            # Generate a code using the patter ITEM_CODE-ELEMENT_CODE
            generated_code = fao_item_code+'-'+fao_element_code
            result[generated_code] = ind
-	 except:
-           print("exception on %s!" % option)
+         except Exception as e:
+           print str(e)
 	self.log.info("Added %d indicators in the indicators dictionary" % len(result))
 	return result
 
