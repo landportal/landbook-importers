@@ -57,18 +57,8 @@ done
 # IFPRI - Global Hunger Index #
 ###############################
 
-for file_path in data/IFPRI-GHI/IFPRI-GHI*.xlsx
-do
-  python main.py -i $file_path #generate the intermediate XML
-
-  # obtain the filename and the extension
-  file=${file_path#data/IFPRI-GHI/*}
-  file_name="${file%.*}"
-  file_extension="${file##*.}"
-
-  mv IFPRI-GHI_1_0.xml $file_name.xml
-done
-
+python main.py -i data/IFPRI-GHI/2016-IFPRI-GHI.xlsx
+mv IFPRI-GHI_1_0.xml 2016-IFPRI-GHI.xml
 
 #####################
 # FAO LAND & GENDER #
