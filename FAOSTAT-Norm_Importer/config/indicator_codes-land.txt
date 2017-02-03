@@ -2,41 +2,69 @@
 #Each indicator should be placed in a single line. You can use comments
 #by starting a line with "#"
 
-
 #Agricultural area
 6610-5110
 #Agricultural area actually irrigated
+6611-5110
 #Agricultural area certified organic
+6672-5110
 #Agricultural area in conversion to organic
+6673-5110
 #Agricultural area organic, total
 6671-5110
 #Arable land
 6621-5110
 #Arable land and Permanent crops
+6620-5110
 #Arable land area certified organic
+6675-5110
 #Arable land area in conversion to organic
+6676-5110
 #Arable land organic, total
+6674-5110
 #Area of arable land and permanent crops under protective cover
+6774-5110
 #Country area
+6600-5110
 #Fallow land (temporary)
+6640-5110
 #Forest area
 6661-5110
 #Inland water
+6680-5110
 #Land area
 6601-5110
 #Other land
+6670-5110
 #Perm. meadows & pastures - Cultivated
+6656-5110
 #Perm. meadows & pastures - Nat. growing
+6659-5110
 #Permanent crops
 6650-5110
 #Permanent crops area certified organic
+6678-5110
 #Permanent crops area in conversion to organic
+6679-5110
 #Permanent crops organic, total
+6677-5110
 #Permanent meadows and pastures
 6655-5110
 #Permanent meadows and pastures area certified organic
+6682-5110
 #Permanent meadows and pastures area in conversion to organic
+6683-5110
 #Permanent meadows and pastures organic, total
+6681-5110
 #Temporary crops
+6630-5110
 #Temporary meadows and pastures
+6633-5110
 #Total area equipped for irrigation
+6690-5110
+#Primary forest
+6714-5110
+#Planted forest
+6716-5110
+#Other naturally regenerated forest
+6717-5110
