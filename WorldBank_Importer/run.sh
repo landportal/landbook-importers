@@ -4,7 +4,8 @@ python main.py -c config/configuration-WB-DEM.ini #generate the intermediate XML
 python main.py -c config/configuration-WB-HN.ini #generate the intermediate XML
 python main.py -c config/configuration-WB-RD.ini #generate the intermediate XML
 python main.py -c config/configuration-WB-SE.ini #generate the intermediate XML
-python main.py -c config/configuration-WB-WGI.ini #generate the intermediate XML
+python main.py -c config/configuration-WB-CC.ini #generate the intermediate XML
+python main.py -c config/configuration-WB-ENV.ini #generate the intermediate XML
 
 for file in *.xml
 do
