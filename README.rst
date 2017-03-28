@@ -41,6 +41,7 @@ Simple_XLS_Importer
 :RRI-FTD: Shared by email from RRI team  (Original data from http://rightsandresources.org/en/resources/tenure-data/tenure-data-tool/) (July 2016)
 :LandMark: Shared by email from WRI team (December 2016)
 :NKT-VGGT16: Shared by email from Nicholas K. Tagliarino (December 2016)
+:LMAF-LAC: Shared by email from Lao Decide and Lao Ministry of Agriculture and Forestry (March 2017)
 
 
 WorldBank_Importer
