@@ -5,6 +5,14 @@
 #############################
 
 
+############################
+# Lao Agricultural Census  #
+############################
+
+python main.py -i data/LMAF-LAC/LMAF-LAC.xlsx #generate the intermediate XML
+mv LMAF-LAC_1_0.xml LMAF-LAC.xml
+
+
 #############
 # LandMark  #
 #############
