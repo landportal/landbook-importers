@@ -4,6 +4,14 @@
 # GENERATE intermediate XML #
 #############################
 
+###############################
+# Transparency International  #
+###############################
+
+python main.py -i data/TI-CPI/TI-CPI.xlsx #generate the intermediate XML
+mv TI-CPI_1_0.xml TI-CPI.xml
+
+
 
 ############################
 # Lao Agricultural Census  #
