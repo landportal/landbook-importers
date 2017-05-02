@@ -30,7 +30,7 @@ class FileParser(object):
 
     #ROW INDEX
     FIRST_ROW = 1
-    LAST_ROW = 249
+    LAST_ROW = 250
 
     #COLUMN INDEX
     ISO3_OFFICIAL_COL = 0
