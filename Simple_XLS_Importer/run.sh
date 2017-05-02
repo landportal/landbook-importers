@@ -34,6 +34,9 @@ mv NKT-VGGT16_1_0.xml NKT-VGGT16.1.xml
 python main.py -i data/NKT-VGGT16/2017-NKT-VGGT-16.3.xlsx #generate the intermediate XML
 mv NKT-VGGT16_1_0.xml NKT-VGGT16.3.xml
 
+python main.py -i data/NKT-VGGT16/2017-NKT-VGGT-16.8-16.9.xlsx #generate the intermediate XML
+mv NKT-VGGT16_1_0.xml NKT-VGGT16.8-16.9.xml
+
 
 #################################
 # UNDP Human Development Index  #
