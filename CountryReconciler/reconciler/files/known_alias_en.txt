@@ -19,6 +19,7 @@ IRQ=Irak
 KOR=South Korea
 LAO=Lao PDR
 LAO=Laos
+LAO=Lao
 MAC=Macao
 MAC=Macau
 MAF=Saint Martin
