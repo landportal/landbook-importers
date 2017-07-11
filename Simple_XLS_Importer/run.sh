@@ -4,13 +4,21 @@
 # GENERATE intermediate XML #
 #############################
 
+
+################################
+# Land Conflict Watch (India)  #
+################################
+
+python main.py -i data/LCW-LCI/LCW-LCI.xlsx #generate the intermediate XML
+mv LCW-LCI_1_0.xml LCW-LCI.xml
+
+
 ###############################
 # Transparency International  #
 ###############################
 
 python main.py -i data/TI-CPI/TI-CPI.xlsx #generate the intermediate XML
 mv TI-CPI_1_0.xml TI-CPI.xml
-
 
 
 ############################
