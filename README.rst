@@ -42,7 +42,7 @@ Simple_XLS_Importer
 :LandMark: Shared by email from WRI team (December 2016)
 :NKT-VGGT16: Shared by email from Nicholas K. Tagliarino (December 2016)
 :LCW-LCI: Shared by email from Land Conflict Watch team (July 2017)
-
+:LA-PRI: Shared by email from LA team (July 2017)
 
 WorldBank_Importer
 ------------------

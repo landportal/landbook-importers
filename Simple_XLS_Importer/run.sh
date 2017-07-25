@@ -4,6 +4,13 @@
 # GENERATE intermediate XML #
 #############################
 
+############
+# PRINDEX  #
+############
+
+python main.py -i data/LA-PRI/LA-PRI.xlsx #generate the intermediate XML
+mv LA-PRI_1_0.xml LA-PRI.xml
+
 
 ################################
 # Land Conflict Watch (India)  #
