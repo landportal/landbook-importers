@@ -143,3 +143,133 @@ configuration-Land
 
   * FAOSTAT item_code = 6671
   * FAOSTAT element_code = 5110
+
+
+* Agricultural area actually irrigated
+  * FAOSTAT item_code = 6611
+  * FAOSTAT element_code = 5110
+
+
+* Agricultural area certified organic
+  * FAOSTAT item_code = 6672
+  * FAOSTAT element_code = 5110
+
+
+* Agricultural area in conversion to organic
+  * FAOSTAT item_code = 6673
+  * FAOSTAT element_code = 5110
+
+
+* Arable land and Permanent crops
+  * FAOSTAT item_code = 6620
+  * FAOSTAT element_code = 5110
+
+
+* Arable land area certified organic
+  * FAOSTAT item_code = 6675
+  * FAOSTAT element_code = 5110
+
+
+* Arable land area in conversion to organic
+  * FAOSTAT item_code = 6676
+  * FAOSTAT element_code = 5110
+
+
+* Arable land organic, total
+  * FAOSTAT item_code = 6674
+  * FAOSTAT element_code = 5110
+
+
+* Area of arable land and permanent crops under protective cover
+  * FAOSTAT item_code = 6774
+  * FAOSTAT element_code = 5110
+
+
+* Country area
+  * FAOSTAT item_code = 6600
+  * FAOSTAT element_code = 5110
+
+
+* Fallow land (temporary)
+  * FAOSTAT item_code = 6640
+  * FAOSTAT element_code = 5110
+
+
+* Inland water
+  * FAOSTAT item_code = 6680
+  * FAOSTAT element_code = 5110
+
+
+* Other land
+  * FAOSTAT item_code = 6670
+  * FAOSTAT element_code = 5110
+
+
+* Other naturally regenerated forest
+  * FAOSTAT item_code = 6717
+  * FAOSTAT element_code = 5110
+
+
+* Perm. meadows & pastures - Cultivated
+  * FAOSTAT item_code = 6656
+  * FAOSTAT element_code = 5110
+
+
+* Perm. meadows & pastures - Naturally growing
+  * FAOSTAT item_code = 6659
+  * FAOSTAT element_code = 5110
+
+
+* Permanent crops area certified organic
+  * FAOSTAT item_code = 6678
+  * FAOSTAT element_code = 5110
+
+
+* Permanent crops area in conversion to organic
+  * FAOSTAT item_code = 6679
+  * FAOSTAT element_code = 5110
+
+
+* Permanent crops organic, total
+  * FAOSTAT item_code = 6677
+  * FAOSTAT element_code = 5110
+
+
+* Permanent meadows and pastures area certified organic
+  * FAOSTAT item_code = 6682
+  * FAOSTAT element_code = 5110
+
+
+* Permanent meadows and pastures area in conversion to organic
+  * FAOSTAT item_code = 6683
+  * FAOSTAT element_code = 5110
+
+
+* Permanent meadows and pastures organic, total
+  * FAOSTAT item_code = 6681
+  * FAOSTAT element_code = 5110
+
+
+* Planted forest
+  * FAOSTAT item_code = 6716
+  * FAOSTAT element_code = 5110
+
+
+* Primary forest
+  * FAOSTAT item_code = 6714
+  * FAOSTAT element_code = 5110
+
+
+* Temporary crops
+  * FAOSTAT item_code = 6630
+  * FAOSTAT element_code = 5110
+
+
+* Temporary meadows and pastures
+  * FAOSTAT item_code = 6633
+  * FAOSTAT element_code = 5110
+
+
+* Total area equipped for irrigation
+  * FAOSTAT item_code = 6690
+  * FAOSTAT element_code = 5110
