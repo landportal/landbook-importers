@@ -4,6 +4,15 @@
 # GENERATE intermediate XML #
 #############################
 
+
+#################################################
+# OKI - Global Open Data Index - Land Ownership #
+#################################################
+
+python main.py -i data/OKI-GODI/2016-OKI-GODI.xlsx #generate the intermediate XML
+mv OKI-GODI_1_0.xml OKI-GODI.xml
+
+
 ############
 # PRINDEX  #
 ############
