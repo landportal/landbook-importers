@@ -5,6 +5,14 @@
 #############################
 
 
+####################################
+# TI - Global Corruption Barometer #
+####################################
+
+python main.py -i data/TI-GCB/TI-GCB.xlsx #generate the intermediate XML
+mv TI-GCB.xml TI-GCB.xml
+
+
 #################################################
 # OKI - Global Open Data Index - Land Ownership #
 #################################################

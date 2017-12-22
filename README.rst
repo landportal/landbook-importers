@@ -41,9 +41,11 @@ Simple_XLS_Importer
 :RRI-FTD: Shared by email from RRI team  (Original data from http://rightsandresources.org/en/resources/tenure-data/tenure-data-tool/) (July 2016)
 :LandMark: Shared by email from WRI team (December 2016)
 :NKT-VGGT16: Shared by email from Nicholas K. Tagliarino (December 2016)
+:TI-CPI: Shared by email (April 2017)
 :LCW-LCI: Shared by email from Land Conflict Watch team (July 2017)
 :LA-PRI: Shared by email from LA team (July 2017)
 :OKI-GODI: Extracted from web (https://index.okfn.org/dataset/land/) + scripting process (October 2017)
+:TI-GCB: Extracted from web (https://www.transparency.org/research/gcb/overview) (December 2017)
 
 WorldBank_Importer
 ------------------
