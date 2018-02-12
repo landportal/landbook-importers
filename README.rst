@@ -46,6 +46,7 @@ Simple_XLS_Importer
 :LA-PRI: Shared by email from LA team (July 2017)
 :OKI-GODI: Extracted from web (https://index.okfn.org/dataset/land/) + scripting process (October 2017)
 :TI-GCB: Extracted from web (https://www.transparency.org/research/gcb/overview) (December 2017)
+:SEDAC-ABW: Shared by email (February 2018)
 
 WorldBank_Importer
 ------------------

@@ -5,6 +5,14 @@
 #############################
 
 
+#############################################
+# SEDAC - Anthropogenic Biomes of the World #
+#############################################
+
+python main.py -i data/SEDAC-ABW/SEDAC-ABW.xlsx #generate the intermediate XML
+mv SEDAC-ABW_1_0.xml SEDAC-ABW.xml
+
+
 ####################################
 # TI - Global Corruption Barometer #
 ####################################
