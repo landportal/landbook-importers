@@ -5,6 +5,15 @@
 #############################
 
 
+
+################################################################
+# FAO/ILRI - Global Livestock Production Systems in Rangelands #
+################################################################
+
+python main.py -i data/FAO-GLPSR/FAO-GLPSR.xlsx #generate the intermediate XML
+mv FAO-GLPSR_1_0.xml FAO-GLPSR.xml
+
+
 #############################################
 # SEDAC - Anthropogenic Biomes of the World #
 #############################################
