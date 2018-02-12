@@ -127,7 +127,7 @@ class RawImporter(object):
             raw_country = data[i]['country']
             country = self._get_country(raw_country)
             if country is None:
-		self._log.warning("In line=%d, unkown country=%s" %(i,country))
+		self._log.warning("In line=%d, unkown country=%s" %(i,raw_country))
                 continue
 
             year = self._build_ref_time_object(data[i]['year'])
@@ -173,6 +173,7 @@ class RawImporter(object):
             raw_country = data[i]['country']
             country = self._get_country(raw_country)
             if country is None:
+		self._log.warning("In line=%d, unkown country=%s" %(i,raw_country))
                 continue
 
             year = self._build_ref_time_object(data[i]['year'])
@@ -270,7 +271,7 @@ class RawImporter(object):
                pass
 
 	if result is None:
-	   self._log.warning("Unkown country = " + country)
+	   self._log.warning("Unkwon country = " + country)
         return result
 
     def _build_default_user(self):
