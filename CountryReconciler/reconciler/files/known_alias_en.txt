@@ -39,6 +39,7 @@ PSE=Occupied Palestinian Territory
 PSE=Palestinian Authority
 PSE=Palestinian Authority or West Bank and Gaza Strip
 PSE=Palestinian Territory
+PSE=Palestine, State of
 RUS=Russian Federation
 SHN=Saint Helena
 SJM=Svalbard
