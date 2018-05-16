@@ -38,7 +38,7 @@ class Parser(object):
         self._look_for_historical = self.config.getboolean("TRANSLATOR", "historical_mode")
         if not self._look_for_historical:
             self._historical_year = self.config.getint("TRANSLATOR", "historical_year")
-        
+
         self._org_id = self.config.get("ORGANIZATION", "acronym")
         self._obs_int = self.config.getint("TRANSLATOR", "obs_int")
         self._sli_int = self.config.getint("TRANSLATOR", "sli_int")
@@ -48,7 +48,7 @@ class Parser(object):
         self.countries_url = self.config.get('URLs', 'country_list')
         self.observations_url = self.config.get('URLs', 'indicator_pattern')
         self.data_sources = dict(self.config.items('data_sources'))
-        
+
         self._organization = self._build_default_organization()
         self._user = self._build_default_user()
         self._license = self._build_default_license()
@@ -81,7 +81,7 @@ class Parser(object):
                 self.countries[country.iso3] = country
             except:
                 self.logger.warning("No country matches found for iso code=" + possible_country['iso2Code'])
-                
+
     def _build_default_organization(self):
         return Organization(chain_for_id=self._org_id,
                             name=self.config.get("ORGANIZATION", "name"),
@@ -98,20 +98,20 @@ class Parser(object):
     def _build_default_user(self):
         return User(user_login="worldbank_importer",
                          organization=self._organization)
-        
+
     def _build_default_license(self):
         return License(name=self.config.get("LICENSE", "name"),
                        description=self.config.get("LICENSE", "description"),
                        republish=self.config.get("LICENSE", "republish"),
                        url=self.config.get("LICENSE", "url"))
-        
+
     def _build_data_source(self, data_source_name):
         data_source = DataSource(chain_for_id=self._org_id,
                                  int_for_id=self.config.get("datasource", "datasource_id"),
                                  name=data_source_name,
                                  organization=self._organization)
         return data_source
-        
+
     def _build_data_set(self, data_source):
         frequency = Dataset.YEARLY
         dataset = Dataset(chain_for_id=self._org_id,
@@ -121,7 +121,7 @@ class Parser(object):
                               source=data_source)
         self._dat_int += 1  # Updating dataset int id value
         return dataset
-    
+
     def _build_indicator(self, indicator_code, dataset, measurement_unit):
         indicator = Indicator(chain_for_id=self._org_id,
                               int_for_id=self.config.get(indicator_code, "indicator_id"),
@@ -135,9 +135,9 @@ class Parser(object):
                               measurement_unit=measurement_unit,
                               preferable_tendency=self._get_preferable_tendency_of_indicator(self.config.get(indicator_code, "indicator_tendency")),
                               topic=self.config.get(indicator_code, "indicator_topic"))
-        
+
         return indicator
-    
+
     def _build_slice(self, country, dataset, indicator):
         slice_object = Slice(chain_for_id=self._org_id,
                       int_for_id=self._sli_int,
@@ -145,9 +145,9 @@ class Parser(object):
                       dataset=dataset,
                       indicator=indicator)
         self._sli_int += 1  # Updating int id slice value
-        
+
         return slice_object
-    
+
     def _build_value(self, indicator, country, date, value_element):
         value_object = Value(value_element,
                              Value.FLOAT,
@@ -157,10 +157,10 @@ class Parser(object):
                                  None,
                                  Value.MISSING)
             self.logger.warning('Missing value for ' + indicator.name_en + ', ' + country.name + ', ' + date)
-            
+
         return value_object
-    
-    def _filter_historical_observations(self, year): 
+
+    def _filter_historical_observations(self, year):
         if self._look_for_historical:
             return True
         else :
@@ -168,13 +168,13 @@ class Parser(object):
                 return year.year > self._historical_year
             else:
                 return year.end_time > self._historical_year
- 
+
     def _build_observation(self, indicator, dataset, country, value, date):
         value_object = self._build_value(indicator,
-                                         country, 
+                                         country,
                                          date,
                                          value)
-                                
+
         time = YearInterval(year=int(date))
         observation = Observation(chain_for_id=self._org_id,
                                   int_for_id=self._obs_int,
@@ -185,26 +185,26 @@ class Parser(object):
                                   indicator=indicator,
                                   dataset=dataset)
         self._obs_int += 1  # Updating obs int value
-        
+
         return observation
-    
+
     def extract_observations(self):
         for data_source_name in self.data_sources:
             indicators_section = self.config.get('data_sources', data_source_name)
             requested_indicators = dict(self.config.items(indicators_section))
-            
+
             data_source = self._build_data_source(data_source_name)
             self._organization.add_data_source(data_source)
             dataset = self._build_data_set(data_source)
             data_source.add_dataset(dataset)
-            
+
             # Iterate over the indicators
             for indicator_element in requested_indicators:
                 indicator_code = self.config.get(indicators_section, indicator_element)
                 measurement_unit = MeasurementUnit(name = self.config.get(indicator_code, "indicator_unit_name"),
                                                    convert_to = self.config.get(indicator_code, "indicator_unit_type"))
                 indicator = self._build_indicator(indicator_code, dataset, measurement_unit)
-                
+
                 print '\t' + indicator.name_en  + "--------------" + indicator.preferable_tendency + "-----------"
 
                 # Create an slice by country
