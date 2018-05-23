@@ -29,7 +29,7 @@ INDICATORS SUPPORTED
 configuration-ASTI_Researchers
 ------------------------------
 
-:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Researchers_E_All_Data_(Norm).zip
+:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Researchers_E_All_Data_(Normalized).zip
 :Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Agricultural researchers (FTE) (Number)
@@ -46,7 +46,7 @@ configuration-ASTI_Researchers
 configuration-ASTI_Research_Spending
 ------------------------------------
 
-:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Research_Spending_E_All_Data_(Norm).zip
+:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Research_Spending_E_All_Data_(Normalized).zip
 :Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Agriculture research spending (2011 PPP$)
@@ -62,8 +62,8 @@ configuration-ASTI_Research_Spending
 
 configuration-Food_Security
 ---------------------------
-
-:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/Food_Security_Data_E_All_Data_(Norm).zip
+               
+:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/Food_Security_Data_E_All_Data_(Normalized).zip
 :Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Domestic food price index (index)
@@ -100,7 +100,7 @@ configuration-Food_Security
 configuration-Land
 ------------------
 
-:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/Inputs_Land_E_All_Data_(Normalized).zip
+:Download URL: http://fenixservices.fao.org/faostat/static/bulkdownloads/Inputs_LandUse_E_All_Data_(Normalized).zip
 :Indicator ID pattern: FAO-{ITEM_CODE}-{ELEMENT_CODE}
 
 * Agricultural land
