@@ -5,6 +5,13 @@
 #############################
 
 
+####################################
+# NRGI - Resource Governance Index #
+####################################
+
+python main.py -i data/NRGI-RGI/NRGI-RGI.xlsx #generate the intermediate XML
+mv NRGI-RGI_1_0.xml NRGI-RGI.xml
+
 
 ################################################################
 # FAO/ILRI - Global Livestock Production Systems in Rangelands #

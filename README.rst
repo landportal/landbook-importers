@@ -48,6 +48,8 @@ Simple_XLS_Importer
 :TI-GCB: Extracted from web (https://www.transparency.org/research/gcb/overview) (December 2017)
 :SEDAC-ABW: Shared by email (February 2018)
 :FAO-GLPSR: Shared by email (February 2018)
+:NRGI-RGI: Extracted from web (http://resourcegovernanceindex.org/data) + manual processing (May 2018)
+
 
 WorldBank_Importer
 ------------------
