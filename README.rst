@@ -49,6 +49,7 @@ Simple_XLS_Importer
 :SEDAC-ABW: Shared by email (February 2018)
 :FAO-GLPSR: Shared by email (February 2018)
 :NRGI-RGI: Extracted from web (http://resourcegovernanceindex.org/data) + manual processing (May 2018)
+:UNEP-WCMC-DRY: Shared by email (June 2018)
 
 
 WorldBank_Importer

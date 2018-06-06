@@ -5,6 +5,14 @@
 #############################
 
 
+######################
+# UNEP-WCMC Drylands #
+######################
+
+python main.py -i data/UNEP-WCMC-DRY/UNEP-WCMC-DRY.xlsx #generate the intermediate XML
+mv UNEP-WCMC-DRY_1_0.xml UNEP-WCMC-DRY.xml
+
+
 ####################################
 # NRGI - Resource Governance Index #
 ####################################
