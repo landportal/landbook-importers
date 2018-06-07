@@ -299,8 +299,14 @@ class RawImporter(object):
 
 # Checks if the value is not: None, "-" or blank
 def _is_valid_value(value):
-   if (value is not None) and (value !="-") and (value !=""):
-      return True
+   if isinstance(value, basestring):
+      if (value is not None) and (value.strip()!="-") and (value.strip() !=""):
+         return True
+      else:
+         return False
    else:
-      return False
+      if (value is not None) and (value !=""):
+         return True
+      else:
+         return False
 
