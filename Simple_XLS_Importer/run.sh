@@ -140,8 +140,8 @@ done
 # IFPRI - Global Hunger Index #
 ###############################
 
-python main.py -i data/IFPRI-GHI/2016-IFPRI-GHI.xlsx
-mv IFPRI-GHI_1_0.xml 2016-IFPRI-GHI.xml
+python main.py -i data/IFPRI-GHI/2017-IFPRI-GHI.xlsx
+mv IFPRI-GHI_1_0.xml 2017-IFPRI-GHI.xml
 
 #####################
 # FAO LAND & GENDER #
