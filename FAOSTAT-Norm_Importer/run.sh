@@ -8,6 +8,8 @@ python main.py -c config/configuration-ASTI_Research_Spending.ini #generate the 
 mv FAO-ASTI_1_0.xml FAO-ASTI-Research_Spending.xml
 python main.py -c config/configuration-Food_security.ini #generate the intermediate XML
 mv FAO-FS_1_0.xml FAO-FS-Food_security.xml
+#python main.py -c config/configuration-Food_security_2011suite.ini #generate the intermediate XML
+#mv FAO-FS_1_0.xml FAO-FS-Food_security_2011suite.xml
 
 for file in *.xml
 do
