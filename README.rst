@@ -40,7 +40,7 @@ Simple_XLS_Importer
 :WB-LGAF: LGAF 2013 & LGAF 2016 Provided by LGAF team (Original data from http://go.worldbank.org/21M7S7AZO0) (June 2016)
 :RRI-FTD: Shared by email from RRI team  (Original data from http://rightsandresources.org/en/resources/tenure-data/tenure-data-tool/) (July 2016)
 :LandMark: Shared by email from WRI team (December 2016)
-:NKT-VGGT16: Shared by email from Nicholas K. Tagliarino (December 2016)
+:NKT-VGGT16: Shared by email from Nicholas K. Tagliarino (December 2016) (June 2018)
 :TI-CPI: Shared by email (April 2017)
 :LCW-LCI: Shared by email from Land Conflict Watch team (July 2017)
 :LA-PRI: Shared by email from LA team (July 2017)

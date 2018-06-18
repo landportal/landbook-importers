@@ -101,13 +101,19 @@ mv LMM-PICL_1_0.xml LMM-PICL.xml
 ##################
 
 python main.py -i data/NKT-VGGT16/2016-NKT-VGGT-16.1.xlsx #generate the intermediate XML
-mv NKT-VGGT16_1_0.xml NKT-VGGT16.1.xml
+mv NKT-VGGT16_1_0.xml 2016-NKT-VGGT16.1.xml
 
 python main.py -i data/NKT-VGGT16/2017-NKT-VGGT-16.3.xlsx #generate the intermediate XML
 mv NKT-VGGT16_1_0.xml NKT-VGGT16.3.xml
 
 python main.py -i data/NKT-VGGT16/2017-NKT-VGGT-16.8-16.9.xlsx #generate the intermediate XML
 mv NKT-VGGT16_1_0.xml NKT-VGGT16.8-16.9.xml
+
+python main.py -i data/NKT-VGGT16/2018-NKT-VGGT-16.1.xlsx #generate the intermediate XML
+mv NKT-VGGT16_1_0.xml 2018-NKT-VGGT16.1.xml
+
+python main.py -i data/NKT-VGGT16/2018-NKT-VGGT-16.2-16.5.xlsx #generate the intermediate XML
+mv NKT-VGGT16_1_0.xml NKT-VGGT16.2-16.5.xml
 
 
 #################################
