@@ -50,6 +50,7 @@ Simple_XLS_Importer
 :FAO-GLPSR: Shared by email (February 2018)
 :NRGI-RGI: Extracted from web (http://resourcegovernanceindex.org/data) + manual processing (May 2018)
 :UNEP-WCMC-DRY: Shared by email (June 2018)
+:WF-OBD: Extracted from web (https://opendatabarometer.org) + manual processing (May 2018)
 
 
 WorldBank_Importer

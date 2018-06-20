@@ -4,6 +4,13 @@
 # GENERATE intermediate XML #
 #############################
 
+############################
+# WF - Open Data Barometer #
+############################
+
+python main.py -i data/WF-OBD/WF-ODB.xlsx #generate the intermediate XML
+mv WF-ODB_1_0.xml WF-ODB.xml
+
 
 ######################
 # UNEP-WCMC Drylands #
