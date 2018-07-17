@@ -8,7 +8,7 @@
 # WF - Open Data Barometer #
 ############################
 
-python main.py -i data/WF-OBD/WF-ODB.xlsx #generate the intermediate XML
+python main.py -i data/WF-ODB/WF-ODB.xlsx #generate the intermediate XML
 mv WF-ODB_1_0.xml WF-ODB.xml
 
 
