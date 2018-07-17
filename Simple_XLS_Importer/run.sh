@@ -49,7 +49,7 @@ mv SEDAC-ABW_1_0.xml SEDAC-ABW.xml
 ####################################
 
 python main.py -i data/TI-GCB/TI-GCB.xlsx #generate the intermediate XML
-mv TI-GCB.xml TI-GCB.xml
+mv TI-GCB_1_0.xml TI-GCB.xml
 
 
 #################################################
