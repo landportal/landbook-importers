@@ -4,6 +4,14 @@
 # GENERATE intermediate XML #
 #############################
 
+#######################
+# WB - Doing Business #
+#######################
+
+python main.py -i data/WB-DB/WB-DB.xlsx #generate the intermediate XML
+mv WB-DB_1_0.xml WB-DB.xml
+
+
 ############################
 # WF - Open Data Barometer #
 ############################

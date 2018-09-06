@@ -51,6 +51,7 @@ Simple_XLS_Importer
 :NRGI-RGI: Extracted from web (http://resourcegovernanceindex.org/data) + manual processing (May 2018)
 :UNEP-WCMC-DRY: Shared by email (June 2018)
 :WF-OBD: Extracted from web (https://opendatabarometer.org) + manual processing (May 2018)
+:WB-DB: Extracted from web (http://www.doingbusiness.org/) + manual processing (September 2018)
 
 
 WorldBank_Importer
