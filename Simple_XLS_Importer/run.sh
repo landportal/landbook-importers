@@ -4,6 +4,14 @@
 # GENERATE intermediate XML #
 #############################
 
+###############################
+# FAO - Legal Assessment tool #
+###############################
+
+python main.py -i data/FAO-LAT/FAO-LAT.xlsx #generate the intermediate XML
+mv FAO-LAT_1_0.xml FAO-LAT.xml
+
+
 #######################
 # WB - Doing Business #
 #######################

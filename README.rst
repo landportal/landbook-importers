@@ -52,6 +52,7 @@ Simple_XLS_Importer
 :UNEP-WCMC-DRY: Shared by email (June 2018)
 :WF-OBD: Extracted from web (https://opendatabarometer.org) + manual processing (May 2018)
 :WB-DB: Extracted from web (http://www.doingbusiness.org/) + manual processing (September 2018)
+:FAO-LAT: Extracted from web (http://www.fao.org/gender-landrights-database/legislation-assessment-tool/en/) using python script + manual processing (September 2018)
 
 
 WorldBank_Importer
