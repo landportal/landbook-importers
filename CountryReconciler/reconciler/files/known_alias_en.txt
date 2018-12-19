@@ -55,6 +55,7 @@ SHN=Saint Helena
 SJM=Svalbard
 SRB=Republic of Serbia
 STP=São Tomé and Príncipe
+SWZ=Eswatini
 SYR=Syria
 TLS=East Timor
 TWN=Chinese Taipei
