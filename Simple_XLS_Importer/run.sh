@@ -4,6 +4,14 @@
 # GENERATE intermediate XML #
 #############################
 
+
+###################
+# PRINDEX (2018) #
+###################
+
+python main.py -i data/PRINDEX-PRINDEX2018/PRINDEX-PRINDEX2018.xlsx #generate the intermediate XML
+mv PRINDEX-PRINDEX2018_1_0.xml PRINDEX-PRINDEX2018.xml
+
 ###############################
 # FAO - Legal Assessment tool #
 ###############################
@@ -76,9 +84,9 @@ python main.py -i data/OKI-GODI/2016-OKI-GODI.xlsx #generate the intermediate XM
 mv OKI-GODI_1_0.xml OKI-GODI.xml
 
 
-############
-# PRINDEX  #
-############
+###################
+# PRINDEX (Pilot) #
+###################
 
 python main.py -i data/LA-PRI/LA-PRI.xlsx #generate the intermediate XML
 mv LA-PRI_1_0.xml LA-PRI.xml

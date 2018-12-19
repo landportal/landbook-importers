@@ -44,6 +44,7 @@ Simple_XLS_Importer
 :TI-CPI: Shared by email (April 2017)
 :LCW-LCI: Shared by email from Land Conflict Watch team (July 2017) (December 2018)
 :LA-PRI: Shared by email from LA team (July 2017)
+:PRINDEX-PRINDEX2018: Extracted from web (https://www.prindex.net/countries/zip/) + manual processing (December 2018)
 :OKI-GODI: Extracted from web (https://index.okfn.org/dataset/land/) + scripting process (October 2017)
 :TI-GCB: Extracted from web (https://www.transparency.org/research/gcb/overview) (December 2017)
 :SEDAC-ABW: Shared by email (February 2018)
