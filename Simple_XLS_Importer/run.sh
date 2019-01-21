@@ -5,6 +5,19 @@
 #############################
 
 
+
+
+###############
+# SIGI (2019) #
+###############
+
+python main.py -i data/OECD-SIGI2019/OECD-SIGI2019.xlsx #generate the intermediate XML
+mv OECD-SIGI2019_1_0.xml OECD-SIGI2019.xml
+
+python main.py -i data/OECD-SIGI2019/OECD-SIGI2019-SALA.xlsx #generate the intermediate XML
+mv OECD-SIGI2019_1_0.xml OECD-SIGI2019-SALA.xml
+
+
 ###################
 # PRINDEX (2018) #
 ###################
