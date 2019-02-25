@@ -186,6 +186,9 @@ do
   mv DP-MOD_1_0.xml $file_name.xml
 done
 
+python main.py -i data/DP-MOD/2018-DP-MOD.xlsx #generate the intermediate XML
+mv DP-MOD_1_0.xml 2018-DP-MOD.xml
+
 ###############################
 # IFPRI - Global Hunger Index #
 ###############################
