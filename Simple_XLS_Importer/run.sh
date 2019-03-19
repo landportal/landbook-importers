@@ -5,6 +5,12 @@
 #############################
 
 
+###################
+# VGGT endorsment #
+###################
+
+python main.py -i data/LS-VGGT/LS-VGGT.xlsx #generate the intermediate XML
+mv LS-VGGT_1_0.xml LS-VGGT.xml
 
 
 ###############
