@@ -56,6 +56,18 @@ by starting a line with "#"
 # Prevalence of obesity in the adult population (18 years and older)
 21042-6121
 
+# Percentage of population using at least basic drinking water services (%)
+21047-6121
+
+# Percentage of population using safely managed drinking water services (%)
+21045-6121
+
+# Percentage of population using at least basic sanitation services (%)
+21048-6121
+
+# Percentage of population using safely managed sanitation services (%)
+21046-6121
+
 # Prevalence of severe food insecurity in the total population (%) (3-year average)
 210401-6121
 
