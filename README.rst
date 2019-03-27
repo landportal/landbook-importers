@@ -55,7 +55,7 @@ Simple_XLS_Importer
 :WB-DB: Extracted from web (http://www.doingbusiness.org/) + manual processing (September 2018)
 :FAO-LAT: Extracted from web (http://www.fao.org/gender-landrights-database/legislation-assessment-tool/en/) using python script + manual processing (September 2018)
 :OECD-SIGI2019: Extracted from web (https://www.genderindex.org/data/ and https://stats.oecd.org/Index.aspx?DataSetCode=GIDDB2019) (January 2019)
-
+:LS-VGGT: Shared by email (March 2019)
 
 WorldBank_Importer
 ------------------
