@@ -21,10 +21,10 @@ by starting a line with "#"
 22013-6126
 
 # Number of people undernourished (millions) (3-year average)
-21001-6132
+210011-6132
 
-# Number of severely food insecure people
-21007-6132
+# Number of severely food insecure people (million) (3-year average)
+210071-6132
 
 # Per capita food production variability (I$ per person constant 2004-06)
 21030-6127
@@ -56,11 +56,11 @@ by starting a line with "#"
 # Prevalence of obesity in the adult population (18 years and older)
 21042-6121
 
-# Prevalence of severe food insecurity in the total population
-21040-6121
+# Prevalence of severe food insecurity in the total population (%) (3-year average)
+210401-6121
 
 # Prevalence of undernourishment (%) (3-year average)
-21004-6121
+210041-6121
 
 # Rail-lines density (per 100 square km of land area)
 21016-6124
