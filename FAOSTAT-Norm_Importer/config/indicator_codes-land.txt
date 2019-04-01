@@ -28,8 +28,8 @@
 6600-5110
 #Fallow land (temporary)
 6640-5110
-#Forest area
-6661-5110
+#Forest land
+6646-5110
 #Inland water
 6680-5110
 #Land area

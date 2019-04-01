@@ -26,7 +26,7 @@ class TranslatorConst(object):
 
     CODE_LAND_AREA = "6601-5110"
     CODE_AGRICULTURAL_LAND = "6610-5110"
-    CODE_FOREST_LAND = "6661-5110"
+    CODE_FOREST_LAND = "6646-5110"
     CODE_ARABLE_LAND = "6621-5110"
     CODE_PERMANENT_CROPS = "6650-5110"
     CODE_PERMANENT_MEADOW_AND_PASTURES = "6655-5110"
@@ -37,7 +37,7 @@ class TranslatorConst(object):
     #  The next three are random numbers that are not it the previous indicator codes.
     CODE_RELATIVE_AGRICULTURAL_LAND = "X-6610-5110"
     CODE_RELATIVE_ARABLE_LAND = "X-6621-5110"
-    CODE_RELATIVE_FOREST_LAND = "X-6661-5110"
+    CODE_RELATIVE_FOREST_LAND = "X-6646-5110"
     
 
         
