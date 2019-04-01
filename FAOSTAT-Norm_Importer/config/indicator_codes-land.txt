@@ -56,7 +56,7 @@
 6683-5110
 #Permanent meadows and pastures organic, total
 6681-5110
-#Temporary crops
+#Land under temporary crops
 6630-5110
 #Temporary meadows and pastures
 6633-5110
