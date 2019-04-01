@@ -14,7 +14,7 @@
 6671-5110
 #Arable land
 6621-5110
-#Arable land and Permanent crops
+#Cropland
 6620-5110
 #Arable land area certified organic
 6675-5110
@@ -22,7 +22,7 @@
 6676-5110
 #Arable land organic, total
 6674-5110
-#Area of arable land and permanent crops under protective cover
+#Cropland area under protective cover
 6774-5110
 #Country area
 6600-5110
