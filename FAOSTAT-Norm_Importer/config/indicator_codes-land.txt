@@ -40,7 +40,7 @@
 6656-5110
 #Perm. meadows & pastures - Nat. growing
 6659-5110
-#Permanent crops
+#Land under permanent crops
 6650-5110
 #Permanent crops area certified organic
 6678-5110
