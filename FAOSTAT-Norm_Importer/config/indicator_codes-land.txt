@@ -60,7 +60,7 @@
 6630-5110
 #Land under temp. meadows and pastures
 6633-5110
-#Total area equipped for irrigation
+#Land area equipped for irrigation
 6690-5110
 #Primary forest
 6714-5110
