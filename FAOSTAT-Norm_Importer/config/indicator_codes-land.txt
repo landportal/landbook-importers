@@ -10,7 +10,7 @@
 6672-5110
 #Agricultural area in conversion to organic
 6673-5110
-#Agricultural area organic, total
+#Agriculture area under organic agric.
 6671-5110
 #Arable land
 6621-5110
