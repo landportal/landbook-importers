@@ -54,7 +54,7 @@
 6682-5110
 #Permanent meadows and pastures area in conversion to organic
 6683-5110
-#Permanent meadows and pastures organic, total
+#Permanent meadows & pastures area under organic agriculture
 6681-5110
 #Land under temporary crops
 6630-5110
