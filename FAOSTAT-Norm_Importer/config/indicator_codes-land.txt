@@ -26,7 +26,7 @@
 6774-5110
 #Country area
 6600-5110
-#Fallow land (temporary)
+#Land with temporary fallow
 6640-5110
 #Forest land
 6646-5110
