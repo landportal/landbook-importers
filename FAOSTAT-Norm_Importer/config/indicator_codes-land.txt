@@ -4,14 +4,8 @@
 
 #Agricultural area
 6610-5110
-#Agricultural area actually irrigated
-6611-5110
-#Agricultural area certified organic
-6672-5110
 #Agricultural area in conversion to organic
 6673-5110
-#Agriculture area under organic agric.
-6671-5110
 #Arable land
 6621-5110
 #Cropland
@@ -30,8 +24,6 @@
 6640-5110
 #Forest land
 6646-5110
-#Inland waters
-6680-5110
 #Land area
 6601-5110
 #Other land
@@ -50,21 +42,13 @@
 6677-5110
 #Land under perm. meadows and pastures
 6655-5110
-#Permanent meadows and pastures area certified organic
-6682-5110
 #Permanent meadows and pastures area in conversion to organic
 6683-5110
-#Permanent meadows & pastures area under organic agriculture
-6681-5110
 #Land under temporary crops
 6630-5110
 #Land under temp. meadows and pastures
 6633-5110
-#Land area equipped for irrigation
-6690-5110
-#Primary forest
-6714-5110
-#Planted forest
-6716-5110
-#Other naturally regenerated forest
-6717-5110
+#Agriculture (Land Use)
+6602-5110
+#Land under protective cover
+6649-5110

@@ -2,14 +2,25 @@
 
 python main.py -c config/configuration-land.ini #generate the intermediate XML
 mv FAO-LU_1_0.xml FAO-Land.xml
-python main.py -c config/configuration-ASTI_Researchers.ini #generate the intermediate XML
-mv FAO-ASTI_1_0.xml FAO-ASTI-Researchers.xml
-python main.py -c config/configuration-ASTI_Research_Spending.ini #generate the intermediate XML
-mv FAO-ASTI_1_0.xml FAO-ASTI-Research_Spending.xml
-python main.py -c config/configuration-Food_security.ini #generate the intermediate XML
-mv FAO-FS_1_0.xml FAO-FS-Food_security.xml
+python main.py -c config/configuration-LU-forestry.ini #generate the intermediate XML
+mv FAO-LU_1_0.xml FAO-LU-forestry.xml
+python main.py -c config/configuration-LU-water.ini #generate the intermediate XML
+mv FAO-LU_1_0.xml FAO-LU-water.xml
+python main.py -c config/configuration-LU-irrigation.ini #generate the intermediate XML
+mv FAO-LU_1_0.xml FAO-LU-irrigation.xml
+python main.py -c config/configuration-LU-agripractices.ini #generate the intermediate XML
+mv FAO-LU_1_0.xml FAO-LU-agripractices.xml
+python main.py -c config/configuration-LU-aquaculture.ini #generate the intermediate XML
+mv FAO-LU_1_0.xml FAO-LU-aquaculture.xml
+
+#python main.py -c config/configuration-ASTI_Researchers.ini #generate the intermediate XML
+#mv FAO-ASTI_1_0.xml FAO-ASTI-Researchers.xml
+#python main.py -c config/configuration-ASTI_Research_Spending.ini #generate the intermediate XML
+#mv FAO-ASTI_1_0.xml FAO-ASTI-Research_Spending.xml
+#python main.py -c config/configuration-Food_security.ini #generate the intermediate XML
+#mv FAO-FS_1_0.xml FAO-FS-Food_security.xml
 #python main.py -c config/configuration-Food_security_2011suite.ini #generate the intermediate XML
-#mv FAO-FS_1_0.xml FAO-FS-Food_security_2011suite.xml
+#mv FAO-FS.2011_1_0.xml FAO-FS-Food_security_2011suite.xml
 
 for file in *.xml
 do
