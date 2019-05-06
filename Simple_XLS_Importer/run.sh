@@ -5,6 +5,14 @@
 #############################
 
 
+#########################
+# Afrobarometer Survery #
+#########################
+
+python main.py -i data/AFRB-SURV/AFRB-SURV.xlsx #generate the intermediate XML
+mv AFRB-SURV_1_0.xml AFRB-SURV.xml
+
+
 ###################
 # VGGT endorsment #
 ###################
