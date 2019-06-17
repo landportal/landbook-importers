@@ -5,6 +5,14 @@
 #############################
 
 
+############################
+# Bonn Challenge Barometer #
+############################
+
+python main.py -i data/IUCN-BCB/IUCN-BCB.xlsx #generate the intermediate XML
+mv IUCN-BCB_1_0.xml IUCN-BCB.xml
+
+
 #########################
 # Afrobarometer Survery #
 #########################
