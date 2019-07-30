@@ -36,6 +36,7 @@ MAC=Macau
 MAF=Saint Martin
 MDA=Moldavia
 MDA=Moldova, Republic of
+KMD=North Macedonia
 MKD=Macedonia, FYR
 MKD=The FYR of Macedonia
 MMR=Burma
