@@ -6,6 +6,14 @@
 
 
 #############
+# SDG 2.3.2 #
+#############
+
+python main.py -i data/UN-SDG_2.3.2/UN-SDG_2.3.2.xlsx #generate the intermediate XML
+mv UN-SDG_2.3.2_1_0.xml  UN-SDG_2.3.2.xml
+
+
+#############
 # SDG 2.3.1 #
 #############
 
