@@ -5,6 +5,14 @@
 #############################
 
 
+#############
+# SDG 2.3.1 #
+#############
+
+python main.py -i data/UN-SDG_2.3.1/UN-SDG_2.3.1.xlsx #generate the intermediate XML
+mv UN-SDG_2.3.1_1_0.xml  UN-SDG_2.3.1.xml
+
+
 ############################
 # Bonn Challenge Barometer #
 ############################
