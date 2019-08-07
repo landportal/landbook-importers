@@ -60,6 +60,7 @@ Simple_XLS_Importer
 :UN-SDG_2.3.1: Extracted from web (https://unstats.un.org/sdgs/indicators/database/) (August 2019)
 :UN-SDG_2.3.2: Extracted from web (https://unstats.un.org/sdgs/indicators/database/) (August 2019)
 :UN-SDG_15.1.2: Extracted from web (https://unstats.un.org/sdgs/indicators/database/) (August 2019)
+:UN-SDG_15.2.1: Extracted from web (https://unstats.un.org/sdgs/indicators/database/) (August 2019)
 :UN-SDG_15.3.1: Extracted from web (https://unstats.un.org/sdgs/indicators/database/) (August 2019)
 
 
