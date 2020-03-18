@@ -112,6 +112,8 @@ class FaostatTranslator(object):
         result = []
         for i in range(1, len(lines)):
             propper_line = lines[i].encode(encoding="utf-8")
+            if propper_line.strip() == '"':
+                continue
             try:
                 candidate_register = self.create_field_list(propper_line, i + 1)
                 if self.pass_filters(candidate_register, look_for_historical):
@@ -184,8 +186,8 @@ class FaostatTranslator(object):
         # some fields, so we can split by ',' .All the fields but the first
         # starts with the character '"', so if we split by ",\"", we get the
         # expected result. We have to consider this when parsing values
-        if len(primitive_data) != TranslatorConst.EXPECTED_NUMBER_OF_COLS:
-            raise RuntimeError("Row {0} contains a non expected number of fileds. \
+        if len(primitive_data) < TranslatorConst.EXPECTED_NUMBER_OF_COLS:
+            raise RuntimeError("Row {0} contains a non expected number of fields. \
                         The row must be ignored".format(str(index)))
 
         return self.parse_register_fields(primitive_data)

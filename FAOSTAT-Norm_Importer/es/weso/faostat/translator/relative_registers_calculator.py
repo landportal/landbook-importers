@@ -97,7 +97,7 @@ class RelativeRegistersCalculator(object):
         elif imported_code == TranslatorConst.CODE_ARABLE_LAND:
             return "Relative agricultural land"
         else:
-            raise RuntimeError("Unrecognised item code while generating calculated registers: {0}.".
+            raise RuntimeError("Unrecognised item while generating calculated registers: {0}.".
                                                                                             format(imported_code))
     @staticmethod
     def _infer_item_code(imported):

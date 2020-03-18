@@ -3,7 +3,7 @@
 #by starting a line with "#"
 
 # Agricultural researchers (FTE) (Number)
-23046-6085
+23046-6082
 
 # Agricultural researchers (FTE)(Per 100,000 farmers)
 23046-6086

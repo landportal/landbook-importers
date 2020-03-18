@@ -43,11 +43,14 @@ class FaostatExtractor(object):
         '''
         self.log.info("Extracting data from zip file...")
         sourceZip = ZipFile(zip_file_name)  # open the zip File
-        if len(sourceZip.namelist()) != 1:  # The zip file should contain a single element
-            raise RuntimeError("Unexpected zip file. Content will not be extracted")
-        else:
+        if len(sourceZip.namelist()) == 1:  # The zip file should contain a single element
             sourceZip.extract(sourceZip.namelist()[0], self.config.get("FAOSTAT", "data_file_path"))
             self.log.info("Data extracted to {0}".format(self.config.get("FAOSTAT", "data_file_path")))
+        elif len(sourceZip.namelist()) == 2:
+            sourceZip.extract(sourceZip.namelist()[0], self.config.get("FAOSTAT", "data_file_path"))
+            self.log.info("Data extracted to {0}".format(self.config.get("FAOSTAT", "data_file_path")))
+        else:
+            raise RuntimeError("Unexpected zip file. Content will not be extracted")
 
         
 
