@@ -111,6 +111,11 @@ class DealsAnalyser(object):
             self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
             self._increase_hectares_indicator(KeyDicts.HECTARES_AGRICULTURE_DEALS, hectares_to_add, target_country)
 
+        if Deal.FOODER in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.FOODER_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_FOODER_DEALS, hectares_to_add, target_country)
+            self._increase_counter_indicator(KeyDicts.AGRICULTURE_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_AGRICULTURE_DEALS, hectares_to_add, target_country)
 
         if Deal.CONSERVATION in deal.sectors:
             self._increase_counter_indicator(KeyDicts.CONSERVATION_DEALS, target_country)
@@ -118,7 +123,7 @@ class DealsAnalyser(object):
 
 
 	# FORESTRY
-        if Deal.FOR_WOOD_AND_FIBRE in deal.sectors:
+        if (Deal.TIMBER_FOR_WOOD_AND_FIBRE in deal.sectors) or (Deal.LOGGING_FOR_WOOD_AND_FIBRE in deal.sectors):
             self._increase_counter_indicator(KeyDicts.FOR_WOOD_AND_FIBRE_DEALS, target_country)
             self._increase_hectares_indicator(KeyDicts.HECTARES_FOR_WOOD_AND_FIBRE_DEALS, hectares_to_add, target_country)
             self._increase_counter_indicator(KeyDicts.FORESTRY_DEALS, target_country)
@@ -160,6 +165,21 @@ class DealsAnalyser(object):
         if Deal.UNKNOWN in deal.sectors:
             self._increase_counter_indicator(KeyDicts.UNKNOWN_DEALS, target_country)
             self._increase_hectares_indicator(KeyDicts.HECTARES_UNKNOWN_DEALS, hectares_to_add, target_country)
+
+
+        if Deal.MINING in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.MINING_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_MINING_DEALS, hectares_to_add, target_country)
+
+
+        if Deal.LANDSPECULATION in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.LANDSPECULATION_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_LANDSPECULATION_DEALS, hectares_to_add, target_country)
+
+
+        if Deal.OIL_GAS in deal.sectors:
+            self._increase_counter_indicator(KeyDicts.OIL_GAS_DEALS, target_country)
+            self._increase_hectares_indicator(KeyDicts.HECTARES_OIL_GAS_DEALS, hectares_to_add, target_country)
 
 
     def _process_deals_by_hectares(self, deal, target_country):

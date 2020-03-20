@@ -140,7 +140,7 @@ class LandMatrixTranslator(object):
 
         """
         try:
-            info_nodes = self._get_info_nodes_from_file()
+            info_nodes = self._get_info_nodes_from_file().find("deals")
 	    self._log.info("Number of info_nodes read = %i" %len(info_nodes))
             deals = self._turn_info_nodes_into_deals(info_nodes)
 	    self._log.info("Number of info_nodes turn into deals = %i" %len(deals))
@@ -251,7 +251,7 @@ class LandMatrixTranslator(object):
         result = []
         for info_node in info_nodes:
             try:
-		self._log.debug("Parsing deal id = " + info_node.findtext("./field[@name='deal_id']").strip())
+		self._log.debug("Parsing deal id = " + info_node.findtext("./field[@name='Deal ID']").strip())
 		deal = DealsBuilder.turn_node_into_deal_object(info_node)
 		self._log.debug("Parsing finished of deal = " + str(deal))
                 result.append(deal)
@@ -273,7 +273,8 @@ class LandMatrixTranslator(object):
             lines = content_file.read()
             content_file.close()
             return ETree.fromstring(lines.encode(encoding="utf-8"))
-        except:
+        except Exception as e:
+            print e.message, e.args
             raise RuntimeError("Impossible to parse xml in path: {0}. \
                     It looks that it is not a valid xml file.".format(file_path))
 

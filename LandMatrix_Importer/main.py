@@ -20,7 +20,7 @@ from es.weso.landmatrix.translator.land_matrix_translator import LandMatrixTrans
 
 def configure_log():
     FORMAT = "%(asctime)s - %(name)s - %(levelname)s [%(filename)s:%(lineno)s - %(funcName)20s() ] %(message)s"
-    logging.basicConfig(filename='land_matrix_extractor.log', level=logging.INFO, 
+    logging.basicConfig(filename='land_matrix_extractor.log', level=logging.DEBUG, 
                         format=FORMAT)
 
 
@@ -31,8 +31,9 @@ def run():
     config.read("./config/configuration.ini")
     look_for_historical = config.getboolean("TRANSLATOR", "historical_mode")
     try:
-        xml_extractor = LandMatrixExtractorXML(log, config)
-        xml_extractor.run()
+        #xml_extractor = LandMatrixExtractorXML(log, config)
+        #xml_extractor.run()
+        pass
     except BaseException as execpp:
         log.error("While downloading data: " + execpp.message)
         raise RuntimeError()

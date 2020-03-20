@@ -1,7 +1,7 @@
 Land Matrix data Importer
 ================================
 
-:Download URL: http://landmatrix.org/get-the-detail/database.csv?download_format=xml
+:Download URL: https://landmatrix.org/data/all.xml
 
 Process
 ^^^^^^^
@@ -20,7 +20,7 @@ A deal contains:
 * Intended hectares (integer)
 * Contract hectares (integer)
 * Sectors (list of topics obtained from intention field)
-* Negotiation status (available values: INTENDED, CONCLUDED, FAILED
+* Negotiation status (available values: INTENDED, CONCLUDED, FAILED)
 
 
 A DealAnalyserEntry contains:
@@ -37,9 +37,6 @@ This importer downloads the entire landmatrix database in XML format, but the ob
 A node of information in the landmatrix does not refer to a concrete country, with a concrete indicator and a single value in a concrete date. 
 The indicators built are aggregations of values, such as "total number of deals in some sector".
 
-The python project of the importer includes a file "strategy.txt" where the indicators are detailed.
-
-
 The date assigned to each observation is the highest date found when parsing all the deals. 
 For this reason, when executing again the importer to incorporate new data, 
 it may be something to consider removing from the system all the old observation 
@@ -51,11 +48,11 @@ Each country will only have an observation per indicator (the date will be the s
 The date is an interval
 
 The start date of the interval is 2000
-From http://www.landmatrix.org/en/about/#what-is-a-land-deal
+From https://landmatrix.org/faq/#what-is-a-land-deal
 "Deals must: - Have been initiated since the year 2000"
 
 The end date is obtained parsing the negotiation_status field.
-The end date (last date) of the interval is calculated. The value is the maximun between all the deals years.The ini
+The end date (last date) of the interval is calculated. The value is the maximum between all the deals years.
 
 
 Historical: The importer is prepared to ignore data with a date lower than the value specified in the "first_valid_year" field 
@@ -87,24 +84,27 @@ The algorithm to calculate the indicators "Total Number of Deals in Production" 
 "implementation_status" equals to "In operation (production)".
 
 
-Intention of the investment (hierarchy 2016/06/08)
+Intention of the investment (hierarchy 2020/03/19)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - Agriculture
     - Biofuels
     - Food crops
     - Livestock
-    - Non-food agricultural commodities
-    - Agriunspecified
+    - Non-food agricultural commodities (Nonfoodagriculturalcommodities)
+    - Agricultureunspecified
+    - Fodder
 - Forestry
-    - For wood and fibre
+    - For wood and fibre (Timberplantation(forwoodandfibre) + Forestlogging/management(forwoodandfibre))
     - For carbon sequestration/REDD
-    - Forestunspecified
-- Mining
+    - Forestryunspecified
 - Tourism
 - Industry
 - Conservation
 - Renewable Energy
 - Other (please specify)
+- Mining
+- Land Speculation (Landspeculation)
+- Oil/Gas Extraction (Oil/Gasextraction)
 
 INDICATORS SUPPORTED
 ====================
@@ -172,4 +172,14 @@ INDICATORS SUPPORTED
 :N21: Total number of Forestunspecified (Forestry) deals
 :HA21: Total hectares in Forestunspecified (Forestry) deals
 
+:N22: Total number of Fodder (Agriculture) deals
+:HA22: Total hectares in Fodder (Agriculture) deals
 
+:N23: Total number of Mining deals
+:HA23: Total hectares in Mining deals
+
+:N24: Total number of Land Speculation deals
+:HA24: Total hectares in Land Speculation deals
+
+:N25: Total number of Oil/Gas extraction deals
+:HA25: Total hectares in Oil/Gas extraction deals

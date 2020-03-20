@@ -34,14 +34,14 @@ class DealsBuilder(object):
 
 
 PROPERTY = "name"
-TARGET_COUNTRY = "target_country"
-SECTORS = "intention"
-NEGOTIATION_STATUS = "negotiation_status"
-IMPLEMENTATION_STATUS = "implementation_status"
+TARGET_COUNTRY = "Location 1: Target country"
+SECTORS = "Intention of investment"
+NEGOTIATION_STATUS = "Negotiation status"
+IMPLEMENTATION_STATUS = "Implementation status"
 NO_VALUE = "None"
-INTENDED_SIZE = "intended_size"
-CONTRACT_SIZE = "contract_size"
-PRODUCTION_SIZE = "production_size"
+INTENDED_SIZE = "Intended size (in ha)"
+CONTRACT_SIZE = "Size under contract (leased or purchased area, in ha)"
+PRODUCTION_SIZE = "Size in operation (production, in ha)"
 
 
 #Functions
@@ -50,11 +50,12 @@ def _extract_hectares(info_node, hectares_type):
     hectares_container = _get_node_data(info_node, hectares_type)
     if hectares_container == NO_VALUE:
         return None
-    elif hectares_container.isdigit():
-        return int(hectares_container)
     else:
-        return None
-
+        potential_ha = hectares_container.split("|")[-1]
+        potential_ha = potential_ha.split("##")[-1]
+        if "current" in potential_ha: #2020#current#500
+            potential_ha = potential_ha.split("#")[-1]
+        return int(round(float(potential_ha)))
 
 def _extract_intended_hectares(info_node):
     return _extract_hectares(info_node, INTENDED_SIZE)
@@ -108,21 +109,26 @@ def _extract_target_country(info_node):
 
 def _extract_date(info_node):
     # 2016/03/29: Pattern of negotiation_status node "[YYYY] STATUS (XXXX XXXXXX)" or "STATUS (XXXX XXXXXX)"
-
+    # 2020/03/19: Pattern changed. Many different
     #Looking for the target text
     date_container = _get_node_data(info_node, NEGOTIATION_STATUS)
+
     # return None if there is no negotiation_status value
     if date_container == NO_VALUE:
         return None
 
-    # return None if there is no year in negotiation_status node. STATUS (XXXX XXXXXXXX)
-    if '[' not in date_container:
+    candidate_years = []
+    negotiation_status_year = None
+    for negotiation in date_container.split("|"):
+        potential_year = negotiation.split("#")[0][:4]
+        if potential_year != "":
+            candidate_years.append(potential_year)
+    if len(candidate_years)>0:
+        negotiation_status_year = max(candidate_years) # obtain the highest value
+        if int(negotiation_status_year)>2020:
+            return None
+    else:
         return None
-
-    candidate_years = re.findall(r'\[([^]]*)\]', date_container) # get the years (as string)
-    candidate_years = map(int, candidate_years) # convert to integer
-    negotiation_status_year = max(candidate_years) # obtain the highest value
-
     return negotiation_status_year
 
 
@@ -165,8 +171,11 @@ def _extract_sectors(info_node):
         _raise_error("sectors", "not found")
         return  # It will throw an error, the next won't execute.... but let's ensure that
     elif text == NO_VALUE:
-        return ['Unknown']  # Unknowk sector
+        return ['Unknown']  # Unknown sector
     result = []
+    text = re.sub('\d', '', text)
+    text = text.replace("#","").replace("-", "").replace("current","")
+    text = text.replace("|",",")
     candidate_sectors = text.split(",")
     for candidate in candidate_sectors:
         if not (candidate is None or candidate == ""):
