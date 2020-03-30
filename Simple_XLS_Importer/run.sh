@@ -254,8 +254,8 @@ mv DP-MOD_1_0.xml 2018-DP-MOD.xml
 # IFPRI - Global Hunger Index #
 ###############################
 
-python main.py -i data/IFPRI-GHI/2017-IFPRI-GHI.xlsx
-mv IFPRI-GHI_1_0.xml 2017-IFPRI-GHI.xml
+python main.py -i data/IFPRI-GHI/2019-IFPRI-GHI.xlsx
+mv IFPRI-GHI_1_0.xml 2019-IFPRI-GHI.xml
 
 #####################
 # FAO LAND & GENDER #
