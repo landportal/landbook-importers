@@ -2,83 +2,17 @@ This file contains all the needed indicators from the complete downloaded list.
 Each indicator should be placed in a single line. You can use comments
 by starting a line with "#"
 
-# Average dietary energy supply adequacy (%) (3-year average)
-21010-6121
-
-# Average protein supply (g/capita/day) (3-year average)
-21013-6123
-
-# Average supply of protein of animal origin (g/capita/day) (3-year average)
-21014-6123
-
-# Average value of food production (constant I$ per person) (3-year average)
-21011-6122
-
-# Cereal import dependency ratio (%) (3-year average)
-21035-6121
-
 # Gross domestic product per capita, PPP (constant 2011 international $)
 22013-6126
-
-# Number of people undernourished (millions) (3-year average)
-210011-6132
 
 # Number of severely food insecure people (million) (3-year average)
 210071-6132
 
-# Per capita food production variability (I$ per person constant 2004-06)
-21030-6127
-
-# Per capita food supply variability (kcal/capita/day)
-21031-6128
-
 # Percentage of arable land equipped for irrigation (%) (3-year average)
 21034-6121
-
-# Percentage of children under 5 years of age affected by wasting (%)
-21026-6121
-
-# Percentage of children under 5 years of age who are overweight
-21041-6121
-
-# Percentage of children under 5 years of age who are stunted (%)
-21025-6121
 
 # Political stability and absence of violence/terrorism (index)
 21032-6125
 
-# Prevalence of anemia among women of reproductive age (15-49 years)
-21043-6121
-
-# Prevalence of exclusive breastfeeding among infants (0-5 months)
-21044-6121
-
-# Prevalence of obesity in the adult population (18 years and older)
-21042-6121
-
-# Percentage of population using at least basic drinking water services (%)
-21047-6121
-
-# Percentage of population using safely managed drinking water services (%)
-21045-6121
-
-# Percentage of population using at least basic sanitation services (%)
-21048-6121
-
-# Percentage of population using safely managed sanitation services (%)
-21046-6121
-
 # Prevalence of severe food insecurity in the total population (%) (3-year average)
 210401-6121
-
-# Prevalence of undernourishment (%) (3-year average)
-210041-6121
-
-# Rail-lines density (per 100 square km of land area)
-21016-6124
-
-# Share of dietary energy supply derived from cereals, roots and tubers (%) (3-year average)
-21012-6121
-
-# Value of food imports over total merchandise exports (%) (3-year average)
-21033-6121
