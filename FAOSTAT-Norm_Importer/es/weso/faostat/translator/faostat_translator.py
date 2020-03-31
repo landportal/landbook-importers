@@ -110,6 +110,7 @@ class FaostatTranslator(object):
         lines = raw_data_file.readlines()
         raw_data_file.close()
         result = []
+        self._log.info("File with number of lines="+str(len(lines)))
         for i in range(1, len(lines)):
             propper_line = lines[i].encode(encoding="utf-8")
             if propper_line.strip() == '"':
@@ -121,9 +122,9 @@ class FaostatTranslator(object):
                     result.append(self.create_field_list(propper_line, i + 1))
                 else:
 		    # TODO change to trace level.
-		    self._log.debug("The candidate register does NOT pass the filters")
+		    self._log.debug("The candidate register (line "+str(i)+") does NOT pass the filters")
             except RuntimeError as e:
-                self._log.info("While parsing a row form the csv_file: {0}. Row will be ignored".format(e.message))
+                self._log.info("While parsing a row ("+str(i)+") from the csv_file: {0}. Row will be ignored".format(e.message))
 	self._log.info("Generated %s valid registers" %len(result))
         return result
 
@@ -157,6 +158,7 @@ class FaostatTranslator(object):
 
         """
         if not look_for_historical and not self.pass_filter_current_date(candidate_register):
+            self._log.info("Current date")
             return False
         elif not self.pass_filter_indicator_needed(candidate_register):
             return False
@@ -187,9 +189,7 @@ class FaostatTranslator(object):
         # starts with the character '"', so if we split by ",\"", we get the
         # expected result. We have to consider this when parsing values
         if len(primitive_data) < TranslatorConst.EXPECTED_NUMBER_OF_COLS:
-            raise RuntimeError("Row {0} contains a non expected number of fields. \
-                        The row must be ignored".format(str(index)))
-
+            raise RuntimeError("Row "+str(index)+" contains "+str(len(primitive_data))+" columns, different than expected number ("+str(TranslatorConst.EXPECTED_NUMBER_OF_COLS)+"). The row is ignored")
         return self.parse_register_fields(primitive_data)
 
 

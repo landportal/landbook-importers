@@ -31,7 +31,7 @@ class FaostatExtractor(object):
         try:
             zip_file_name = self.download_zip_file()
             self.extract_zip_file(zip_file_name)
-            self.log.info("Proccess succesfully ended")
+            self.log.info("Process successfully finished")
         except RuntimeError, (strerror):
             self.log.error(strerror)
 
