@@ -13,17 +13,12 @@ FAOAgriculturalCensues_Importer
 - Land_tenure 2000.xls
 - Land tenure_1970.1980.1990.xlsx
 
-FAOSTAT_Importer
-----------------
-:Land: http://faostat.fao.org/Portals/_Faostat/Downloads/zip_files/Resources_Land_E_All_Data.zip
-:Water: http://fenixservices.fao.org/faostat/static/bulkdownloads/Environment_Water_E_All_Data.zip
-
-
 FAOSTAT-Norm_Importer
 ---------------------
 :Food Security: http://fenixservices.fao.org/faostat/static/bulkdownloads/Food_Security_Data_E_All_Data_(Norm).zip
 :ASTI Researchers: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Researchers_E_All_Data_(Norm).zip
 :ASTI Research Spending: http://fenixservices.fao.org/faostat/static/bulkdownloads/ASTI_Research_Spending_E_All_Data_(Norm).zip
+:Land Use: http://faostat.fao.org/Portals/_Faostat/Downloads/zip_files/Resources_Land_E_All_Data.zip
 
 LandMatrix_Importer
 -------------------

@@ -8,10 +8,6 @@ cd FAOSTAT-Norm_Importer
 ./run.sh
 
 cd ..
-cd FAOSTAT_Importer
-./run.sh
-
-cd ..
 cd FAOAgriculturalCensues_Importer
 ./run.sh
 
