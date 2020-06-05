@@ -4,6 +4,14 @@
 # GENERATE intermediate XML #
 #############################
 
+#############
+# SDG 5.a.1 #
+#############
+
+python main.py -i data/UN-SDG_5.a.1/UN-SDG_5.a.1.xlsx #generate the intermediate XML
+mv UN-SDG_5.A.1_1_0.xml  UN-SDG_5.A.1.xml
+
+
 ##############
 # SDG 15.2.1 #
 ##############
