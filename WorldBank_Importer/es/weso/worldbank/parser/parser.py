@@ -215,6 +215,7 @@ class Parser(object):
 
                 # Compound the URL to request
                 uri = self.observations_url.replace('{INDICATOR.CODE}', indicator_code)
+                self.logger.info(uri)
 
                 try:
                    response = RestClient.get(uri, {"format": "json"})
@@ -225,16 +226,19 @@ class Parser(object):
 			sys.exit(1)
                    observations = response[1]
                    if observations is not None:
+                      self.logger.info("Number of observations harvested="+str(len(observations)))
                       for observation_element in observations:
                          iso3code = observation_element['countryiso3code']
                          if (iso3code is None) or iso3code=="":
-                            self.logger.warning("Not country iso3code in observation: " + str(observation_element))
-                            continue # pass to the next observation
+                            iso3code = observation_element['country']['id']
+                            if (iso3code is None) or iso3code=="":
+                              self.logger.warning("Skip the observation. Neither countryiso3code or nor country->id in observation: " + str(observation_element))
+                              continue # pass to the next observation
 
                          if iso3code in self.countries:
                             country = self.countries[iso3code]
                          else:
-                            self.logger.warning("Not country returned by country_reconcilier using the iso3code: " + iso3code)
+                            self.logger.warning("Skip the observation. Not country returned by country_reconcilier using the iso3code: " + iso3code + " observation=" + str(observation_element))
                             continue # pass to the next observation
 
                          value = observation_element['value']
