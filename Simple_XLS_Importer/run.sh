@@ -4,6 +4,14 @@
 # GENERATE intermediate XML #
 #############################
 
+#########################
+# ND-GAIN Country Index #
+#########################
+
+python main.py -i data/NDGAIN-CI/NDGAIN-CI.xlsx #generate the intermediate XML
+mv NDGAIN-CI_1_0.xml NDGAIN-CI.xml
+
+
 #############
 # SDG 5.a.1 #
 #############
